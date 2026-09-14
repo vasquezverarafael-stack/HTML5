@@ -1,0 +1,186 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio - Elementos HTML5</title>
+</head>
+<body>
+    <h1>
+        Escriba un elemento (o elementos) de HTML5 para realizar cada una
+        de las siguientes tareas:
+    </h1>
+    <hr>
+    <h3>a)</h3>
+    <p>
+        Se pidió a los estudiantes que clasificaran los alimentos en la cafetería,
+        en una escala del 1 al 10. Use un elemento <strong>meter</strong> con texto
+        a su izquierda y a su derecha para indicar que la calificación promedio
+        fue 7 de 10.
+    </p>
+    <p><strong>Respuesta:</strong></p>
+    <p>
+        Calificación promedio:
+        <meter min="1" max="10" value="7">7 de 10</meter>
+        7 de 10
+    </p>
+    <hr>
+    <h3>b)</h3>
+    <p>
+        Cree un elemento <strong>details</strong> que muestre el texto
+        "Resultados de la encuesta" en el elemento <strong>summary</strong>
+        para la parte (a). Cuando el usuario haga clic en la flecha enseguida
+        del texto de summary, deberá aparecer un párrafo que explique sobre
+        la encuesta.
+    </p>
+    <p><strong>Respuesta:</strong></p>
+    <details>
+        <summary>Resultados de la encuesta</summary>
+        <p>
+            Se pidió a los estudiantes que calificaran los alimentos de la
+            cafetería en una escala del 1 al 10. La calificación promedio
+            obtenida fue de 7.
+        </p>
+    </details>
+    <hr>
+    <h3>c)</h3>
+    <p>
+        Cree un elemento input text para el primer nombre. El elemento deberá
+        recibir el enfoque de manera automática al momento de desplegar el
+        formulario en un navegador.
+    </p>
+    <p><strong>Respuesta:</strong></p>
+    <p>
+        <label>
+            Primer nombre:
+            <input type="text" name="nombre" autofocus>
+        </label>
+    </p>
+
+
+    <hr>
+
+
+    <h3>d)</h3>
+
+    <p>
+        Modifique la parte (c) de modo que se elimine el elemento
+        <strong>label</strong> y use texto en un atributo
+        <strong>placeholder</strong> en el elemento input.
+    </p>
+
+    <p><strong>Respuesta:</strong></p>
+
+    <p>
+        <input type="text"
+               name="nombre"
+               placeholder="Primer nombre"
+               autofocus>
+    </p>
+
+
+    <hr>
+
+
+    <h3>e)</h3>
+
+    <p>
+        Use un elemento <strong>datalist</strong> para proporcionar una lista
+        autocomplete para cinco estados.
+    </p>
+
+    <p><strong>Respuesta:</strong></p>
+
+    <p>
+        <input type="text"
+               list="estados"
+               name="estado"
+               placeholder="Seleccione un estado">
+
+        <datalist id="estados">
+            <option value="Veracruz">
+            <option value="Puebla">
+            <option value="Oaxaca">
+            <option value="Chiapas">
+            <option value="Tabasco">
+        </datalist>
+    </p>
+
+
+    <hr>
+
+
+    <h3>f)</h3>
+
+    <p>
+        Cree un elemento input range que permita al usuario seleccionar
+        un número del 1 al 100.
+    </p>
+
+    <p><strong>Respuesta:</strong></p>
+
+    <p>
+        1
+        <input type="range"
+               name="numero"
+               min="1"
+               max="100"
+               value="50">
+        100
+    </p>
+
+
+    <hr>
+
+
+    <h3>g)</h3>
+
+    <p>
+        Especifique que no debe permitirse el atributo autocomplete en un
+        formulario. Muestre sólo la etiqueta de apertura del formulario.
+    </p>
+
+    <p><strong>Respuesta:</strong></p>
+
+    <p>
+        &lt;form autocomplete="off"&gt;
+    </p>
+
+
+    <hr>
+
+
+    <h3>h)</h3>
+
+    <p>
+        Use un elemento <strong>mark</strong> para resaltar el segundo
+        enunciado del siguiente párrafo:
+    </p>
+
+    <p>
+        Se pidió a los estudiantes que calificaran los alimentos en la cafetería.
+        En una escala del 1 al 10. El resultado promedio fue 7.
+    </p>
+
+    <p><strong>Respuesta:</strong></p>
+
+    <p>
+        Se pidió a los estudiantes que calificaran los alimentos en la cafetería.
+        <mark>En una escala del 1 al 10.</mark>
+        El resultado promedio fue 7.
+    </p>
+
+
+    <br>
+
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+
+</body>
+
+</html>

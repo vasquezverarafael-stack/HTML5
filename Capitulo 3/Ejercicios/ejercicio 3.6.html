@@ -1,0 +1,47 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Autocomplete con Datalist</title>
+</head>
+<body>
+    <h1>Autocomplete con un elemento datalist</h1>
+    <p>
+        Seleccione o escriba un día de la semana:
+    </p>
+    <form>
+        <p>
+            <label>
+                Día de la semana:
+                <input type="text"
+                       name="dia"
+                       list="dias"
+                       placeholder="Escriba un día"
+                       autocomplete="on">
+
+                <datalist id="dias">
+                    <option value="Lunes">
+                    <option value="Martes">
+                    <option value="Miércoles">
+                    <option value="Jueves">
+                    <option value="Viernes">
+                    <option value="Sábado">
+                    <option value="Domingo">
+                </datalist>
+            </label>
+        </p>
+        <p>
+            <input type="submit" value="Enviar">
+            <input type="reset" value="Borrar">
+        </p>
+    </form>
+    <br>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>
