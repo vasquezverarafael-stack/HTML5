@@ -1,0 +1,97 @@
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de retroalimentación universitaria</title>
+</head>
+
+<body>
+    <h1>Retroalimentación sobre la visita al campus</h1>
+
+         <form method="post" action="http://www.deitel.com">
+             <p>
+                    <label>Nombre:
+                       <input type="text" name="nombre">
+                   </label>
+              </p>
+
+             <p>
+                 <label>Correo electrónico:
+                        <input type="email" name="correo">
+                   </label>
+            </p>
+
+          <p><strong>¿Qué fue lo que más le gustó del campus?</strong></p>
+          <p>
+             <label>
+                 <input type="checkbox" name="gustos" value="campus">
+                 Campus
+            </label>
+
+             <label>
+                <input type="checkbox" name="gustos" value="estudiantes">
+                Estudiantes
+            </label>
+
+            <label>
+                <input type="checkbox" name="gustos" value="ubicacion">
+                Ubicación
+            </label>
+
+            <label>
+                <input type="checkbox" name="gustos" value="ambiente">
+                Ambiente
+            </label>
+
+            <label>
+                <input type="checkbox" name="gustos" value="dormitorios">
+                Dormitorios
+            </label>
+
+            <label>
+                <input type="checkbox" name="gustos" value="deportes">
+                Deportes
+            </label>
+        </p>
+
+        <p><strong>¿Cómo supo sobre la universidad?</strong></p>
+        <p>
+            <label>
+                <input type="radio" name="informacion" value="amigos">
+                Amigos
+            </label>
+
+            <label>
+                <input type="radio" name="informacion" value="television">
+                Televisión
+            </label>
+
+            <label>
+                <input type="radio" name="informacion" value="internet">
+                Internet
+            </label>
+
+            <label>
+                <input type="radio" name="informacion" value="otro">
+                Otro
+            </label>
+        </p>
+        <p>
+            <label>Comentarios adicionales:</label>
+            <br>
+            <textarea name="comentarios" rows="5" cols="40"></textarea>
+        </p>
+        <p>
+            <input type="submit" value="Enviar">
+            <input type="reset" value="Restablecer">
+        </p>
+    </form>
+        <p>
+            <a href="index.html">
+             <button type="button">Volver al índice de ejercicios</button>
+            </a>
+        </p>
+    </body>
+</html>
