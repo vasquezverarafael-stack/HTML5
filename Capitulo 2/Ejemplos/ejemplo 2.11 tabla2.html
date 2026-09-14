@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--Fig. 2.13: tabla2.html Vásquez Vera Rafael 227O01115-->
+<!--Tabla de HTMLS compleja.-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>tablas</title>
+    </head>
+    <body>
+        <h1>Ejemplo de tabla: combinando filas y columnas</h1>
+        <table border="1">
+            <caption>Una tabla de muestra m&aacute;s</caption>
+            <thead>
+                <!--los elementos rowspan y colspan combinan el numero-->
+                <!--especificado de celdas en sentido vertical u horizontal-->
+                <tr>
+                    <!--combina dos filas-->
+                    <th rowspan="2">
+                        <img src="camello.jpg" width="205" 
+                        height="167" alt="imagen de un camello con una joroba">
+                    </th>
+
+                    <!--combina cuatro columnas-->
+                    <th colspan="4">
+                        <strong>Comparaci&oacute;n de cam&eacute;lidos</strong><br>
+                        Fecha aproximada: 10/2011
+                    </th>
+                </tr>
+                <tr>
+                    <th># Jorobas</th>
+                    <th>Regi&oacute; ind&iacute;gena</th>
+                    <th>Escupe?</th>
+                    <th>Produce lana?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Camellos (bacterianos)</th>
+                    <td>2</td>
+                    <td>Africa/Asia</td>
+                    <td>S&iacute;</td>
+                    <td>S&iacute;</td>
+                </tr>
+                <tr>
+                    <th>Llamas</th>
+                    <td>1</td>
+                    <td>Monta&ntilde;as de los Andes</td>
+                    <td>S&iacute;</td>
+                    <td>S&iacute;</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>
+            <a href="index.html">
+             <button type="button">Volver al índice de ejemplos</button>
+            </a>
+        </p>
+    </body>
+</html>
