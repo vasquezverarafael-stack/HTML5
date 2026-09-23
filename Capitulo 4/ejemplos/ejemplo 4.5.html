@@ -1,0 +1,62 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+
+<!DOCTYPE html>
+<!-- Fig. 4.10: posicionamiento2.html -->
+<!-- Posicionamiento relativo de los elementos. -->
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Posicionamiento relativo</title>
+    <style type="text/css">
+        p {
+            font-size: 1.3em;
+            font-family: verdana, arial, sans-serif;
+        }
+        span {
+            color: red;
+            font-size: .6em;
+            height: 1em;
+        }
+        .super {
+            position: relative;
+            top: -1em;
+        }
+        .sub {
+            position: relative;
+            bottom: -1em;
+        }
+        .desplizq {
+            position: relative;
+            left: -1em;
+        }
+        .desplder {
+            position: relative;
+            right: -1em;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        El texto al final de esta oración
+        <span class="super">está en superíndice</span>.
+    </p>
+    <p>
+        El texto al final de esta oración
+        <span class="sub">está en subíndice</span>.
+    </p>
+    <p>
+        El texto al final de esta oración
+        <span class="desplizq">está desplazado a la izquierda</span>.
+    </p>
+    <p>
+        El texto al final de esta oración
+        <span class="desplder">está desplazado a la derecha</span>.
+    </p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejemplos</button>
+        </a>
+    </p>
+</body>
+</html>
