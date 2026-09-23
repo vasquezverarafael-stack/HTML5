@@ -1,0 +1,22 @@
+.boton {
+    width: 150px;
+    border: 2px solid blue;
+    background-color: lightblue;
+    text-align: center;
+}
+
+.boton a {
+    display: block;
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+}
+
+.boton:hover {
+    border-color: red;
+    background-color: yellow;
+}
+
+.boton:hover a {
+    color: red;
+}
