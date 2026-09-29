@@ -1,0 +1,113 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+
+<!DOCTYPE html>
+<!-- Fig. 5.11: animacion.html -->
+<!-- Animación en CSS3. -->
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Animación</title>
+    <style type="text/css">
+        img {
+            position: relative;
+            -webkit-animation: movingimage linear 10s 1s 2 alternate;
+            -moz-animation: movingimage linear 10s 1s 2 alternate;
+            animation: movingimage linear 10s 1s 2 alternate;
+        }
+        @-webkit-keyframes movingimage {
+            0% {
+                opacity: 0;
+                left: 50px;
+                top: 0px;
+            }
+            25% {
+                opacity: 1;
+                left: 0px;
+                top: 50px;
+            }
+            50% {
+                opacity: 0;
+                left: 50px;
+                top: 100px;
+            }
+            75% {
+                opacity: 1;
+                left: 100px;
+                top: 50px;
+            }
+            100% {
+                opacity: 0;
+                left: 50px;
+                top: 0px;
+            }
+        }
+        @-moz-keyframes movingimage {
+            0% {
+                opacity: 0;
+                left: 50px;
+                top: 0px;
+            }
+            25% {
+                opacity: 1;
+                left: 0px;
+                top: 50px;
+            }
+            50% {
+                opacity: 0;
+                left: 50px;
+                top: 100px;
+            }
+            75% {
+                opacity: 1;
+                left: 100px;
+                top: 50px;
+            }
+            100% {
+                opacity: 0;
+                left: 50px;
+                top: 0px;
+            }
+        }
+        @keyframes movingimage {
+            0% {
+                opacity: 0;
+                left: 50px;
+                top: 0px;
+            }
+            25% {
+                opacity: 1;
+                left: 0px;
+                top: 50px;
+            }
+            50% {
+                opacity: 0;
+                left: 50px;
+                top: 100px;
+            }
+            75% {
+                opacity: 1;
+                left: 100px;
+                top: 50px;
+            }
+            100% {
+                opacity: 0;
+                left: 50px;
+                top: 0px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="jhtp.png"
+         width="138"
+         height="180"
+         alt="Portada del libro Java How to Program">
+    <div></div>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejemplos</button>
+        </a>
+    </p>
+</body>
+</html>

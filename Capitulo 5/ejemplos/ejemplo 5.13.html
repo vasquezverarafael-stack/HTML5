@@ -1,0 +1,63 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+
+<!DOCTYPE html>
+<!-- Fig. 5.14: fusionarimagenes.html -->
+<!-- Fusionar una imagen en otra mediante CSS3. -->
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fusión de imágenes</title>
+
+    <style type="text/css">
+
+        #portada {
+            position: relative;
+            margin: 0 auto;
+            width: 138px;
+            height: 180px;
+        }
+
+        #portada img {
+            position: absolute;
+            left: 0;
+            top: 0;
+
+            -webkit-transition: opacity 4s ease-in-out;
+            transition: opacity 4s ease-in-out;
+        }
+
+        #portada img.top:hover {
+            opacity: 0;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div id="portada">
+
+        <img class="bottom"
+             src="jhtp.png"
+             width="138"
+             height="180"
+             alt="Portada de Java 9e">
+
+        <img class="top"
+             src="jhtp8.png"
+             width="138"
+             height="180"
+             alt="Portada de Java 8e">
+
+    </div>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejemplos</button>
+        </a>
+    </p>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+
+<!DOCTYPE html>
+<!-- Fig. 5.4: gradientelineal.html -->
+<!-- Gradientes lineales en CSS3. -->
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gradiente lineal</title>
+    <style type="text/css">
+        div {
+            width: 200px;
+            height: 200px;
+            border: 3px solid navy;
+            padding: 5px 20px;
+            text-align: center;
+
+            background: -webkit-linear-gradient(
+                top, white 15%, lightsteelblue 50%, navy 75%
+            );
+
+            background: -moz-linear-gradient(
+                top, white 15%, lightsteelblue 50%, navy 75%
+            );
+
+            background: linear-gradient(
+                to bottom, white 15%, lightsteelblue 50%, navy 75%
+            );
+
+            float: left;
+            margin-right: 15px;
+        }
+        #horizontal {
+            width: 200px;
+            height: 200px;
+            border: 3px solid orange;
+            padding: 5px 20px;
+            text-align: center;
+
+            background: -webkit-linear-gradient(
+                left, white 15%, yellow 50%, orange 75%
+            );
+
+            background: -moz-linear-gradient(
+                left, white 15%, yellow 50%, orange 75%
+            );
+
+            background: linear-gradient(
+                to right, white 15%, yellow 50%, orange 75%
+            );
+
+            margin-right: 15px;
+        }
+        #diagonal {
+            width: 200px;
+            height: 200px;
+            border: 3px solid purple;
+            padding: 5px 20px;
+            text-align: center;
+
+            background: -webkit-linear-gradient(
+                top left, white 15%, plum 50%, purple 75%
+            );
+
+            background: -moz-linear-gradient(
+                top left, white 15%, plum 50%, purple 75%
+            );
+
+            background: linear-gradient(
+                135deg, white 15%, plum 50%, purple 75%
+            );
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Gradiente lineal vertical</h2>
+    </div>
+    <div id="horizontal">
+        <h2>Gradiente lineal horizontal</h2>
+    </div>
+    <div id="diagonal">
+        <h2>Gradiente lineal diagonal</h2>
+    </div>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejemplos</button>
+        </a>
+    </p>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+
+<!DOCTYPE html>
+<!-- Fig. 5.16: mdcf.html -->
+<!-- Módulo de diseño de caja flexible. -->
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Modelo de diseño de caja flexible</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Rosario"
+          rel="stylesheet"
+          type="text/css">
+
+    <style type="text/css">
+
+        .flexbox {
+            width: 600px;
+            height: 420px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .flexbox > div {
+            transition: 1s ease-out;
+            border-radius: 10px;
+            border: 2px solid black;
+            width: 120px;
+            height: 350px;
+            margin: 10px -10px 10px 0;
+            padding: 20px;
+            box-shadow: 10px 10px 10px dimgrey;
+            background-color: lightgrey;
+            overflow: hidden;
+        }
+
+        /* Evita que las imágenes se salgan de las cajas */
+        .flexbox img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+
+        .flexbox > div:hover {
+            width: 200px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .flexbox > div:nth-child(1):hover {
+            background-color: royalblue;
+        }
+
+        .flexbox > div:nth-child(2):hover {
+            background-color: crimson;
+        }
+
+        .flexbox > div:nth-child(3):hover {
+            background-color: crimson;
+        }
+
+        .flexbox > div:nth-child(4):hover {
+            background-color: darkgreen;
+        }
+
+        p {
+            height: 250px;
+            overflow: hidden;
+            font-family: "Rosario", sans-serif;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="flexbox">
+
+        <div>
+            <img src="CPP.png"
+                 alt="Icono de buena práctica de programación">
+
+            <p>
+                Las buenas prácticas de programación indican las técnicas
+                que le ayudarán a producir programas más claros,
+                comprensibles y fáciles de mantener.
+            </p>
+        </div>
+
+        <div>
+            <img src="EPT.png"
+                 alt="Icono de tip para prevenir errores">
+
+            <p>
+                Los tips para prevenir errores contienen sugerencias para
+                exponer errores y eliminarlos de sus programas; muchos
+                describen aspectos de programación que evitan que los errores
+                entren siquiera a los programas.
+            </p>
+        </div>
+
+        <div>
+            <img src="CPE.png"
+                 alt="Icono de error común de programación">
+
+            <p>
+                Los errores comunes de programación señalan los errores que
+                cometen los estudiantes con frecuencia. Estos errores comunes
+                de programación reducen la probabilidad de que usted cometa
+                los mismos errores.
+            </p>
+        </div>
+
+        <div>
+            <img src="SEO.png"
+                 alt="Icono de observación de ingeniería de software">
+
+            <p>
+                Las observaciones de ingeniería de software resaltan los
+                asuntos de arquitectura y diseño que afectan en la
+                construcción de sistemas de software, en especial los
+                sistemas de gran escala.
+            </p>
+        </div>
+
+    </div>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejemplos</button>
+        </a>
+    </p>
+</body>
+
+</html>

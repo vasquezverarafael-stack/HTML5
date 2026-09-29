@@ -1,0 +1,105 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+
+<!DOCTYPE html>
+<!-- Fig. 5.13: inclinar.html -->
+<!-- Elementos de inclinación y de transformación en CSS3. -->
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inclinar (skew)</title>
+    <style type="text/css">
+        .skew .textbox {
+            margin-left: 75px;
+            background: lightgreen;
+            height: 100px;
+            width: 200px;
+            padding: 25px 0;
+            text-align: center;
+            font-size: 250%;
+            border: 3px solid DarkGreen;
+            border-radius: 15px;
+
+            -webkit-animation: skew 3s infinite linear;
+            -moz-animation: skew 3s infinite linear;
+            animation: skew 3s infinite linear;
+        }
+        @-webkit-keyframes skew {
+            from {
+                -webkit-transform: skewX(0deg);
+            }
+
+            25% {
+                -webkit-transform: skewX(45deg);
+            }
+
+            50% {
+                -webkit-transform: skewX(0deg);
+            }
+
+            75% {
+                -webkit-transform: skewX(-45deg);
+            }
+
+            to {
+                -webkit-transform: skewX(0deg);
+            }
+        }
+        @-moz-keyframes skew {
+            from {
+                -moz-transform: skewX(0deg);
+            }
+
+            25% {
+                -moz-transform: skewX(45deg);
+            }
+
+            50% {
+                -moz-transform: skewX(0deg);
+            }
+
+            75% {
+                -moz-transform: skewX(-45deg);
+            }
+
+            to {
+                -moz-transform: skewX(0deg);
+            }
+        }
+
+        @keyframes skew {
+            from {
+                transform: skewX(0deg);
+            }
+
+            25% {
+                transform: skewX(45deg);
+            }
+
+            50% {
+                transform: skewX(0deg);
+            }
+
+            75% {
+                transform: skewX(-45deg);
+            }
+
+            to {
+                transform: skewX(0deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="box skew">
+        <div class="textbox">
+            Inclinar texto
+        </div>
+    </div>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejemplos</button>
+        </a>
+    </p>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+
+<!DOCTYPE html>
+<!-- Fig. 5.9: reflejos.html -->
+<!-- Reflejos en CSS3. -->
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reflejo</title>
+    <style type="text/css">
+        img {margin-right: 30px;}
+        img.below {
+            -webkit-box-reflect: below 5px
+            -webkit-gradient(
+                linear,
+                left top,
+                left bottom,
+                from(transparent),
+                to(white)
+            );
+        }
+        img.right {
+            -webkit-box-reflect: right 5px
+            -webkit-gradient(
+                linear,
+                right top,
+                left top,
+                from(transparent),
+                to(white)
+            );
+        }
+    </style>
+</head>
+<body>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejemplos</button>
+        </a>
+    </p>
+    <img src="image.png"
+         class="below"
+         alt="Imagen con reflejo debajo">
+    <img src="image.png"
+         class="right"
+         alt="Imagen con reflejo a la derecha">
+</body>
+</html>

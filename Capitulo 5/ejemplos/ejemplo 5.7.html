@@ -1,0 +1,50 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+
+<!DOCTYPE html>
+<!-- Fig. 5.8: multiplesfondos.html -->
+<!-- Múltiples imágenes de fondo en CSS3. -->
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Múltiples fondos</title>
+    <style type="text/css">
+        div.fondo {
+            background-image: url(logo.png), url(oceano.png);
+            background-position: bottom right, 100% center;
+            background-origin: border-box, content-box;
+            background-repeat: no-repeat, repeat;
+        }
+        div.contenido {
+            padding: 10px 15px;
+            color: white;
+            font-size: 150%;
+        }
+    </style>
+</head>
+<body>
+    <div class="fondo">
+        <div class="contenido">
+            <p>
+                Deitel &amp; Associates, Inc. es una empresa reconocida a nivel
+                mundial, dedicada al entrenamiento corporativo y la creación
+                de contenido. La empresa ofrece cursos impartidos por
+                instructores en los sitios de los clientes en todo el mundo
+                sobre lenguajes de programación y otros temas de software como
+                C++, Visual C++<sup>&reg;</sup>, C, Java&trade;,
+                C#<sup>&reg;</sup>, Visual Basic<sup>&reg;</sup>,
+                Objective-C<sup>&reg;</sup>, XML<sup>&reg;</sup>,
+                Python<sup>&reg;</sup>, JavaScript, tecnología de objetos,
+                programación en Internet y Web, y desarrollo de aplicaciones
+                para Android y iPhone.
+            </p>
+        </div>
+    </div>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejemplos</button>
+        </a>
+    </p>
+</body>
+</html>

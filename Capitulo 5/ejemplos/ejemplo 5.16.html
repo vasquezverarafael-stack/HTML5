@@ -1,0 +1,114 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+
+<!DOCTYPE html>
+<!-- Fig. 5.17: multicolumna.html -->
+<!-- Texto multicolumna en CSS3. -->
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Varias columnas</title>
+
+    <style type="text/css">
+
+        p {
+            margin: 0.9em 0;
+        }
+
+        .multicolumna {
+            /* Establecer el número de columnas en 3 */
+            -webkit-column-count: 3;
+            -moz-column-count: 3;
+            column-count: 3;
+
+            /* Establecer el espacio entre columnas en 30px */
+            -webkit-column-gap: 30px;
+            -moz-column-gap: 30px;
+            column-gap: 30px;
+
+            /* Agregar una línea negra de 1px entre cada columna */
+            -webkit-column-rule: 1px outset black;
+            -moz-column-rule: 1px outset black;
+            column-rule: 1px outset black;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <h1>Computadoras, hardware y software</h1>
+    </header>
+
+    <div class="multicolumna">
+
+        <p>
+            Una computadora es un dispositivo que puede realizar cálculos y
+            tomar decisiones lógicas con mucha más rapidez que los humanos.
+            Muchas de las computadoras personales de la actualidad pueden
+            realizar miles de millones de cálculos en un segundo, más de lo
+            que un humano puede realizar durante toda su vida. Las
+            supercomputadoras ya se encuentran realizando miles de billones
+            (trillones) de instrucciones por segundo. Para poner esto en
+            perspectiva, una computadora de un trillón de instrucciones por
+            segundo puede realizar en un segundo más de 100,000 cálculos para
+            cada persona en el planeta. Y estos "límites superiores" aumentan
+            con rapidez.
+        </p>
+
+        <p>
+            Las computadoras procesan datos bajo el control de conjuntos de
+            instrucciones llamadas programas de computadora. Estos programas
+            guían a la computadora por conjuntos ordenados de acciones
+            especificadas por personas llamadas programadores de computadora.
+            Los programas que se ejecutan en una computadora se conocen como
+            software. En este libro usted aprenderá sobre la metodología de
+            programación clave de la actualidad que mejora la productividad
+            del programador, con lo cual se reducen los costos de desarrollo
+            de software: programación orientada a objetos.
+        </p>
+
+        <p>
+            Una computadora consiste de diversos dispositivos conocidos como
+            hardware (por ejemplo: el teclado, pantalla, ratón, discos duros,
+            memoria, DVD y unidades de procesamiento). Los costos de las
+            computadoras disminuyen en forma dramática, debido a los rápidos
+            desarrollos en las tecnologías de hardware y software. Las
+            computadoras que podrían haber llenado salones extensos y costar
+            millones de dólares hace unas décadas ahora se inscriben en chips
+            de silicio más chicos que una uña, que cuestan tal vez unos
+            cuantos dólares. Por ironía, el silicio es uno de los materiales
+            más abundantes.
+        </p>
+
+        <p>
+            Los chips de computadora (microprocesadores) controlan innumerables
+            dispositivos. Estos sistemas incrustados incluyen frenos
+            antibloqueo en los autos, sistemas de navegación, electrodomésticos
+            inteligentes, sistemas de seguridad en el hogar, teléfonos
+            celulares y smartphones, robots, intersecciones de tráfico
+            inteligentes, sistemas para evitar colisiones, controladores de
+            videojuegos y más. La inmensa mayoría de los microprocesadores que
+            se producen cada año se incrustan en dispositivos que no son
+            computadoras de propósito general.
+        </p>
+
+    </div>
+
+    <footer>
+        <p>
+            &copy; 2012 por Pearson Education, Inc.<br>
+            Todos los derechos reservados.
+        </p>
+    </footer>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejemplos</button>
+        </a>
+    </p>
+</body>
+
+</html>
