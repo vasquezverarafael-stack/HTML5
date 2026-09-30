@@ -1,0 +1,43 @@
+<!--227O0115 Vásquez Vera Rafael-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Inclinación</title>
+
+    <style>
+        .elemento {
+            width: 200px;
+            height: 100px;
+            background-color: deepskyblue;
+            border: 3px solid black;
+            margin: 100px;
+
+            animation: inclinacion 3s infinite alternate;
+        }
+
+        @keyframes inclinacion {
+            0% {
+                transform: skewY(30deg);
+            }
+
+            100% {
+                transform: skewX(30deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="elemento">
+        Inclinación CSS3
+    </div>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejemplos</button>
+        </a>
+    </p>
+</body>
+</html>

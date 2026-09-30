@@ -1,0 +1,73 @@
+<!--227O0115 Vásquez Vera Rafael-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Fusionar imágenes</title>
+
+    <style>
+        .galeria {
+            position: relative;
+            width: 500px;
+            height: 350px;
+        }
+
+        .galeria img {
+            position: absolute;
+            width: 500px;
+            height: 350px;
+            left: 0;
+            top: 0;
+
+            opacity: 0;
+
+            transition-property: opacity;
+            transition-duration: 3s;
+            transition-timing-function: linear;
+        }
+
+        .galeria img:target {
+            opacity: 1;
+        }
+
+        .galeria img:first-child {
+            opacity: 1;
+        }
+
+        .botones {
+            margin-top: 20px;
+        }
+
+        .botones a {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Fusionar imágenes</h1>
+
+    <div class="galeria">
+        <img id="imagen1" src="imagen1.jpg" alt="Imagen 1">
+        <img id="imagen2" src="imagen2.jpg" alt="Imagen 2">
+        <img id="imagen3" src="imagen3.jpg" alt="Imagen 3">
+        <img id="imagen4" src="imagen4.jpg" alt="Imagen 4">
+        <img id="imagen5" src="imagen5.jpg" alt="Imagen 5">
+    </div>
+
+    <div class="botones">
+        <a href="#imagen1">Imagen 1</a>
+        <a href="#imagen2">Imagen 2</a>
+        <a href="#imagen3">Imagen 3</a>
+        <a href="#imagen4">Imagen 4</a>
+        <a href="#imagen5">Imagen 5</a>
+    </div>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejemplos</button>
+        </a>
+    </p>
+</body>
+</html>
