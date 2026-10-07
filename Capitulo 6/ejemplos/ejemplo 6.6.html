@@ -1,0 +1,58 @@
+<!-- 227O01115 Vásquez Vera Rafael  -->
+<!-- Fig. 6.14: bienvenido5.html -->
+<!-- Uso de operadores de igualdad y relacionales. -->
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Uso de operadores relacionales</title>
+
+    <script type="text/javascript">
+
+        var nombre;               // cadena introducida por el usuario
+        var ahora = new Date();   // fecha y hora actuales
+        var hora = ahora.getHours(); // hora actual (0-23)
+
+        // Lee el nombre del cuadro indicador como una cadena
+        nombre = window.prompt("Escriba su nombre");
+
+        // Determina si es de mañana
+        if (hora < 12)
+            document.write("<h1>Buenos días, ");
+
+        // Determina si la hora es PM
+        if (hora >= 12) {
+
+            // Convierte a reloj de 12 horas
+            hora = hora - 12;
+
+            // Determina si es antes de las 6 PM
+            if (hora < 6)
+                document.write("<h1>Buenas tardes, ");
+
+            // Determina si es después de las 6 PM
+            if (hora >= 6)
+                document.write("<h1>Buenas noches, ");
+
+        } // fin de if
+
+        document.writeln(
+            nombre +
+            ", bienvenido a la programación en JavaScript</h1>"
+        );
+
+    </script>
+
+</head>
+
+<body>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejemplos</button>
+        </a>
+    </p>
+</body>
+
+</html>
