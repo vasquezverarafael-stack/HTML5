@@ -1,0 +1,34 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Par o impar</title>
+    <script>
+        var entrada;   // cadena escrita por el usuario
+        var numero;    // entero como número
+
+        // leer el entero como cadena
+        entrada = window.prompt("Escriba un entero", "0");
+
+        // convertir la cadena a entero
+        numero = parseInt(entrada);
+
+        // determinar si es par o impar y mostrar el resultado en HTML5
+        if (numero % 2 == 0)
+            document.writeln("<h1>" + numero + " es un número par</h1>");
+
+        if (numero % 2 != 0)
+            document.writeln("<h1>" + numero + " es un número impar</h1>");
+    </script>
+</head>
+<body>
+    <p>Actualice la página para ejecutar el script de nuevo.</p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

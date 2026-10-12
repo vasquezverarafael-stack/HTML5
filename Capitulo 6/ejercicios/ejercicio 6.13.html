@@ -1,0 +1,42 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Círculo</title>
+    <script>
+        var entradaRadio;      // cadena escrita por el usuario
+        var radio;             // radio como número
+        var diametro;
+        var circunferencia;
+        var area;
+        var PI = 3.14159;      // valor constante de pi
+
+        // leer el radio como cadena
+        entradaRadio = window.prompt("Escriba el radio del círculo", "0");
+
+        // convertir la cadena a número
+        radio = parseFloat(entradaRadio);
+
+        // realizar los cálculos
+        diametro = 2 * radio;
+        circunferencia = 2 * PI * radio;
+        area = PI * radio * radio;
+
+        // mostrar los resultados en HTML5
+        document.writeln("<h1>Círculo de radio " + radio + "</h1>");
+        document.writeln("<p>Diámetro: " + diametro + "</p>");
+        document.writeln("<p>Circunferencia: " + circunferencia + "</p>");
+        document.writeln("<p>Área: " + area + "</p>");
+    </script>
+</head>
+<body>
+    <p>Actualice la página para ejecutar el script de nuevo.</p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

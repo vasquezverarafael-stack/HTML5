@@ -1,0 +1,60 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Negativos, positivos y ceros</title>
+    <script>
+        var entrada;           // cadena escrita por el usuario
+        var numero;            // número actual
+        var negativos = 0;     // contador de números negativos
+        var positivos = 0;     // contador de números positivos
+        var ceros = 0;         // contador de ceros
+
+        // leer el número 1
+        entrada = window.prompt("Escriba el número 1", "0");
+        numero = parseFloat(entrada);
+        if (numero < 0)
+            negativos = negativos + 1;
+        if (numero > 0)
+            positivos = positivos + 1;
+        if (numero == 0)
+            ceros = ceros + 1;
+
+        // leer el número 2
+        entrada = window.prompt("Escriba el número 2", "0");
+        numero = parseFloat(entrada);
+        if (numero < 0)
+            negativos = negativos + 1;
+        if (numero > 0)
+            positivos = positivos + 1;
+        if (numero == 0)
+            ceros = ceros + 1;
+
+        // leer el número 3
+        entrada = window.prompt("Escriba el número 3", "0");
+        numero = parseFloat(entrada);
+        if (numero < 0)
+            negativos = negativos + 1;
+        if (numero > 0)
+            positivos = positivos + 1;
+        if (numero == 0)
+            ceros = ceros + 1;
+
+        // mostrar los resultados como marcado HTML5
+        document.writeln("<h1>Resultados</h1>");
+        document.writeln("<p>Cantidad de números negativos: " + negativos + "</p>");
+        document.writeln("<p>Cantidad de números positivos: " + positivos + "</p>");
+        document.writeln("<p>Cantidad de ceros: " + ceros + "</p>");
+    </script>
+</head>
+<body>
+    <p>Actualice la página para ejecutar el script de nuevo.</p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>    
+    </p>    
+</body>
+</html>

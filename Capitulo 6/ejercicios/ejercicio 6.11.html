@@ -1,0 +1,40 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Comparación de dos enteros</title>
+    <script>
+        var primerNumero;   // primera cadena escrita por el usuario
+        var segundoNumero;  // segunda cadena escrita por el usuario
+        var numero1;        // primer operando
+        var numero2;        // segundo operando
+
+        // leer los datos del usuario como cadenas
+        primerNumero = window.prompt("Escriba el primer entero", "0");
+        segundoNumero = window.prompt("Escriba el segundo entero", "0");
+
+        // convertir las cadenas a enteros
+        numero1 = parseInt(primerNumero);
+        numero2 = parseInt(segundoNumero);
+
+        // comparar los números
+        if (numero1 > numero2)
+            window.alert(numero1 + " es mayor que " + numero2);
+
+        if (numero2 > numero1)
+            window.alert(numero2 + " es mayor que " + numero1);
+
+        if (numero1 == numero2)
+            document.writeln("<h1>Estos números son iguales</h1>");
+    </script>
+</head>
+<body>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

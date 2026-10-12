@@ -1,0 +1,55 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+<!-- Ejercicio: Orden de evaluación de operadores -->
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Orden de evaluación en JavaScript</title>
+</head>
+
+<body>
+
+    <h1>Orden de evaluación de los operadores</h1>
+
+    <p>
+        <strong>a)</strong>
+        <code>x = 7 + 3 * 6 / 2 - 1;</code>
+    </p>
+    <p>
+        <strong>Orden de evaluación:</strong>
+        Primero la multiplicación (3 * 6), después la división (18 / 2),
+        luego la suma (7 + 9) y finalmente la resta (16 - 1).
+    </p>
+    <p><strong>Valor final de x:</strong> 15</p>
+
+    <p>
+        <strong>b)</strong>
+        <code>x = 2 % 2 + 2 * 2 - 2 / 2;</code>
+    </p>
+    <p>
+        <strong>Orden de evaluación:</strong>
+        Primero el residuo (2 % 2), la multiplicación (2 * 2)
+        y la división (2 / 2). Después la suma y la resta,
+        de izquierda a derecha.
+    </p>
+    <p><strong>Valor final de x:</strong> 3</p>
+
+    <p>
+        <strong>c)</strong>
+        <code>x = (3 * 9 * (3 + (9 * 3 / (3))));</code>
+    </p>
+    <p>
+        <strong>Orden de evaluación:</strong>
+        Primero el paréntesis más interno (9 * 3 / 3 = 9),
+        después (3 + 9 = 12) y finalmente (3 * 9 * 12).
+    </p>
+    <p><strong>Valor final de x:</strong> 324</p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

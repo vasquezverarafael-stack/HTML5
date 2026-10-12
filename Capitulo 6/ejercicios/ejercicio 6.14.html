@@ -1,0 +1,66 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Menor y mayor de cinco enteros</title>
+    <script>
+        var entrada;     // cadena escrita por el usuario
+        var numero;      // entero actual
+        var menor;       // menor entero encontrado
+        var mayor;       // mayor entero encontrado
+
+        // leer el primer entero; empieza como menor y mayor
+        entrada = window.prompt("Escriba el entero 1", "0");
+        numero = parseInt(entrada);
+        menor = numero;
+        mayor = numero;
+
+        // leer el entero 2
+        entrada = window.prompt("Escriba el entero 2", "0");
+        numero = parseInt(entrada);
+        if (numero < menor)
+            menor = numero;
+        if (numero > mayor)
+            mayor = numero;
+
+        // leer el entero 3
+        entrada = window.prompt("Escriba el entero 3", "0");
+        numero = parseInt(entrada);
+        if (numero < menor)
+            menor = numero;
+        if (numero > mayor)
+            mayor = numero;
+
+        // leer el entero 4
+        entrada = window.prompt("Escriba el entero 4", "0");
+        numero = parseInt(entrada);
+        if (numero < menor)
+            menor = numero;
+        if (numero > mayor)
+            mayor = numero;
+
+        // leer el entero 5
+        entrada = window.prompt("Escriba el entero 5", "0");
+        numero = parseInt(entrada);
+        if (numero < menor)
+            menor = numero;
+        if (numero > mayor)
+            mayor = numero;
+
+        // mostrar los resultados como marcado HTML5
+        document.writeln("<h1>Resultados</h1>");
+        document.writeln("<p>El entero menor es: " + menor + "</p>");
+        document.writeln("<p>El entero mayor es: " + mayor + "</p>");
+    </script>
+</head>
+<body>
+    <p>Actualice la página para ejecutar el script de nuevo.</p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

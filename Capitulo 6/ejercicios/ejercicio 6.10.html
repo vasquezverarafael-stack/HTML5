@@ -1,0 +1,48 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Operaciones con dos números</title>
+    <script>
+        var primerNumero;   // primera cadena escrita por el usuario
+        var segundoNumero;  // segunda cadena escrita por el usuario
+        var numero1;        // primer operando
+        var numero2;        // segundo operando
+        var suma;
+        var producto;
+        var diferencia;
+        var cociente;
+
+        // leer los datos del usuario como cadenas
+        primerNumero = window.prompt("Escriba el primer número", "0");
+        segundoNumero = window.prompt("Escriba el segundo número", "0");
+
+        // convertir las cadenas a enteros
+        numero1 = parseInt(primerNumero);
+        numero2 = parseInt(segundoNumero);
+
+        // realizar los cálculos
+        suma = numero1 + numero2;
+        producto = numero1 * numero2;
+        diferencia = numero1 - numero2;
+        cociente = numero1 / numero2;
+
+        // mostrar los resultados
+        document.writeln("<h1>Resultados</h1>");
+        document.writeln("<p>La suma de " + numero1 + " y " + numero2 + " es " + suma + "</p>");
+        document.writeln("<p>El producto de " + numero1 + " y " + numero2 + " es " + producto + "</p>");
+        document.writeln("<p>La diferencia de " + numero1 + " y " + numero2 + " es " + diferencia + "</p>");
+        document.writeln("<p>El cociente de " + numero1 + " y " + numero2 + " es " + cociente + "</p>");
+    </script>
+</head>
+<body>
+<p>Actualice la página para ejecutar el script de nuevo.</p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

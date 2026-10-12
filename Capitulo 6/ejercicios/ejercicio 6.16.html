@@ -1,0 +1,38 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Múltiplo de un número</title>
+    <script>
+        var primerNumero;    // primera cadena escrita por el usuario
+        var segundoNumero;   // segunda cadena escrita por el usuario
+        var numero1;         // primer entero
+        var numero2;         // segundo entero
+
+        // leer los datos del usuario como cadenas
+        primerNumero = window.prompt("Escriba el primer entero", "0");
+        segundoNumero = window.prompt("Escriba el segundo entero", "0");
+
+        // convertir las cadenas a enteros
+        numero1 = parseInt(primerNumero);
+        numero2 = parseInt(segundoNumero);
+
+        // determinar si el primero es múltiplo del segundo y mostrar el resultado en HTML5
+        if (numero1 % numero2 == 0)
+            document.writeln("<h1>" + numero1 + " es múltiplo de " + numero2 + "</h1>");
+
+        if (numero1 % numero2 != 0)
+            document.writeln("<h1>" + numero1 + " no es múltiplo de " + numero2 + "</h1>");
+    </script>
+</head>
+<body>
+    <p>Actualice la página para ejecutar el script de nuevo.</p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

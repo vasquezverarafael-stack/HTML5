@@ -1,0 +1,54 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Operaciones con tres enteros</title>
+    <script>
+        var primerNumero;    // primera cadena escrita por el usuario
+        var segundoNumero;   // segunda cadena escrita por el usuario
+        var tercerNumero;    // tercera cadena escrita por el usuario
+        var numero1;         // primer operando
+        var numero2;         // segundo operando
+        var numero3;         // tercer operando
+        var suma;
+        var promedio;
+        var producto;
+        var menor;
+        var mayor;
+
+        // leer los datos del usuario como cadenas
+        primerNumero = window.prompt("Escriba el primer entero", "0");
+        segundoNumero = window.prompt("Escriba el segundo entero", "0");
+        tercerNumero = window.prompt("Escriba el tercer entero", "0");
+
+        // convertir las cadenas a enteros
+        numero1 = parseInt(primerNumero);
+        numero2 = parseInt(segundoNumero);
+        numero3 = parseInt(tercerNumero);
+
+        // realizar los cálculos
+        suma = numero1 + numero2 + numero3;
+        promedio = suma / 3;
+        producto = numero1 * numero2 * numero3;
+        menor = Math.min(numero1, numero2, numero3);
+        mayor = Math.max(numero1, numero2, numero3);
+
+        // mostrar los resultados en un diálogo alert
+        window.alert("Suma: " + suma +
+                     "\nPromedio: " + promedio +
+                     "\nProducto: " + producto +
+                     "\nMenor: " + menor +
+                     "\nMayor: " + mayor);
+    </script>
+</head>
+<body>
+    <p>Actualice la página para ejecutar el script de nuevo.</p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>
