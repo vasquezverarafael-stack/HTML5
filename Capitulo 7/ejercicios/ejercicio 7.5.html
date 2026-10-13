@@ -1,0 +1,227 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+<!-- Ejercicio 7.13: Ingresos de un vendedor -->
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 7.13 - Ingresos de un vendedor</title>
+</head>
+
+<body>
+
+    <h1>Ejercicio 7.13: Ingresos de un vendedor</h1>
+
+    <h2>1. Enunciado del problema</h2>
+
+    <p>
+        Una empresa paga a sus vendedores $200 por semana, más el 9% de sus
+        ventas brutas durante esa semana. Se conocen los siguientes valores
+        de los artículos vendidos:
+    </p>
+
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>Artículo</th>
+            <th>Valor</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>$239.99</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>$129.75</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>$99.95</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>$350.89</td>
+        </tr>
+    </table>
+
+    <p>
+        Desarrolle una secuencia de comandos que reciba como entrada los
+        artículos vendidos por un vendedor durante la última semana,
+        calcule sus ingresos y muestre el resultado en HTML.
+    </p>
+
+    <hr>
+
+    <h2>2. Algoritmo en pseudocódigo</h2>
+
+    <pre>
+Inicio
+    sueldoBase = 200
+    totalVentas = 0
+
+    Repetir para cada artículo
+        Preguntar si vendió el artículo
+        Si la respuesta es sí
+            totalVentas = totalVentas + valor del artículo
+        Fin Si
+    Fin Repetir
+
+    comision = totalVentas * 0.09
+    ingresos = sueldoBase + comision
+
+    Mostrar totalVentas
+    Mostrar comision
+    Mostrar ingresos
+Fin
+    </pre>
+
+    <h2>3. Refinamiento arriba-abajo</h2>
+
+    <ol>
+        <li>Definir el sueldo base semanal de $200.</li>
+        <li>Registrar los valores de los cuatro artículos.</li>
+        <li>Preguntar al vendedor cuántas unidades vendió de cada artículo.</li>
+        <li>Multiplicar cada cantidad por el precio correspondiente.</li>
+        <li>Sumar los importes para obtener las ventas brutas.</li>
+        <li>Calcular la comisión multiplicando las ventas por 0.09.</li>
+        <li>Sumar la comisión al sueldo base.</li>
+        <li>Mostrar las ventas, la comisión y los ingresos totales.</li>
+    </ol>
+
+    <hr>
+
+    <h2>4. Programa en JavaScript</h2>
+
+    <p>
+        Introduzca la cantidad de unidades vendidas de cada artículo.
+        Si no vendió un artículo, escriba 0.
+    </p>
+
+    <button type="button" onclick="calcularIngresos()">
+        Calcular ingresos
+    </button>
+
+    <div id="resultado">
+        <p>Los resultados aparecerán aquí.</p>
+    </div>
+
+    <script type="text/javascript">
+
+        function calcularIngresos() {
+
+            var sueldoBase = 200;
+            var totalVentas = 0;
+            var comision;
+            var ingresos;
+
+            var precios = [239.99, 129.75, 99.95, 350.89];
+            var cantidades = [];
+            var cantidad;
+            var i;
+
+            for (i = 0; i < precios.length; i++) {
+
+                cantidad = window.prompt(
+                    "¿Cuántas unidades del artículo " +
+                    (i + 1) + " vendió? Precio: $" +
+                    precios[i].toFixed(2),
+                    "0"
+                );
+
+                if (cantidad === null) {
+                    return;
+                }
+
+                cantidad = Number(cantidad);
+
+                if (
+                    !Number.isFinite(cantidad) ||
+                    cantidad < 0 ||
+                    !Number.isInteger(cantidad)
+                ) {
+                    window.alert(
+                        "Introduzca una cantidad entera válida, igual o mayor que cero."
+                    );
+                    return;
+                }
+
+                cantidades.push(cantidad);
+
+                totalVentas += cantidad * precios[i];
+            }
+
+            comision = totalVentas * 0.09;
+            ingresos = sueldoBase + comision;
+
+            document.getElementById("resultado").innerHTML =
+                "<h3>Resumen semanal del vendedor</h3>" +
+                "<p>Ventas brutas: $" + totalVentas.toFixed(2) + "</p>" +
+                "<p>Comisión del 9%: $" + comision.toFixed(2) + "</p>" +
+                "<p>Sueldo base: $" + sueldoBase.toFixed(2) + "</p>" +
+                "<h3>Ingresos totales: $" + ingresos.toFixed(2) + "</h3>";
+
+        }
+
+    </script>
+
+    <hr>
+
+    <h2>5. Prueba de escritorio</h2>
+
+    <p>Supongamos que el vendedor vende una unidad de cada artículo.</p>
+
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>Artículo</th>
+            <th>Cantidad</th>
+            <th>Precio unitario</th>
+            <th>Importe</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>$239.99</td>
+            <td>$239.99</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>1</td>
+            <td>$129.75</td>
+            <td>$129.75</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>1</td>
+            <td>$99.95</td>
+            <td>$99.95</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>1</td>
+            <td>$350.89</td>
+            <td>$350.89</td>
+        </tr>
+        <tr>
+            <th colspan="3">Ventas brutas</th>
+            <th>$820.58</th>
+        </tr>
+    </table>
+
+    <p>Comisión: $820.58 × 0.09 = $73.85</p>
+    <p>Sueldo base: $200.00</p>
+    <p><strong>Ingresos totales: $273.85</strong></p>
+
+    <h2>6. Conclusión</h2>
+
+    <p>
+        El programa calcula las ventas brutas según las cantidades vendidas
+        de cada artículo, obtiene el 9% de comisión y lo suma al sueldo base
+        semanal de $200 para determinar los ingresos totales del vendedor.
+    </p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

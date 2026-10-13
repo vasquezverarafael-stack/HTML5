@@ -1,0 +1,187 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+<!-- Ejercicio 7.17: Encontrar los dos números más grandes -->
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 7.17 - Los dos números más grandes</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+
+        h1, h2, p {
+            text-align: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #dddddd;
+        }
+
+        .boton {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 18px;
+        }
+
+        #resultado {
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+
+    <script>
+        function encontrarDosMayores() {
+            var contador = 1;
+            var numero;
+            var mayor = -1;
+            var segundoMayor = -1;
+            var entrada;
+            var datos = [];
+
+            while (contador <= 10) {
+                entrada = window.prompt(
+                    "Introduzca un dígito del 0 al 9 (" +
+                    contador + " de 10):"
+                );
+
+                if (entrada === null || !/^[0-9]$/.test(entrada)) {
+                    window.alert(
+                        "Entrada no válida. Debe introducir un solo dígito " +
+                        "del 0 al 9. Inicie nuevamente."
+                    );
+                    return;
+                }
+
+                numero = parseInt(entrada, 10);
+                datos.push(numero);
+
+                if (numero > mayor) {
+                    segundoMayor = mayor;
+                    mayor = numero;
+                } else if (numero > segundoMayor) {
+                    segundoMayor = numero;
+                }
+
+                contador++;
+            }
+
+            document.getElementById("numeros").innerHTML =
+                datos.map(function(n) {
+                    return "<td>" + n + "</td>";
+                }).join("");
+
+            document.getElementById("resultado").innerHTML =
+                "<h2>Resultados</h2>" +
+                "<p>El número más grande es: <strong>" +
+                mayor + "</strong></p>" +
+                "<p>El segundo número más grande es: <strong>" +
+                segundoMayor + "</strong></p>";
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Ejercicio 7.17: Los dos números más grandes</h1>
+
+    <h2>Enunciado</h2>
+    <p>
+        Utilizando una metodología similar a la del ejercicio 7.15,
+        encuentre los dos valores más grandes de los diez números
+        introducidos. Cada número solo puede introducirse una vez.
+    </p>
+
+    <h2>Algoritmo en pseudocódigo</h2>
+    <pre>
+Inicio
+    mayor = -1
+    segundoMayor = -1
+    contador = 1
+
+    Mientras contador <= 10
+        Leer numero
+
+        Si numero > mayor Entonces
+            segundoMayor = mayor
+            mayor = numero
+        Si no, si numero > segundoMayor Entonces
+            segundoMayor = numero
+        Fin Si
+
+        contador = contador + 1
+    Fin Mientras
+
+    Mostrar mayor
+    Mostrar segundoMayor
+Fin
+    </pre>
+
+    <h2>Refinamiento descendente</h2>
+    <ol>
+        <li>Inicializar las variables mayor y segundoMayor.</li>
+        <li>Solicitar diez números, uno por uno.</li>
+        <li>Comparar cada número con el mayor actual.</li>
+        <li>Si lo supera, mover el mayor anterior a segundoMayor.</li>
+        <li>Si no supera al mayor, comprobar si supera a segundoMayor.</li>
+        <li>Mostrar los dos valores encontrados.</li>
+    </ol>
+
+    <button class="boton" onclick="encontrarDosMayores()">
+        Introducir los 10 números
+    </button>
+
+    <h2>Números introducidos</h2>
+    <table>
+        <tbody>
+            <tr id="numeros"></tr>
+        </tbody>
+    </table>
+
+    <div id="resultado"></div>
+
+    <h2>Prueba de escritorio</h2>
+    <table>
+        <tr>
+            <th>Número introducido</th>
+            <th>Mayor</th>
+            <th>Segundo mayor</th>
+        </tr>
+        <tr><td>3</td><td>3</td><td>-1</td></tr>
+        <tr><td>7</td><td>7</td><td>3</td></tr>
+        <tr><td>2</td><td>7</td><td>3</td></tr>
+        <tr><td>9</td><td>9</td><td>7</td></tr>
+        <tr><td>1</td><td>9</td><td>7</td></tr>
+        <tr><td>5</td><td>9</td><td>7</td></tr>
+        <tr><td>4</td><td>9</td><td>7</td></tr>
+        <tr><td>8</td><td>9</td><td>8</td></tr>
+        <tr><td>6</td><td>9</td><td>8</td></tr>
+        <tr><td>0</td><td>9</td><td>8</td></tr>
+    </table>
+
+    <h2>Conclusión</h2>
+    <p>
+        El programa encuentra los dos números más grandes de diez entradas
+        sin repetir la captura de ningún número. Para ello, compara cada
+        valor con el mayor y el segundo mayor registrados hasta ese momento.
+    </p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

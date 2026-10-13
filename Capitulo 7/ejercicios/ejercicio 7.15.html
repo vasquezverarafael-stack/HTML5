@@ -1,0 +1,137 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+<!-- Ejercicio 7.23: Descifrado de un entero de cuatro dígitos -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 7.23 - Descifrar datos</title>
+
+    <script>
+        function descifrarNumero() {
+            var entrada;
+            var digitos = [];
+            var temporal;
+            var resultado;
+
+            entrada = window.prompt(
+                "Introduzca el número cifrado de cuatro dígitos:"
+            );
+
+            if (entrada === null) {
+                return;
+            }
+
+            entrada = entrada.trim();
+
+            if (!/^\d{4}$/.test(entrada)) {
+                window.alert(
+                    "Error: debe introducir exactamente cuatro dígitos."
+                );
+                return;
+            }
+
+            // Separar los cuatro dígitos
+            for (var i = 0; i < 4; i++) {
+                digitos[i] = parseInt(entrada.charAt(i), 10);
+            }
+
+            // Deshacer el intercambio de posiciones
+            temporal = digitos[0];
+            digitos[0] = digitos[2];
+            digitos[2] = temporal;
+
+            temporal = digitos[1];
+            digitos[1] = digitos[3];
+            digitos[3] = temporal;
+
+            // Aplicar la operación inversa del cifrado
+            for (var j = 0; j < 4; j++) {
+                digitos[j] = (digitos[j] + 3) % 10;
+            }
+
+            resultado = digitos.join("");
+
+            document.getElementById("resultado").innerHTML =
+                "<h2>Resultado del descifrado</h2>" +
+                "<p>Número cifrado: <strong>" + entrada + "</strong></p>" +
+                "<p>Número original: <strong>" + resultado + "</strong></p>";
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Ejercicio 7.23: Descifrar datos</h1>
+
+    <h2>Enunciado</h2>
+    <p>
+        Escriba una secuencia de comandos que reciba un entero cifrado
+        de cuatro dígitos y lo descifre para obtener el número original,
+        utilizando el procedimiento inverso del ejercicio 7.22.
+    </p>
+
+    <h2>Algoritmo en pseudocódigo</h2>
+    <pre>
+Inicio
+    Leer numero cifrado de cuatro dígitos
+
+    Separar los cuatro dígitos
+
+    Intercambiar el primer dígito con el tercero
+    Intercambiar el segundo dígito con el cuarto
+
+    Para cada dígito
+        digito = (digito + 3) MOD 10
+    Fin Para
+
+    Mostrar numero original
+Fin
+    </pre>
+
+    <h2>Refinamiento descendente</h2>
+    <ol>
+        <li>Solicitar el número cifrado de cuatro dígitos.</li>
+        <li>Validar que la entrada tenga exactamente cuatro dígitos.</li>
+        <li>Separar los cuatro dígitos.</li>
+        <li>Deshacer los dos intercambios de posiciones.</li>
+        <li>Sumar 3 a cada dígito y calcular el módulo 10.</li>
+        <li>Mostrar el número original recuperado.</li>
+    </ol>
+
+    <button onclick="descifrarNumero()">Descifrar número</button>
+
+    <div id="resultado"></div>
+
+    <h2>Prueba de escritorio</h2>
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>Etapa</th>
+            <th>Resultado</th>
+        </tr>
+        <tr>
+            <td>Número cifrado</td>
+            <td>0981</td>
+        </tr>
+        <tr>
+            <td>Deshacer los intercambios</td>
+            <td>8901</td>
+        </tr>
+        <tr>
+            <td>Sumar 3 y aplicar módulo 10</td>
+            <td>1234</td>
+        </tr>
+    </table>
+
+    <h2>Conclusión</h2>
+    <p>
+        El programa recupera el número original deshaciendo los
+        intercambios y aplicando la operación inversa a cada dígito.
+        Se utiliza una cadena de texto para conservar los ceros iniciales.
+    </p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

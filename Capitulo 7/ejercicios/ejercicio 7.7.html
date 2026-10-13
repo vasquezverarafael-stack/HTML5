@@ -1,0 +1,144 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+<!-- Ejercicio 7.15: Encontrar el número más grande -->
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 7.15 - Número más grande</title>
+
+    <script>
+        function encontrarMayor() {
+            var contador;
+            var numero;
+            var mayor;
+            var entrada;
+
+            // Leer el primer número e inicializar el mayor
+            entrada = window.prompt(
+                "Introduzca el número de 1 dígito (1 de 10):"
+            );
+
+            if (entrada === null || !/^[0-9]$/.test(entrada)) {
+                window.alert("Debe introducir un solo dígito del 0 al 9.");
+                return;
+            }
+
+            numero = parseInt(entrada, 10);
+            mayor = numero;
+            contador = 2;
+
+            // Leer los 9 números restantes
+            while (contador <= 10) {
+                entrada = window.prompt(
+                    "Introduzca el número de 1 dígito (" +
+                    contador + " de 10):"
+                );
+
+                if (entrada === null || !/^[0-9]$/.test(entrada)) {
+                    window.alert(
+                        "Debe introducir un solo dígito del 0 al 9. " +
+                        "Vuelva a ejecutar el programa."
+                    );
+                    return;
+                }
+
+                numero = parseInt(entrada, 10);
+
+                if (numero > mayor) {
+                    mayor = numero;
+                }
+
+                contador = contador + 1;
+            }
+
+            document.getElementById("resultado").innerHTML =
+                "<h2>Resultado</h2>" +
+                "<p>El número más grande introducido es: <strong>" +
+                mayor + "</strong></p>";
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Ejercicio 7.15: Encontrar el número más grande</h1>
+
+    <h2>Enunciado</h2>
+    <p>
+        Escriba un algoritmo en pseudocódigo y una secuencia de comandos
+        que reciba diez números de un solo dígito, determine el mayor
+        de ellos y muestre un mensaje con el número más grande.
+        El programa debe utilizar las variables contador, numero y mayor.
+    </p>
+
+    <h2>Algoritmo en pseudocódigo</h2>
+    <pre>
+Inicio
+    contador = 1
+
+    Leer numero
+    mayor = numero
+
+    Mientras contador < 10
+        Leer numero
+
+        Si numero > mayor Entonces
+            mayor = numero
+        Fin Si
+
+        contador = contador + 1
+    Fin Mientras
+
+    Mostrar "El número más grande es: ", mayor
+Fin
+    </pre>
+
+    <h2>Refinamiento descendente</h2>
+    <ol>
+        <li>Solicitar el primer número e inicializar mayor con ese valor.</li>
+        <li>Inicializar el contador para registrar los números procesados.</li>
+        <li>Solicitar los números restantes hasta completar diez.</li>
+        <li>Comparar cada número con mayor.</li>
+        <li>Actualizar mayor si el nuevo número es superior.</li>
+        <li>Mostrar el número más grande encontrado.</li>
+    </ol>
+
+    <button onclick="encontrarMayor()">
+        Introducir los 10 números
+    </button>
+
+    <div id="resultado"></div>
+
+    <h2>Prueba de escritorio</h2>
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>Contador</th>
+            <th>Número introducido</th>
+            <th>Mayor hasta el momento</th>
+        </tr>
+        <tr><td>1</td><td>3</td><td>3</td></tr>
+        <tr><td>2</td><td>7</td><td>7</td></tr>
+        <tr><td>3</td><td>2</td><td>7</td></tr>
+        <tr><td>4</td><td>9</td><td>9</td></tr>
+        <tr><td>5</td><td>1</td><td>9</td></tr>
+        <tr><td>6</td><td>5</td><td>9</td></tr>
+        <tr><td>7</td><td>4</td><td>9</td></tr>
+        <tr><td>8</td><td>8</td><td>9</td></tr>
+        <tr><td>9</td><td>6</td><td>9</td></tr>
+        <tr><td>10</td><td>0</td><td>9</td></tr>
+    </table>
+
+    <h2>Conclusión</h2>
+    <p>
+        El programa utiliza un contador para procesar diez números,
+        la variable numero para almacenar cada entrada y la variable
+        mayor para conservar el valor máximo encontrado. Al finalizar,
+        muestra el número más grande de la serie.
+    </p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

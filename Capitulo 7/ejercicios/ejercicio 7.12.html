@@ -1,0 +1,162 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+<!-- Ejercicio 7.20: Número palíndromo -->
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 7.20 - Palíndromo</title>
+
+    <script>
+        function verificarPalindromo() {
+            var entrada;
+            var numero;
+            var digito1;
+            var digito2;
+            var digito4;
+            var digito5;
+
+            while (true) {
+                entrada = window.prompt(
+                    "Introduzca un número entero de cinco dígitos:"
+                );
+
+                if (entrada === null) {
+                    document.getElementById("resultado").innerHTML =
+                        "<p>Operación cancelada por el usuario.</p>";
+                    return;
+                }
+
+                entrada = entrada.trim();
+
+                if (!/^\d{5}$/.test(entrada)) {
+                    window.alert(
+                        "Error: debe introducir exactamente cinco dígitos. " +
+                        "Inténtelo nuevamente."
+                    );
+                    continue;
+                }
+
+                numero = parseInt(entrada, 10);
+                break;
+            }
+
+            // Extraer los dígitos usando división y residuo
+            digito1 = Math.floor(numero / 10000);
+            digito2 = Math.floor((numero % 10000) / 1000);
+            digito4 = Math.floor((numero % 100) / 10);
+            digito5 = numero % 10;
+
+            if (digito1 === digito5 && digito2 === digito4) {
+                document.getElementById("resultado").innerHTML =
+                    "<h2>Resultado</h2>" +
+                    "<p>El número <strong>" + numero +
+                    "</strong> es un palíndromo.</p>";
+            } else {
+                document.getElementById("resultado").innerHTML =
+                    "<h2>Resultado</h2>" +
+                    "<p>El número <strong>" + numero +
+                    "</strong> no es un palíndromo.</p>";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Ejercicio 7.20: Número palíndromo</h1>
+
+    <h2>Enunciado</h2>
+    <p>
+        Leer un número entero de cinco dígitos y determinar si es un
+        palíndromo. Si el número no tiene cinco dígitos, mostrar un
+        diálogo de alerta y solicitar un nuevo valor.
+    </p>
+
+    <h2>Algoritmo en pseudocódigo</h2>
+    <pre>
+Inicio
+    Repetir
+        Leer numero
+
+        Si numero no tiene cinco dígitos Entonces
+            Mostrar alerta de error
+        Fin Si
+    Hasta que el número tenga cinco dígitos
+
+    digito1 = entero(numero / 10000)
+    digito2 = entero((numero MOD 10000) / 1000)
+    digito4 = entero((numero MOD 100) / 10)
+    digito5 = numero MOD 10
+
+    Si digito1 = digito5 Y digito2 = digito4 Entonces
+        Mostrar "Es un palíndromo"
+    Si no
+        Mostrar "No es un palíndromo"
+    Fin Si
+Fin
+    </pre>
+
+    <h2>Refinamiento descendente</h2>
+    <ol>
+        <li>Solicitar un número entero de cinco dígitos.</li>
+        <li>Validar que la entrada contenga exactamente cinco dígitos.</li>
+        <li>Si es incorrecta, mostrar una alerta y solicitarla nuevamente.</li>
+        <li>Extraer el primer, segundo, cuarto y quinto dígito.</li>
+        <li>Comparar el primer dígito con el quinto y el segundo con el cuarto.</li>
+        <li>Mostrar si el número es o no un palíndromo.</li>
+    </ol>
+
+    <button onclick="verificarPalindromo()">
+        Verificar número
+    </button>
+
+    <div id="resultado"></div>
+
+    <h2>Prueba de escritorio</h2>
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>Número</th>
+            <th>Primer y último dígito</th>
+            <th>Segundo y cuarto dígito</th>
+            <th>Resultado</th>
+        </tr>
+        <tr>
+            <td>12321</td>
+            <td>1 = 1</td>
+            <td>2 = 2</td>
+            <td>Es palíndromo</td>
+        </tr>
+        <tr>
+            <td>55555</td>
+            <td>5 = 5</td>
+            <td>5 = 5</td>
+            <td>Es palíndromo</td>
+        </tr>
+        <tr>
+            <td>12345</td>
+            <td>1 ≠ 5</td>
+            <td>2 ≠ 4</td>
+            <td>No es palíndromo</td>
+        </tr>
+        <tr>
+            <td>1234</td>
+            <td colspan="2">No tiene cinco dígitos</td>
+            <td>Mostrar alerta</td>
+        </tr>
+    </table>
+
+    <h2>Conclusión</h2>
+    <p>
+        El programa utiliza las operaciones de división y residuo para
+        extraer los dígitos del número. Después compara los dígitos
+        simétricos para determinar si el número es un palíndromo.
+        También valida la entrada y solicita un nuevo valor cuando
+        no tiene exactamente cinco dígitos.
+    </p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

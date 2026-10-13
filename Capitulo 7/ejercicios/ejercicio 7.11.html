@@ -1,0 +1,114 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+<!-- Ejercicio 7.19: Problema del else suelto -->
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 7.19 - Else suelto</title>
+</head>
+
+<body>
+    <h1>Ejercicio 7.19: Problema del else suelto</h1>
+
+    <h2>a) Sin llaves</h2>
+
+    <pre>
+if (x < 10)
+    if (y > 10)
+        document.writeln("*****");
+    else
+        document.writeln("#####");
+
+document.writeln("$$$$$");
+    </pre>
+
+    <h3>Pruebas del inciso a)</h3>
+    <script>
+        document.writeln("<h4>Cuando x = 9, y = 11</h4>");
+
+        var x = 9;
+        var y = 11;
+
+        if (x < 10)
+            if (y > 10)
+                document.writeln("*****<br>");
+            else
+                document.writeln("#####<br>");
+
+        document.writeln("$$$$$<br>");
+
+        document.writeln("<h4>Cuando x = 11, y = 9</h4>");
+
+        x = 11;
+        y = 9;
+
+        if (x < 10)
+            if (y > 10)
+                document.writeln("*****<br>");
+            else
+                document.writeln("#####<br>");
+
+        document.writeln("$$$$$<br>");
+    </script>
+
+    <hr>
+
+    <h2>b) Con llaves</h2>
+
+    <pre>
+if (x < 10) {
+    if (y > 10)
+        document.writeln("*****");
+    else {
+        document.writeln("#####");
+        document.writeln("$$$$$");
+    }
+}
+    </pre>
+
+    <h3>Pruebas del inciso b)</h3>
+    <script>
+        document.writeln("<h4>Cuando x = 9, y = 11</h4>");
+
+        x = 9;
+        y = 11;
+
+        if (x < 10) {
+            if (y > 10)
+                document.writeln("*****<br>");
+            else {
+                document.writeln("#####<br>");
+                document.writeln("$$$$$<br>");
+            }
+        }
+
+        document.writeln("<h4>Cuando x = 11, y = 9</h4>");
+
+        x = 11;
+        y = 9;
+
+        if (x < 10) {
+            if (y > 10)
+                document.writeln("*****<br>");
+            else {
+                document.writeln("#####<br>");
+                document.writeln("$$$$$<br>");
+            }
+        }
+    </script>
+
+    <h2>Conclusión</h2>
+    <p>
+        En el inciso a), el else se asocia con el if más cercano,
+        que es la condición y > 10. En el inciso b), las llaves
+        delimitan el bloque del else y determinan qué instrucciones
+        se ejecutan cuando la condición interna es falsa.
+    </p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+<!-- Ejercicio 7.18: Secuencia de comandos misteriosa -->
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Secuencia de comandos misteriosa</title>
+
+    <script>
+        var fila = 10;
+        var columna;
+
+        while (fila >= 1) {
+            columna = 1;
+
+            document.write("<p>");
+
+            while (columna <= 10) {
+                document.write(
+                    fila * 2 - 1 > columna ? "&lt;" : "&gt;"
+                );
+
+                ++columna;
+            }
+
+            --fila;
+            document.write("</p>");
+        }
+    </script>
+</head>
+<body>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

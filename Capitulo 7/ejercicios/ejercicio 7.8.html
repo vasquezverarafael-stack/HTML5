@@ -1,0 +1,95 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+<!-- Ejercicio 7.16: Tabla de valores con ciclos -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 7.16 - Tabla de valores</title>
+
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            width: 60%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #dddddd;
+        }
+
+        h1, p {
+            text-align: center;
+        }
+    </style>
+
+    <script>
+        function generarTabla() {
+            var tabla = document.getElementById("tablaValores");
+            var contenido = "";
+
+            for (var i = 1; i <= 6; i++) {
+                contenido += "<tr>";
+
+                contenido += "<td>" + (i * 10) + "</td>";
+                contenido += "<td>" + (i * 100) + "</td>";
+                contenido += "<td>" + (i * 1000) + "</td>";
+
+                contenido += "</tr>";
+            }
+
+            tabla.innerHTML = contenido;
+        }
+    </script>
+</head>
+
+<body onload="generarTabla()">
+
+    <h1>Ejercicio 7.16: Tabla de valores</h1>
+
+    <p>
+        Tabla generada mediante ciclos y presentada en una tabla HTML5.
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>10 × N</th>
+                <th>100 × N</th>
+                <th>1000 × N</th>
+            </tr>
+        </thead>
+
+        <tbody id="tablaValores"></tbody>
+    </table>
+
+    <h2>Algoritmo en pseudocódigo</h2>
+    <pre>
+Inicio
+    Para i = 1 hasta 6
+        Mostrar i * 10
+        Mostrar i * 100
+        Mostrar i * 1000
+    Fin Para
+Fin
+    </pre>
+
+    <h2>Conclusión</h2>
+    <p>
+        Los ciclos permiten generar automáticamente los valores de cada
+        columna sin escribir cada fila manualmente. CSS centra los datos
+        y mejora la presentación de la tabla.
+    </p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

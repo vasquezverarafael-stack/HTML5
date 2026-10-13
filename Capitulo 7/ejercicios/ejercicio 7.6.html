@@ -1,0 +1,156 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+<!-- Ejercicio 7.14: Cálculo del sueldo bruto de empleados -->
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 7.14 - Sueldo bruto</title>
+
+    <script>
+        function calcularSueldos() {
+            var horas;
+            var tarifa;
+            var sueldoBruto;
+            var horasExtra;
+            var empleado;
+            var resultados = "";
+
+            // Procesar los datos de tres empleados
+            for (empleado = 1; empleado <= 3; empleado++) {
+                horas = parseFloat(
+                    window.prompt(
+                        "Empleado " + empleado +
+                        ": escriba las horas trabajadas la semana pasada:"
+                    )
+                );
+
+                tarifa = parseFloat(
+                    window.prompt(
+                        "Empleado " + empleado +
+                        ": escriba la tarifa por hora:"
+                    )
+                );
+
+                // Validar los datos ingresados
+                if (isNaN(horas) || horas < 0 ||
+                    isNaN(tarifa) || tarifa < 0) {
+                    window.alert(
+                        "Los datos deben ser números no negativos. " +
+                        "Intente nuevamente."
+                    );
+                    return;
+                }
+
+                // Calcular el sueldo bruto
+                if (horas <= 40) {
+                    sueldoBruto = horas * tarifa;
+                } else {
+                    horasExtra = horas - 40;
+                    sueldoBruto = (40 * tarifa) +
+                        (horasExtra * tarifa * 1.5);
+                }
+
+                resultados +=
+                    "<p><strong>Empleado " + empleado +
+                    "</strong><br>" +
+                    "Horas trabajadas: " + horas + "<br>" +
+                    "Tarifa por hora: $" + tarifa.toFixed(2) + "<br>" +
+                    "Sueldo bruto: $" + sueldoBruto.toFixed(2) +
+                    "</p>";
+            }
+
+            document.getElementById("resultados").innerHTML =
+                "<h2>Resultados de la semana</h2>" + resultados;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Ejercicio 7.14: Cálculo del sueldo bruto</h1>
+
+    <h2>Enunciado</h2>
+    <p>
+        Una empresa paga la tarifa normal por las primeras 40 horas
+        trabajadas de cada empleado y una tarifa y media por cada hora
+        que exceda de 40. Calcule el sueldo bruto de tres empleados
+        utilizando diálogos prompt para introducir los datos.
+    </p>
+
+    <h2>Pseudocódigo</h2>
+    <pre>
+Inicio
+    Para cada empleado del 1 al 3
+        Leer horas trabajadas
+        Leer tarifa por hora
+
+        Si horas <= 40 Entonces
+            sueldo = horas * tarifa
+        Si no
+            horasExtra = horas - 40
+            sueldo = (40 * tarifa) +
+                     (horasExtra * tarifa * 1.5)
+        Fin Si
+
+        Mostrar sueldo bruto
+    Fin Para
+Fin
+    </pre>
+
+    <h2>Refinamiento descendente</h2>
+    <ol>
+        <li>Solicitar las horas trabajadas por cada empleado.</li>
+        <li>Solicitar la tarifa por hora de cada empleado.</li>
+        <li>Determinar si trabajó más de 40 horas.</li>
+        <li>Calcular el sueldo normal y, si corresponde, el tiempo extra.</li>
+        <li>Mostrar el sueldo bruto de cada empleado.</li>
+    </ol>
+
+    <button onclick="calcularSueldos()">
+        Ingresar datos de los empleados
+    </button>
+
+    <div id="resultados"></div>
+
+    <h2>Prueba de escritorio</h2>
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>Empleado</th>
+            <th>Horas</th>
+            <th>Tarifa</th>
+            <th>Sueldo bruto</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>40</td>
+            <td>$100.00</td>
+            <td>$4,000.00</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>45</td>
+            <td>$100.00</td>
+            <td>$4,750.00</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>35</td>
+            <td>$80.00</td>
+            <td>$2,800.00</td>
+        </tr>
+    </table>
+
+    <h2>Conclusión</h2>
+    <p>
+        El programa calcula el sueldo bruto de tres empleados. Si trabajan
+        hasta 40 horas, reciben su tarifa normal. Si superan las 40 horas,
+        las horas adicionales se pagan a una tarifa equivalente a una vez
+        y media la tarifa normal.
+    </p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

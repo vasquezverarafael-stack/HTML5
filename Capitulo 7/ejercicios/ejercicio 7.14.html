@@ -1,0 +1,136 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+<!-- Ejercicio 7.22: Cifrado de un entero de cuatro dígitos -->
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 7.22 - Cifrado de datos</title>
+
+    <script>
+        function cifrarNumero() {
+            var entrada;
+            var digitos = [];
+            var cifrados = [];
+            var resultado;
+
+            entrada = window.prompt(
+                "Introduzca un número entero de cuatro dígitos:"
+            );
+
+            if (entrada === null) {
+                return;
+            }
+
+            entrada = entrada.trim();
+
+            if (!/^\d{4}$/.test(entrada)) {
+                window.alert(
+                    "Error: debe introducir exactamente cuatro dígitos."
+                );
+                return;
+            }
+
+            // Separar y cifrar cada dígito
+            for (var i = 0; i < 4; i++) {
+                digitos[i] = parseInt(entrada.charAt(i), 10);
+                cifrados[i] = (digitos[i] + 7) % 10;
+            }
+
+            // Intercambiar el primer dígito con el tercero
+            var temporal = cifrados[0];
+            cifrados[0] = cifrados[2];
+            cifrados[2] = temporal;
+
+            // Intercambiar el segundo dígito con el cuarto
+            temporal = cifrados[1];
+            cifrados[1] = cifrados[3];
+            cifrados[3] = temporal;
+
+            resultado = cifrados.join("");
+
+            document.getElementById("resultado").innerHTML =
+                "<h2>Resultado del cifrado</h2>" +
+                "<p>Número original: <strong>" + entrada + "</strong></p>" +
+                "<p>Número cifrado: <strong>" + resultado + "</strong></p>";
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Ejercicio 7.22: Cifrado de datos</h1>
+
+    <h2>Enunciado</h2>
+    <p>
+        Cifrar un entero de cuatro dígitos reemplazando cada dígito
+        por la suma de ese dígito más 7, módulo 10. Después, intercambiar
+        el primer dígito con el tercero y el segundo con el cuarto.
+        Finalmente, mostrar el entero cifrado.
+    </p>
+
+    <h2>Algoritmo en pseudocódigo</h2>
+    <pre>
+Inicio
+    Leer numero de cuatro dígitos
+
+    Para i = 1 hasta 4
+        cifrado[i] = (digito[i] + 7) MOD 10
+    Fin Para
+
+    Intercambiar cifrado[1] con cifrado[3]
+    Intercambiar cifrado[2] con cifrado[4]
+
+    Mostrar numero cifrado
+Fin
+    </pre>
+
+    <h2>Refinamiento descendente</h2>
+    <ol>
+        <li>Solicitar un número de cuatro dígitos.</li>
+        <li>Validar que la entrada tenga exactamente cuatro dígitos.</li>
+        <li>Sumar 7 a cada dígito y calcular el residuo módulo 10.</li>
+        <li>Intercambiar el primer dígito con el tercero.</li>
+        <li>Intercambiar el segundo dígito con el cuarto.</li>
+        <li>Mostrar el número cifrado.</li>
+    </ol>
+
+    <button onclick="cifrarNumero()">Cifrar número</button>
+
+    <div id="resultado"></div>
+
+    <h2>Prueba de escritorio</h2>
+    <p>Número original de ejemplo: 1234</p>
+
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>Etapa</th>
+            <th>Resultado</th>
+        </tr>
+        <tr>
+            <td>Número original</td>
+            <td>1234</td>
+        </tr>
+        <tr>
+            <td>Sumar 7 y aplicar módulo 10</td>
+            <td>8901</td>
+        </tr>
+        <tr>
+            <td>Intercambiar primero con tercero y segundo con cuarto</td>
+            <td>0981</td>
+        </tr>
+    </table>
+
+    <h2>Conclusión</h2>
+    <p>
+        El programa cifra un número de cuatro dígitos mediante una
+        transformación aritmética y el intercambio de posiciones.
+        La validación garantiza que se introduzcan exactamente cuatro
+        dígitos y que se conserven los ceros iniciales del resultado.
+    </p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>
