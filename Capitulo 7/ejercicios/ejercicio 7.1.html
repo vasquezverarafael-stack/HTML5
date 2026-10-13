@@ -1,0 +1,97 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+<!-- Ejercicio: Identifique y corrija los errores -->
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio de corrección de errores - Capítulo 7</title>
+</head>
+
+<body>
+
+    <h1>Ejercicio: Identifique y corrija los errores</h1>
+
+    <p>
+        Identifique y corrija los errores en cada uno de los siguientes
+        segmentos de código. Puede haber más de un error en cada fragmento.
+        Suponga que todas las variables están declaradas e inicializadas
+        correctamente, a menos que se indique lo contrario.
+    </p>
+
+    <hr>
+
+    <h2>Inciso a)</h2>
+
+    <h3>Código original</h3>
+
+    <pre>
+1f ( edad » 65 );
+    document.wr1te1n("Edad es mayor o igual que 65");
+el se
+    document.wr1teln("Edad es menor que 65");
+    </pre>
+
+    <h3>Respuesta corregida</h3>
+
+    <pre>
+if (edad >= 65)
+    document.writeln("Edad es mayor o igual que 65");
+else
+    document.writeln("Edad es menor que 65");
+    </pre>
+
+    <h3>Errores encontrados</h3>
+
+    <ul>
+        <li><code>1f</code> se corrige a <code>if</code>.</li>
+        <li>El operador de comparación se corrige a <code>>=</code>.</li>
+        <li>Se elimina el punto y coma después de la condición del <code>if</code>.</li>
+        <li><code>el se</code> se corrige a <code>else</code>.</li>
+        <li>Se corrigen los errores de escritura y las comillas de los mensajes.</li>
+    </ul>
+
+    <hr>
+
+    <h2>Inciso b)</h2>
+
+    <h3>Código original recibido</h3>
+
+    <pre>
+var x = 1, total;
+while (x ... 0) {
+    document.writeln(y);
+    ...
+    </pre>
+
+    <p>
+        El código original recibido está incompleto, por lo que no es posible
+        identificar con certeza todos sus errores.
+    </p>
+
+    <h3>Posible corrección parcial</h3>
+
+    <pre>
+var x = 1, total;
+
+while (x > 0) {
+    document.writeln(y);
+    x = x - 1;
+}
+    </pre>
+
+    <p>
+        <strong>Nota:</strong> esta corrección del inciso b) es provisional.
+        Se necesita el fragmento completo para confirmar la condición del
+        ciclo y las instrucciones faltantes.
+    </p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+
+</html>
+

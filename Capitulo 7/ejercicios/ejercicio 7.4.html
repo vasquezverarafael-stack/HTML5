@@ -1,0 +1,226 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+<!-- Ejercicio 7.12: Límite de crédito -->
+ 
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 7.12 - Límite de crédito</title>
+</head>
+
+<body>
+
+    <h1>Ejercicio 7.12: Límite de crédito</h1>
+
+    <h2>1. Enunciado del problema</h2>
+
+    <p>
+        Desarrolle una secuencia de comandos que determine si alguno de los
+        clientes de una tienda de departamentos se ha excedido del límite
+        de crédito de su cuenta. Para cada cliente se solicitan el número
+        de cuenta, el saldo inicial del mes, el total de artículos cargados,
+        el total de créditos aplicados y el límite de crédito permitido.
+        El programa debe calcular el nuevo saldo, mostrarlo y determinar
+        si excede el límite de crédito. Si lo excede, debe mostrar el mensaje
+        "Se excedió el límite de su crédito".
+    </p>
+
+    <hr>
+
+    <h2>2. Algoritmo en pseudocódigo</h2>
+
+    <pre>
+Inicio
+    Leer numeroCuenta
+    Leer saldoInicial
+    Leer cargos
+    Leer creditos
+    Leer limiteCredito
+
+    nuevoSaldo = saldoInicial + cargos - creditos
+
+    Mostrar numeroCuenta
+    Mostrar nuevoSaldo
+
+    Si nuevoSaldo > limiteCredito entonces
+        Mostrar "Se excedió el límite de su crédito"
+    Fin Si
+Fin
+    </pre>
+
+    <h2>3. Refinamiento arriba-abajo</h2>
+
+    <ol>
+        <li>Solicitar el número de cuenta del cliente.</li>
+        <li>Solicitar el saldo inicial del mes.</li>
+        <li>Solicitar el total de artículos cargados durante el mes.</li>
+        <li>Solicitar el total de créditos aplicados a la cuenta.</li>
+        <li>Solicitar el límite de crédito permitido.</li>
+        <li>Calcular el nuevo saldo sumando el saldo inicial y los cargos, y restando los créditos.</li>
+        <li>Mostrar el número de cuenta y el nuevo saldo.</li>
+        <li>Comparar el nuevo saldo con el límite de crédito.</li>
+        <li>Si el saldo excede el límite, mostrar el mensaje de advertencia.</li>
+    </ol>
+
+    <hr>
+
+    <h2>4. Programa en JavaScript</h2>
+
+    <p>
+        Presione el botón para ingresar los datos del cliente mediante
+        cuadros de diálogo.
+    </p>
+
+    <button type="button" onclick="calcularCredito()">
+        Calcular límite de crédito
+    </button>
+
+    <div id="resultado">
+        <p>Los resultados aparecerán aquí.</p>
+    </div>
+
+    <script type="text/javascript">
+
+        function calcularCredito() {
+
+            var numeroCuenta;
+            var saldoInicial;
+            var cargos;
+            var creditos;
+            var limiteCredito;
+            var nuevoSaldo;
+
+            numeroCuenta = window.prompt(
+                "Escriba el número de cuenta:"
+            );
+
+            if (numeroCuenta === null) {
+                return;
+            }
+
+            saldoInicial = window.prompt(
+                "Escriba el saldo inicial del mes:"
+            );
+
+            if (saldoInicial === null) {
+                return;
+            }
+
+            cargos = window.prompt(
+                "Escriba el total de artículos cargados en el mes:"
+            );
+
+            if (cargos === null) {
+                return;
+            }
+
+            creditos = window.prompt(
+                "Escriba el total de créditos aplicados en el mes:"
+            );
+
+            if (creditos === null) {
+                return;
+            }
+
+            limiteCredito = window.prompt(
+                "Escriba el límite de crédito permitido:"
+            );
+
+            if (limiteCredito === null) {
+                return;
+            }
+
+            saldoInicial = parseInt(saldoInicial);
+            cargos = parseInt(cargos);
+            creditos = parseInt(creditos);
+            limiteCredito = parseInt(limiteCredito);
+
+            if (
+                isNaN(saldoInicial) ||
+                isNaN(cargos) ||
+                isNaN(creditos) ||
+                isNaN(limiteCredito)
+            ) {
+                window.alert(
+                    "Error: introduzca cantidades enteras válidas."
+                );
+                return;
+            }
+
+            nuevoSaldo = saldoInicial + cargos - creditos;
+
+            var mensaje =
+                "<h3>Resultado de la cuenta</h3>" +
+                "<p>Número de cuenta: " + numeroCuenta + "</p>" +
+                "<p>Nuevo saldo: $" + nuevoSaldo + "</p>" +
+                "<p>Límite de crédito: $" + limiteCredito + "</p>";
+
+            if (nuevoSaldo > limiteCredito) {
+                mensaje +=
+                    "<p><strong>Se excedió el límite de su crédito</strong></p>";
+            } else {
+                mensaje +=
+                    "<p>El cliente no excedió el límite de crédito.</p>";
+            }
+
+            document.getElementById("resultado").innerHTML = mensaje;
+        }
+
+    </script>
+
+    <hr>
+
+    <h2>5. Prueba de escritorio</h2>
+
+    <table border="1" cellpadding="6">
+        <tr>
+            <th>Dato</th>
+            <th>Valor de prueba</th>
+        </tr>
+        <tr>
+            <td>Número de cuenta</td>
+            <td>1001</td>
+        </tr>
+        <tr>
+            <td>Saldo inicial</td>
+            <td>$5,000</td>
+        </tr>
+        <tr>
+            <td>Cargos del mes</td>
+            <td>$2,000</td>
+        </tr>
+        <tr>
+            <td>Créditos aplicados</td>
+            <td>$500</td>
+        </tr>
+        <tr>
+            <td>Límite de crédito</td>
+            <td>$6,000</td>
+        </tr>
+        <tr>
+            <td>Nuevo saldo</td>
+            <td>$6,500</td>
+        </tr>
+    </table>
+
+    <p>
+        <strong>Resultado esperado:</strong>
+        Se excedió el límite de su crédito.
+    </p>
+
+    <h2>6. Conclusión</h2>
+
+    <p>
+        El programa calcula el nuevo saldo de una cuenta y lo compara con
+        el límite de crédito permitido. De esta manera, identifica si el
+        cliente excedió el crédito autorizado.
+    </p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

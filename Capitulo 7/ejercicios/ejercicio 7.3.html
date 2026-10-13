@@ -1,0 +1,226 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+<!-- Ejercicio 7.11: Kilómetros por litro -->
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 7.11 - Kilómetros por litro</title>
+</head>
+
+<body>
+
+    <h1>Ejercicio 7.11: Kilómetros por litro</h1>
+
+    <h2>Enunciado del problema</h2>
+
+    <p>
+        Los conductores se preocupan acerca del kilometraje de sus automóviles.
+        Un conductor ha llevado el control de varios reabastecimientos de
+        gasolina, registrando los kilómetros conducidos y los litros usados
+        en cada viaje. Desarrolle una secuencia de comandos que reciba como
+        entrada los kilómetros conducidos y los litros usados por cada viaje.
+        La secuencia debe mostrar los kilómetros por litro obtenidos en cada
+        viaje y el total de kilómetros por litro obtenido en todos los
+        reabastecimientos hasta ese punto. Use diálogos prompt para obtener
+        los datos del usuario.
+    </p>
+
+    <hr>
+
+    <h2>1. Algoritmo en pseudocódigo</h2>
+
+    <pre>
+Inicio
+    totalKilometros = 0
+    totalLitros = 0
+
+    Repetir
+        Leer kilometros
+        Leer litros
+
+        Si litros > 0 entonces
+            rendimientoViaje = kilometros / litros
+
+            totalKilometros = totalKilometros + kilometros
+            totalLitros = totalLitros + litros
+
+            rendimientoTotal = totalKilometros / totalLitros
+
+            Mostrar rendimientoViaje
+            Mostrar rendimientoTotal
+        Fin Si
+
+        Preguntar si desea registrar otro viaje
+    Hasta que la respuesta sea "no"
+Fin
+    </pre>
+
+    <h2>2. Refinamiento arriba-abajo</h2>
+
+    <ol>
+        <li>Inicializar los acumuladores de kilómetros y litros en cero.</li>
+        <li>Solicitar al usuario los kilómetros recorridos en un viaje.</li>
+        <li>Solicitar los litros de gasolina utilizados.</li>
+        <li>Calcular el rendimiento del viaje dividiendo kilómetros entre litros.</li>
+        <li>Acumular los kilómetros y los litros de todos los viajes.</li>
+        <li>Calcular el rendimiento total dividiendo los kilómetros acumulados entre los litros acumulados.</li>
+        <li>Mostrar el rendimiento del viaje y el rendimiento total.</li>
+        <li>Preguntar si desea registrar otro viaje y repetir el proceso si responde que sí.</li>
+    </ol>
+
+    <h2>3. Programa en JavaScript</h2>
+
+    <p>
+        Al presionar el botón, el programa solicitará los datos mediante
+        cuadros de diálogo.
+    </p>
+
+    <button type="button" onclick="registrarViaje()">
+        Registrar viaje
+    </button>
+
+    <button type="button" onclick="reiniciar()">
+        Reiniciar datos
+    </button>
+
+    <h3>Resultados</h3>
+
+    <div id="resultados">
+        <p>Aún no se han registrado viajes.</p>
+    </div>
+
+    <script type="text/javascript">
+
+        var totalKilometros = 0;
+        var totalLitros = 0;
+        var numeroViaje = 0;
+
+        function registrarViaje() {
+
+            var entradaKilometros;
+            var entradaLitros;
+            var kilometros;
+            var litros;
+            var rendimientoViaje;
+            var rendimientoTotal;
+            var continuar;
+
+            entradaKilometros = window.prompt(
+                "Escriba los kilómetros recorridos:"
+            );
+
+            if (entradaKilometros === null) {
+                return;
+            }
+
+            kilometros = parseFloat(entradaKilometros);
+
+            if (isNaN(kilometros) || kilometros < 0) {
+                window.alert("Introduzca kilómetros válidos.");
+                return;
+            }
+
+            entradaLitros = window.prompt(
+                "Escriba los litros de gasolina utilizados:"
+            );
+
+            if (entradaLitros === null) {
+                return;
+            }
+
+            litros = parseFloat(entradaLitros);
+
+            if (isNaN(litros) || litros <= 0) {
+                window.alert("Los litros deben ser mayores que cero.");
+                return;
+            }
+
+            rendimientoViaje = kilometros / litros;
+
+            totalKilometros = totalKilometros + kilometros;
+            totalLitros = totalLitros + litros;
+            numeroViaje = numeroViaje + 1;
+
+            rendimientoTotal = totalKilometros / totalLitros;
+
+            document.getElementById("resultados").innerHTML +=
+                "<p><strong>Viaje " + numeroViaje + "</strong><br>" +
+                "Kilómetros recorridos: " + kilometros + "<br>" +
+                "Litros utilizados: " + litros + "<br>" +
+                "Rendimiento del viaje: " +
+                rendimientoViaje.toFixed(2) + " km/l<br>" +
+                "Rendimiento total: " +
+                rendimientoTotal.toFixed(2) + " km/l</p>";
+
+            continuar = window.confirm(
+                "¿Desea registrar otro viaje?"
+            );
+
+            if (continuar) {
+                registrarViaje();
+            }
+        }
+
+        function reiniciar() {
+            totalKilometros = 0;
+            totalLitros = 0;
+            numeroViaje = 0;
+
+            document.getElementById("resultados").innerHTML =
+                "<p>Aún no se han registrado viajes.</p>";
+        }
+
+    </script>
+
+    <hr>
+
+    <h2>4. Prueba de escritorio</h2>
+
+    <table border="1" cellpadding="6">
+        <tr>
+            <th>Viaje</th>
+            <th>Kilómetros</th>
+            <th>Litros</th>
+            <th>Rendimiento del viaje</th>
+            <th>Rendimiento acumulado</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>300</td>
+            <td>20</td>
+            <td>15.00 km/l</td>
+            <td>15.00 km/l</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>200</td>
+            <td>10</td>
+            <td>20.00 km/l</td>
+            <td>16.67 km/l</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>250</td>
+            <td>15</td>
+            <td>16.67 km/l</td>
+            <td>16.25 km/l</td>
+        </tr>
+    </table>
+
+    <h2>5. Conclusión</h2>
+
+    <p>
+        El programa calcula el rendimiento de combustible de cada viaje
+        y el rendimiento acumulado de todos los viajes registrados.
+        El rendimiento total se obtiene dividiendo la suma de los kilómetros
+        entre la suma de los litros utilizados.
+    </p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>
