@@ -1,0 +1,80 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+<!-- Fig. 7.9: promedio2.html -->
+<!-- Repetición controlada por centinela para calcular el promedio de una clase. -->
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Programa del promedio de una clase: repetición controlada por centinela</title>
+
+    <script type="text/javascript">
+
+        var total;                    // suma de calificaciones
+        var contadorCalificaciones;   // número de calificaciones introducidas
+        var calificacion;             // calificación escrita por el usuario
+        var valorCalificacion;        // calificación convertida a entero
+        var promedio;                 // promedio de las calificaciones
+
+        // Fase de inicialización
+        total = 0;
+        contadorCalificaciones = 0;
+
+        // Fase de procesamiento
+        calificacion = window.prompt(
+            "Escriba la calificación entera. -1 para salir:",
+            "0"
+        );
+
+        // Convertir la calificación de cadena a entero
+        valorCalificacion = parseInt(calificacion);
+
+        while (valorCalificacion != -1) {
+
+            // Sumar la calificación al total
+            total = total + valorCalificacion;
+
+            // Incrementar el contador
+            contadorCalificaciones = contadorCalificaciones + 1;
+
+            // Pedir otra calificación
+            calificacion = window.prompt(
+                "Escriba la calificación entera. -1 para salir:",
+                "0"
+            );
+
+            // Convertir la calificación de cadena a entero
+            valorCalificacion = parseInt(calificacion);
+
+        } // fin de while
+
+        // Fase de terminación
+        if (contadorCalificaciones != 0) {
+
+            promedio = total / contadorCalificaciones;
+
+            // Mostrar el promedio
+            document.writeln(
+                "<h1>El promedio de la clase es " + promedio + "</h1>"
+            );
+
+        } else {
+
+            document.writeln(
+                "<p>No se introdujeron calificaciones</p>"
+            );
+
+        } // fin de if
+
+    </script>
+</head>
+
+<body>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejemplos</button>
+        </a>
+    </p>
+</body>
+</html>

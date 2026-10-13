@@ -1,0 +1,59 @@
+<!-- Vásquez Vera Rafael 227O01115 -->
+<!-- Fig. 7.11: analisis.html -->
+<!-- Cálculo de los resultados de un examen. -->
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Análisis de los resultados de un examen</title>
+
+    <script type="text/javascript">
+
+        // Inicializar variables
+        var aprobados = 0;   // número de aprobados
+        var reprobados = 0;  // número de reprobados
+        var estudiante = 1;  // contador de estudiantes
+        var resultado;       // resultado de un examen
+
+        // Procesar 10 estudiantes; ciclo controlado por contador
+        while (estudiante <= 10) {
+
+            resultado = window.prompt(
+                "Escriba el resultado (1=aprobado, 2=reprobado)",
+                "0"
+            );
+
+            if (resultado == "1")
+                aprobados = aprobados + 1;
+            else
+                reprobados = reprobados + 1;
+
+            estudiante = estudiante + 1;
+
+        } // fin de while
+
+        // Fase de terminación
+        document.writeln("<h1>Resultados del examen</h1>");
+
+        document.writeln(
+            "<p>Aprobados: " + aprobados +
+            "; Reprobados: " + reprobados + "</p>"
+        );
+
+        if (aprobados > 8)
+            document.writeln("<p>Bono para el instructor</p>");
+
+    </script>
+</head>
+
+<body>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejemplos</button>
+        </a>
+    </p>
+</body>
+
+</html>
