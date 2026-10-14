@@ -1,0 +1,139 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 8.13: ej08_13.html -->
+<!-- Valores que se asignan a x en una instrucción switch. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 8.13 - Valores asignados a x</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; max-width: 850px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; }
+        pre { background-color: #f4f4f4; border: 1px solid #ccc; padding: 10px; }
+        table { border-collapse: collapse; margin-bottom: 20px; }
+        table, th, td { border: 1px solid black; }
+        th, td { padding: 6px 12px; text-align: left; }
+        th { background-color: darkblue; color: white; }
+        tr.pedido { background-color: lightblue; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 8.13</h1>
+
+    <p class="instruccion">Dada la siguiente instrucción switch:</p>
+
+<pre>switch ( k )
+{
+    case 1:
+        break;
+    case 2:
+    case 3:
+        ++k;
+        break;
+    case 4:
+        --k;
+        break;
+    default:
+        k *= 3;
+} // fin de switch
+
+x = k;</pre>
+
+    <p class="instruccion">¿Qué valores se asignan a x cuando k tiene valores de
+       1, 2, 3, 4 y 10?</p>
+
+    <h2>Respuestas</h2>
+    <table>
+        <thead>
+            <tr><th>Valor de k</th><th>Qué ocurre en el switch</th><th>Valor asignado a x</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Entra a <code>case 1</code>, que solo tiene <code>break</code>. k no cambia.</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Entra a <code>case 2</code>, que no tiene instrucciones ni <code>break</code>, así que
+                    continúa en <code>case 3</code>: <code>++k</code> hace k = 3 y luego <code>break</code>.</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Entra a <code>case 3</code>: <code>++k</code> hace k = 4 y luego <code>break</code>.</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Entra a <code>case 4</code>: <code>--k</code> hace k = 3 y luego <code>break</code>.</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>No coincide con ningún <code>case</code>, así que se ejecuta <code>default</code>:
+                    <code>k *= 3</code> hace k = 30.</td>
+                <td>30</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>Los casos 2 y 3 comparten las mismas instrucciones porque <code>case 2</code> no tiene
+       <code>break</code>. Cuando k vale 2, la ejecución "cae" al <code>case 3</code>.</p>
+
+    <h2>Demostración</h2>
+    <p>Resultado de ejecutar el mismo <code>switch</code> con k de 1 a 10
+       (las filas resaltadas son los valores que pide el ejercicio):</p>
+
+    <script>
+
+        var k; // valor de k en cada prueba
+        var x; // valor asignado a x
+
+        document.writeln( "<table>" );
+        document.writeln( "<thead><tr><th>k inicial</th><th>x</th></tr></thead>" );
+        document.writeln( "<tbody>" );
+
+        for ( var inicial = 1; inicial <= 10; ++inicial )
+        {
+            k = inicial;
+
+            switch ( k )
+            {
+                case 1:
+                    break;
+                case 2:
+                case 3:
+                    ++k;
+                    break;
+                case 4:
+                    --k;
+                    break;
+                default:
+                    k *= 3;
+            } // fin de switch
+
+            x = k;
+
+            if ( inicial <= 4 || inicial == 10 )
+                document.writeln( "<tr class='pedido'><td>" + inicial +
+                    "</td><td>" + x + "</td></tr>" );
+            else
+                document.writeln( "<tr><td>" + inicial +
+                    "</td><td>" + x + "</td></tr>" );
+        } // fin de for
+
+        document.writeln( "</tbody></table>" );
+
+    </script>
+
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

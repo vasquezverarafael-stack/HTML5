@@ -1,0 +1,118 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 8.4 - Encontrar los errores</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; max-width: 800px; }
+        h2 { margin-top: 30px; }
+        pre { background-color: #f4f4f4; border: 1px solid #ccc; padding: 10px; }
+        .mal { border-left: 4px solid #c0392b; }
+        .bien { border-left: 4px solid #27ae60; }
+        table, th, td { border: 1px solid black; border-collapse: collapse; }
+        th, td { padding: 6px 12px; text-align: left; }
+        th { background-color: darkblue; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 8.4</h1>
+    <p>Encuentre el error en cada uno de los siguientes segmentos de código.
+       (Nota: puede haber más de un error).</p>
+
+    <!-- a) -->
+    <h2>a)</h2>
+    <p><strong>Segmento original:</strong></p>
+    <pre class="mal">For ( x = 100, x &gt;= 1, ++x )
+    document.writeln( x );</pre>
+    <p><strong>Errores:</strong></p>
+    <ol>
+        <li><code>For</code> debe ir en minúscula: <code>for</code>.</li>
+        <li>Los tres elementos del encabezado se separan con punto y coma (<code>;</code>), no con comas.</li>
+        <li><code>++x</code> incrementa, pero el ciclo cuenta hacia abajo de 100 a 1. Debe ser <code>--x</code>. Con <code>++x</code> sería un ciclo infinito.</li>
+        <li>(Buena práctica) Declarar la variable con <code>var</code>.</li>
+    </ol>
+    <p><strong>Corrección:</strong></p>
+    <pre class="bien">for ( var x = 100; x &gt;= 1; --x )
+    document.writeln( x );</pre>
+
+    <!-- b) -->
+    <h2>b)</h2>
+    <p>El siguiente código debe imprimirse sin importar si el valor entero es par o impar:</p>
+    <p><strong>Segmento original:</strong></p>
+    <pre class="mal">switch ( valor % 2 )
+{
+    case 0:
+        document.writeln( "Entero par" );
+    case 1:
+        document.writeln( "Entero impar" );
+}</pre>
+    <p><strong>Error:</strong> falta <code>break</code> al final de cada <code>case</code>.
+       Sin él, si el valor es par se imprimen "Entero par" <strong>y</strong> "Entero impar",
+       porque la ejecución continúa con el siguiente caso.</p>
+    <p><strong>Corrección:</strong></p>
+    <pre class="bien">switch ( valor % 2 )
+{
+    case 0:
+        document.writeln( "Entero par" );
+        break;
+    case 1:
+        document.writeln( "Entero impar" );
+        break;
+}</pre>
+
+    <!-- c) -->
+    <h2>c)</h2>
+    <p>El siguiente código debe imprimir los enteros impares del 19 al 1:</p>
+    <p><strong>Segmento original:</strong></p>
+    <pre class="mal">for ( x = 19; x &gt;= 1; x += 2 )
+    document.writeln( x );</pre>
+    <p><strong>Error:</strong> el ciclo debe ir de 19 a 1 en orden descendente, pero
+       <code>x += 2</code> hace que <code>x</code> crezca, así que la condición
+       <code>x &gt;= 1</code> nunca se vuelve falsa (ciclo infinito). Debe ser <code>x -= 2</code>.</p>
+    <p><strong>Corrección:</strong></p>
+    <pre class="bien">for ( var x = 19; x &gt;= 1; x -= 2 )
+    document.writeln( x );</pre>
+
+    <!-- d) -->
+    <h2>d)</h2>
+    <p>El siguiente código debe imprimir los enteros pares del 2 al 100:</p>
+    <p><strong>Segmento original:</strong></p>
+    <pre class="mal">contador = 2;
+do {
+    document.writeln( contador );
+    contador += 2;
+} While ( contador &lt; 100 );</pre>
+    <p><strong>Errores:</strong></p>
+    <ol>
+        <li><code>While</code> debe ir en minúscula: <code>while</code>.</li>
+        <li>La condición <code>contador &lt; 100</code> termina el ciclo cuando <code>contador</code>
+            llega a 100, así que el 100 nunca se imprime. Debe ser <code>contador &lt;= 100</code>.</li>
+    </ol>
+    <p><strong>Corrección:</strong></p>
+    <pre class="bien">var contador = 2;
+do {
+    document.writeln( contador );
+    contador += 2;
+} while ( contador &lt;= 100 );</pre>
+
+    <!-- Resumen -->
+    <h2>Resumen de errores</h2>
+    <table>
+        <thead>
+            <tr><th>Inciso</th><th>Errores</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>a)</td><td><code>For</code> en mayúscula, comas en lugar de <code>;</code>, <code>++x</code> en vez de <code>--x</code></td></tr>
+            <tr><td>b)</td><td>Faltan los <code>break</code></td></tr>
+            <tr><td>c)</td><td><code>x += 2</code> en vez de <code>x -= 2</code> (ciclo infinito)</td></tr>
+            <tr><td>d)</td><td><code>While</code> en mayúscula, <code>&lt;</code> en vez de <code>&lt;=</code></td></tr>
+        </tbody>
+    </table>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

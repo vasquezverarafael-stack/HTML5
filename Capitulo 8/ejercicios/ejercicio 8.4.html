@@ -1,0 +1,42 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 8.7: ej08_07.html -->
+<!-- Producto de los enteros impares del 1 al 15. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 8.7 - Producto de enteros impares</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; max-width: 800px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 8.7</h1>
+
+    <p class="instruccion">Escriba una secuencia de comandos que calcule el producto
+       de los enteros impares del 1 al 15 y después imprima texto de HTML5 que
+       muestre los resultados.</p>
+
+    <script>
+
+        var producto = 1; // acumulador; empieza en 1, no en 0
+
+        for ( var numero = 1; numero <= 15; numero += 2 )
+            producto *= numero;
+
+        document.writeln( "<h2>Resultado</h2>" );
+        document.writeln( "<p>El producto de los enteros impares del 1 al 15 es " +
+            producto + "</p>" );
+
+    </script>
+
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

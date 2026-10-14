@@ -1,0 +1,87 @@
+<!--Vásquez Vera Rafael 227O0115-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 8.5 - ¿Qué hace el programa?</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; max-width: 800px; }
+        h2 { margin-top: 30px; }
+        pre { background-color: #f4f4f4; border: 1px solid #ccc; padding: 10px; }
+        .demo { border: 1px solid #ccc; padding: 10px; }
+        .demo table { border-collapse: collapse; }
+        .demo td { border: 1px solid black; padding: 4px 10px; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 8.5</h1>
+    <p>¿Qué es lo que hace el siguiente programa?</p>
+
+    <h2>Programa</h2>
+    <pre>&lt;!DOCTYPE html&gt;
+
+&lt;!-- Ejercicio 8.5: ej08_05.html --&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset = "utf-8"&gt;
+    &lt;title&gt;Misterio&lt;/title&gt;
+    &lt;script&gt;
+
+        document.writeln( "&lt;table&gt;" );
+
+        for ( var i = 1; i &lt;= 10; i++ )
+        {
+            document.writeln( "&lt;tr&gt;" );
+
+            for ( var j = 1; j &lt;= 5; j++ )
+                document.writeln( "&lt;td&gt;(" + i + ", " + j + ")&lt;/td&gt;" );
+
+            document.writeln( "&lt;/tr&gt;" );
+        } // fin de for
+
+        document.writeln( "&lt;/table&gt;" );
+
+    &lt;/script&gt;
+&lt;/head&gt;&lt;body /&gt;
+&lt;/html&gt;</pre>
+
+    <h2>Respuesta</h2>
+    <p>El programa crea una tabla HTML de <strong>10 filas por 5 columnas</strong> (50 celdas).
+       Cada celda muestra sus propias coordenadas en el formato <code>(fila, columna)</code>.</p>
+    <ol>
+        <li>El <code>document.writeln( "&lt;table&gt;" )</code> abre la tabla.</li>
+        <li>El ciclo externo (<code>i</code> de 1 a 10) escribe una fila <code>&lt;tr&gt;</code> en cada vuelta.</li>
+        <li>El ciclo interno (<code>j</code> de 1 a 5) escribe 5 celdas <code>&lt;td&gt;</code> dentro de esa fila,
+            cada una con el texto <code>(i, j)</code>.</li>
+        <li>Al terminar el ciclo interno se cierra la fila con <code>&lt;/tr&gt;</code>, y al terminar el externo se cierra la tabla.</li>
+    </ol>
+    <p>La primera fila muestra <code>(1, 1) (1, 2) (1, 3) (1, 4) (1, 5)</code> y la última
+       <code>(10, 1) (10, 2) (10, 3) (10, 4) (10, 5)</code>.
+       Como el programa original no define bordes, en el navegador se vería como una cuadrícula de texto sin líneas.</p>
+
+    <h2>Demostración</h2>
+    <p>Resultado de ejecutar el mismo código (aquí con bordes solo para que se distingan las celdas):</p>
+    <div class="demo">
+        <script>
+            document.writeln( "<table>" );
+
+            for ( var i = 1; i <= 10; i++ )
+            {
+                document.writeln( "<tr>" );
+
+                for ( var j = 1; j <= 5; j++ )
+                    document.writeln( "<td>(" + i + ", " + j + ")</td>" );
+
+                document.writeln( "</tr>" );
+            } // fin de for
+
+            document.writeln( "</table>" );
+        </script>
+    </div>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

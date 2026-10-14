@@ -1,0 +1,137 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 8.12: ej08_12.html -->
+<!-- Evaluación de expresiones con operadores relacionales, de igualdad y lógicos. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 8.12 - ¿Qué imprime cada instrucción?</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; max-width: 850px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; }
+        table { border-collapse: collapse; margin-bottom: 20px; }
+        table, th, td { border: 1px solid black; }
+        th, td { padding: 6px 12px; text-align: left; }
+        th { background-color: darkblue; color: white; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 8.12</h1>
+
+    <p class="instruccion">Suponga que i = 1, j = 2, k = 3 y m = 2. ¿Qué es lo que
+       imprime cada una de las siguientes instrucciones? ¿Son necesarios los
+       paréntesis en cada caso?<br><br>
+       a) document.writeln( i == 1 );<br>
+       b) document.writeln( j == 3 );<br>
+       c) document.writeln( i &gt;= 1 &amp;&amp; j &lt; 4 );<br>
+       d) document.writeln( m &lt;= 99 &amp;&amp; k &lt; m );<br>
+       e) document.writeln( j &gt;= i || k == m );<br>
+       f) document.writeln( k + m &lt; j || 3 - j &gt;= k );<br>
+       g) document.writeln( !( k &gt; m ) );</p>
+
+    <h2>Respuestas</h2>
+    <table>
+        <thead>
+            <tr><th>Inciso</th><th>Expresión</th><th>Evaluación</th><th>Imprime</th><th>¿Paréntesis necesarios?</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>a)</td>
+                <td><code>i == 1</code></td>
+                <td>1 == 1 es true</td>
+                <td>true</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>b)</td>
+                <td><code>j == 3</code></td>
+                <td>2 == 3 es false</td>
+                <td>false</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>c)</td>
+                <td><code>i &gt;= 1 &amp;&amp; j &lt; 4</code></td>
+                <td>1 &gt;= 1 es true y 2 &lt; 4 es true, entonces true &amp;&amp; true</td>
+                <td>true</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>d)</td>
+                <td><code>m &lt;= 99 &amp;&amp; k &lt; m</code></td>
+                <td>2 &lt;= 99 es true, pero 3 &lt; 2 es false, entonces true &amp;&amp; false</td>
+                <td>false</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>e)</td>
+                <td><code>j &gt;= i || k == m</code></td>
+                <td>2 &gt;= 1 es true, entonces el resultado es true (la segunda condición ni se evalúa)</td>
+                <td>true</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>f)</td>
+                <td><code>k + m &lt; j || 3 - j &gt;= k</code></td>
+                <td>5 &lt; 2 es false y 1 &gt;= 3 es false, entonces false || false</td>
+                <td>false</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>g)</td>
+                <td><code>!( k &gt; m )</code></td>
+                <td>3 &gt; 2 es true, y !true es false</td>
+                <td>false</td>
+                <td>Sí</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>¿Por qué?</h2>
+    <ul>
+        <li>En los incisos a) a f) no hacen falta paréntesis. Los operadores aritméticos
+            (<code>+</code>, <code>-</code>) tienen mayor precedencia que los relacionales
+            (<code>&lt;</code>, <code>&gt;=</code>), estos mayor que los de igualdad
+            (<code>==</code>), y todos mayor que <code>&amp;&amp;</code> y <code>||</code>.
+            Cada comparación se evalúa primero, y después se combinan con el operador lógico.</li>
+        <li>En el inciso g) los paréntesis sí son necesarios. El operador <code>!</code> tiene
+            mayor precedencia que <code>&gt;</code>, así que <code>!k &gt; m</code> se evaluaría
+            como <code>(!k) &gt; m</code>. Eso compara <code>false</code> con 2, que no es lo que
+            se quiere. Los paréntesis hacen que primero se evalúe <code>k &gt; m</code> y después
+            se niegue el resultado.</li>
+    </ul>
+
+    <h2>Demostración</h2>
+    <p>Resultado de ejecutar cada expresión en el navegador con i = 1, j = 2, k = 3 y m = 2:</p>
+
+    <script>
+
+        var i = 1;
+        var j = 2;
+        var k = 3;
+        var m = 2;
+
+        document.writeln( "<table>" );
+        document.writeln( "<thead><tr><th>Inciso</th><th>Resultado</th></tr></thead>" );
+        document.writeln( "<tbody>" );
+        document.writeln( "<tr><td>a)</td><td>" + ( i == 1 ) + "</td></tr>" );
+        document.writeln( "<tr><td>b)</td><td>" + ( j == 3 ) + "</td></tr>" );
+        document.writeln( "<tr><td>c)</td><td>" + ( i >= 1 && j < 4 ) + "</td></tr>" );
+        document.writeln( "<tr><td>d)</td><td>" + ( m <= 99 && k < m ) + "</td></tr>" );
+        document.writeln( "<tr><td>e)</td><td>" + ( j >= i || k == m ) + "</td></tr>" );
+        document.writeln( "<tr><td>f)</td><td>" + ( k + m < j || 3 - j >= k ) + "</td></tr>" );
+        document.writeln( "<tr><td>g)</td><td>" + ( !( k > m ) ) + "</td></tr>" );
+        document.writeln( "</tbody></table>" );
+
+    </script>
+
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

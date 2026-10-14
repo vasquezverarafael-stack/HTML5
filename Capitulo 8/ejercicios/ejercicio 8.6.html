@@ -1,0 +1,64 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 8.9: ej08_09.html -->
+<!-- Gráfico de barras (histograma) con asteriscos. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 8.9 - Gráfico de barras con asteriscos</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 800px; }
+        p.barra { font-family: monospace; margin: 4px 0; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 8.9</h1>
+
+    <p class="instruccion">Una aplicación interesante de las computadoras es dibujar
+       gráficos convencionales y de barra (también llamados histogramas). Escriba una
+       secuencia de comandos que lea cinco números entre 1 y 30. Por cada número
+       imprima texto en HTML5 que muestre una línea que contenga el mismo número de
+       asteriscos adyacentes. Por ejemplo, si su programa lee el número 7, debe
+       producir texto en HTML5 que muestre *******.</p>
+
+    <script>
+
+        var numero;     // número escrito por el usuario
+        var asteriscos; // cadena con los asteriscos de la línea
+
+        document.writeln( "<h2>Gráfico de barras</h2>" );
+
+        // ciclo externo: lee los cinco números
+        for ( var i = 1; i <= 5; ++i )
+        {
+            numero = parseInt( window.prompt(
+                "Escriba el número " + i + " de 5 (entre 1 y 30)", "1" ) );
+
+            if ( numero >= 1 && numero <= 30 )
+            {
+                asteriscos = "";
+
+                // ciclo interno: agrega un asterisco por cada unidad del número
+                for ( var j = 1; j <= numero; ++j )
+                    asteriscos += "*";
+
+                document.writeln( "<p class='barra'>" + asteriscos +
+                    " (" + numero + ")</p>" );
+            } // fin de if
+            else
+                document.writeln( "<p>El número " + i +
+                    " no es válido (debe estar entre 1 y 30): " + numero + "</p>" );
+        } // fin del for externo
+
+    </script>
+
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 8.10: ej08_10.html -->
+<!-- Canción "Los Doce Días de Navidad" con ciclos y switch. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 8.10 - Los Doce Días de Navidad</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 800px; }
+        p.estrofa { margin: 0 0 18px 0; line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 8.10</h1>
+
+    <p class="instruccion">(Canción "Los Doce Días de Navidad") Escriba una secuencia
+       de comandos que utilice estructuras de repetición y un switch para imprimir la
+       canción "Los Doce Días de Navidad". Encontrará las palabras en el sitio
+       http://en.wikipedia.org/wiki/The_Twelve_Days_of_Christmas_(song)</p>
+
+    <h2>Los Doce Días de Navidad</h2>
+
+    <script>
+
+        var ordinal; // nombre del día actual (primer, segundo, ...)
+        var regalo;  // texto del regalo actual
+
+        // ciclo externo: un verso por cada uno de los 12 días
+        for ( var dia = 1; dia <= 12; ++dia )
+        {
+            switch ( dia )
+            {
+                case 1:  ordinal = "primer";     break;
+                case 2:  ordinal = "segundo";    break;
+                case 3:  ordinal = "tercer";     break;
+                case 4:  ordinal = "cuarto";     break;
+                case 5:  ordinal = "quinto";     break;
+                case 6:  ordinal = "sexto";      break;
+                case 7:  ordinal = "séptimo";    break;
+                case 8:  ordinal = "octavo";     break;
+                case 9:  ordinal = "noveno";     break;
+                case 10: ordinal = "décimo";     break;
+                case 11: ordinal = "undécimo";   break;
+                case 12: ordinal = "duodécimo";  break;
+            } // fin de switch
+
+            document.writeln( "<p class='estrofa'>" );
+            document.writeln( "En el " + ordinal +
+                " día de Navidad,<br>mi amor verdadero me regaló:<br>" );
+
+            // ciclo interno: los regalos van del día actual hacia el 1
+            for ( var numeroRegalo = dia; numeroRegalo >= 1; --numeroRegalo )
+            {
+                switch ( numeroRegalo )
+                {
+                    case 12: regalo = "doce tamborileros tocando";   break;
+                    case 11: regalo = "once gaiteros tocando";       break;
+                    case 10: regalo = "diez señores saltando";       break;
+                    case 9:  regalo = "nueve damas bailando";        break;
+                    case 8:  regalo = "ocho doncellas ordeñando";    break;
+                    case 7:  regalo = "siete cisnes nadando";        break;
+                    case 6:  regalo = "seis gansos poniendo huevos"; break;
+                    case 5:  regalo = "cinco anillos de oro";        break;
+                    case 4:  regalo = "cuatro pájaros cantores";     break;
+                    case 3:  regalo = "tres gallinas francesas";     break;
+                    case 2:  regalo = "dos tórtolas";                break;
+                    case 1:  regalo = "una perdiz en un peral";      break;
+                } // fin de switch
+
+                // en el día 1 el regalo va solo; en los demás, el último lleva "y"
+                if ( numeroRegalo == 1 && dia > 1 )
+                    regalo = "y " + regalo;
+
+                // cada regalo termina en coma, salvo el último, que termina en punto
+                if ( numeroRegalo == 1 )
+                    document.writeln( regalo + "." );
+                else
+                    document.writeln( regalo + ",<br>" );
+            } // fin del for interno
+
+            document.writeln( "</p>" );
+        } // fin del for externo
+
+    </script>
+
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

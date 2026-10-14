@@ -1,0 +1,49 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Menor de varios enteros no negativos -->
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Menor de varios enteros</title>
+    <script>
+
+        var cantidad; // cantidad de valores que introducirá el usuario
+        var numero;   // entero actual
+        var menor;    // menor entero encontrado
+
+        // el primer valor leído especifica cuántos enteros se introducirán
+        cantidad = parseInt( window.prompt(
+            "¿Cuántos enteros no negativos va a introducir?", "5" ) );
+
+        if ( cantidad >= 1 )
+        {
+            for ( var i = 1; i <= cantidad; ++i )
+            {
+                numero = parseInt( window.prompt(
+                    "Escriba el entero no negativo " + i + " de " + cantidad, "0" ) );
+
+                // el primer entero leído es el menor hasta ese momento
+                if ( i == 1 )
+                    menor = numero;
+                else if ( numero < menor )
+                    menor = numero;
+            } // fin de for
+
+            document.writeln( "<h1>Resultado</h1>" );
+            document.writeln( "<p>El entero menor de los " + cantidad +
+                " introducidos es: " + menor + "</p>" );
+        } // fin de if
+        else
+            document.writeln( "<p>La cantidad de valores debe ser al menos 1.</p>" );
+
+    </script>
+</head>
+<body>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>
