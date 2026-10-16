@@ -1,0 +1,167 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.23: ej09_23.html -->
+<!-- Instrucción asistida por computadora (CAI) con respuestas variadas. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 9.23 - Instrucción asistida por computadora</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 800px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        #pregunta { font-size: 1.4em; font-weight: bold; }
+        #mensaje { font-size: 1.2em; }
+        #mensaje.bien { color: green; }
+        #mensaje.mal { color: red; }
+    </style>
+    <script>
+
+        var factor1;   // primer número de la pregunta actual
+        var factor2;   // segundo número de la pregunta actual
+
+        // genera una pregunta nueva con dos enteros positivos de un dígito
+        function generarPregunta()
+        {
+            factor1 = Math.floor( 1 + Math.random() * 9 );
+            factor2 = Math.floor( 1 + Math.random() * 9 );
+
+            document.getElementById( "pregunta" ).innerHTML =
+                "¿Cuánto es " + factor1 + " por " + factor2 + "?";
+        } // fin de la función generarPregunta
+
+        // elige al azar uno de cuatro mensajes para una respuesta correcta
+        function mensajeCorrecto()
+        {
+            var opcion = Math.floor( 1 + Math.random() * 4 ); // de 1 a 4
+            var mensaje;
+
+            switch ( opcion )
+            {
+                case 1:
+                    mensaje = "Muy bien.";
+                    break;
+                case 2:
+                    mensaje = "Excelente.";
+                    break;
+                case 3:
+                    mensaje = "Buen trabajo.";
+                    break;
+                case 4:
+                    mensaje = "Siga así.";
+                    break;
+            } // fin de switch
+
+            return mensaje;
+        } // fin de la función mensajeCorrecto
+
+        // elige al azar uno de cuatro mensajes para una respuesta incorrecta
+        function mensajeIncorrecto()
+        {
+            var opcion = Math.floor( 1 + Math.random() * 4 ); // de 1 a 4
+            var mensaje;
+
+            switch ( opcion )
+            {
+                case 1:
+                    mensaje = "No. Intente de nuevo";
+                    break;
+                case 2:
+                    mensaje = "Equivocado. Trate una vez más.";
+                    break;
+                case 3:
+                    mensaje = "No se dé por vencido.";
+                    break;
+                case 4:
+                    mensaje = "No. Siga intentando.";
+                    break;
+            } // fin de switch
+
+            return mensaje;
+        } // fin de la función mensajeIncorrecto
+
+        // verifica la respuesta del estudiante
+        function verificarRespuesta( evento )
+        {
+            var campo = document.getElementById( "campoRespuesta" );
+            var respuesta = parseInt( campo.value );
+            var mensaje = document.getElementById( "mensaje" );
+
+            evento.preventDefault(); // evita que Enter recargue la página
+
+            if ( isNaN( respuesta ) )
+            {
+                mensaje.className = "mal";
+                mensaje.innerHTML = "Escriba un número como respuesta.";
+            } // fin de if
+            else if ( respuesta === factor1 * factor2 )
+            {
+                mensaje.className = "bien";
+                mensaje.innerHTML = mensajeCorrecto();
+                campo.value = "";
+                generarPregunta(); // nueva pregunta solo si respondió bien
+            } // fin de else if
+            else
+            {
+                mensaje.className = "mal";
+                mensaje.innerHTML = mensajeIncorrecto();
+                campo.value = "";
+            } // fin de else
+
+            campo.focus();
+        } // fin de la función verificarRespuesta
+
+        // registrar el manejador del formulario y generar la primera pregunta
+        function iniciar()
+        {
+            var formulario = document.getElementById( "formulario" );
+            formulario.addEventListener( "submit", verificarRespuesta, false );
+            generarPregunta(); // primera llamada al iniciar el programa
+        } // fin de la función iniciar
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 9.23</h1>
+
+    <p class="instruccion">El uso de las computadoras en la educación se conoce como
+       <strong>instrucción asistida por computadora</strong> (CAI). Un problema que se
+       desarrolla en los entornos CAI es la fatiga de los estudiantes. Este problema
+       puede eliminarse si se varía el diálogo de la computadora para mantener la
+       atención del estudiante. Modifique el programa del ejercicio 9.22 para que
+       imprima una variedad de contenido para cada respuesta correcta y cada respuesta
+       incorrecta. El conjunto de respuestas correctas es el siguiente:<br><br>
+       <code>Muy bien.</code><br>
+       <code>Excelente.</code><br>
+       <code>Buen trabajo.</code><br>
+       <code>Siga así.</code><br><br>
+       El conjunto de respuestas incorrectas es:<br><br>
+       <code>No. Intente de nuevo</code><br>
+       <code>Equivocado. Trate una vez más.</code><br>
+       <code>No se dé por vencido.</code><br>
+       <code>No. Siga intentando.</code><br><br>
+       Use la generación de números aleatorios para elegir un número del 1 al 4 que se
+       utilice para seleccionar una respuesta apropiada a cada cuestión. Use una
+       instrucción <code>switch</code> para emitir las respuestas.</p>
+
+    <p id = "pregunta"></p>
+
+    <form id = "formulario" action = "#">
+        <p><label>Respuesta:
+            <input id = "campoRespuesta" type = "text" size = "6"></label>
+            <input id = "botonComprobar" type = "submit" value = "Comprobar"></p>
+    </form>
+
+    <p id = "mensaje"></p>
+
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

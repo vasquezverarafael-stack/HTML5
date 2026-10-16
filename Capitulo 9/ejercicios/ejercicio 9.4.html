@@ -1,0 +1,84 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.10: ej09_10.html -->
+<!-- Preguntas sobre números aleatorios y simulación. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 9.10 - Números aleatorios y simulación</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; max-width: 800px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; }
+        h2 { margin-top: 30px; }
+        pre { background-color: #f4f4f4; border: 1px solid #ccc; padding: 10px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 9.10</h1>
+
+    <p class="instruccion">Responda a cada una de las siguientes preguntas:<br><br>
+       a) ¿Qué significa elegir números "al azar"?<br>
+       b) ¿Por qué es útil la función <code>Math.random</code> para simular juegos de
+          probabilidad?<br>
+       c) ¿Por qué es a menudo necesario escalar y/o desplazar los valores producidos
+          por <code>Math.random</code>?<br>
+       d) ¿Por qué es la simulación computarizada de situaciones reales una técnica
+          útil?</p>
+
+    <!-- a) -->
+    <h2>a) ¿Qué significa elegir números "al azar"?</h2>
+    <p>Significa que cada número del conjunto posible tiene la misma probabilidad de
+       ser elegido, y que el resultado de una selección no depende de las anteriores ni
+       puede predecirse. Por ejemplo, al tirar un dado justo, cada una de las seis caras
+       tiene la misma probabilidad de salir y el resultado de un tiro no influye en el
+       siguiente.</p>
+
+    <!-- b) -->
+    <h2>b) ¿Por qué es útil la función Math.random para simular juegos de probabilidad?</h2>
+    <p>Porque produce valores impredecibles y con la misma probabilidad de aparecer,
+       que es justo lo que ocurre al tirar dados, repartir cartas o girar una ruleta.
+       Cada vez que se ejecuta el programa se obtienen resultados distintos, igual que
+       en el juego real. Además, al transformar su valor se pueden generar los resultados
+       posibles de cada juego (por ejemplo, un entero de 1 a 6 para un dado) y repetir
+       el juego muchas veces con rapidez.</p>
+
+    <!-- c) -->
+    <h2>c) ¿Por qué es a menudo necesario escalar y/o desplazar los valores producidos por Math.random?</h2>
+    <p><code>Math.random</code> siempre devuelve un número de punto flotante mayor o
+       igual que 0 y menor que 1. Los programas casi nunca necesitan ese rango, sino
+       enteros dentro de un rango específico:</p>
+    <ul>
+        <li><strong>Escalar</strong> es multiplicar el valor por el tamaño del rango
+            deseado. Por ejemplo, <code>Math.random() * 6</code> da un valor de 0 hasta
+            menos de 6.</li>
+        <li><strong>Desplazar</strong> es sumar el primer valor del rango. Al sumar 1 se
+            obtiene un valor de 1 hasta menos de 7.</li>
+        <li>Finalmente, <code>Math.floor</code> redondea hacia abajo para obtener un
+            entero.</li>
+    </ul>
+    <p>Con esto, para simular un dado se usa:</p>
+    <pre>valor = Math.floor( 1 + Math.random() * 6 );</pre>
+
+    <!-- d) -->
+    <h2>d) ¿Por qué es la simulación computarizada de situaciones reales una técnica útil?</h2>
+    <p>Porque permite estudiar situaciones reales sin los costos, el tiempo ni los
+       riesgos de hacerlo en la vida real. Con una simulación se puede:</p>
+    <ul>
+        <li>Repetir un experimento miles o millones de veces en segundos.</li>
+        <li>Probar distintos escenarios o cambios antes de aplicarlos (por ejemplo, el
+            flujo de tráfico, el clima o el comportamiento de un sistema).</li>
+        <li>Analizar situaciones peligrosas, muy costosas o imposibles de reproducir
+            físicamente.</li>
+        <li>Observar tendencias y predecir resultados a partir de muchas repeticiones,
+            como las frecuencias al tirar dados en la figura 9.6.</li>
+    </ul>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

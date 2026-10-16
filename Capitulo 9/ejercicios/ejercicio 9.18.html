@@ -1,0 +1,111 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.25: ej09_25.html -->
+<!-- Juego de adivinar el número. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 9.25 - Adivinar el número</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 800px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        #indicador { font-size: 1.3em; font-weight: bold; }
+        #mensaje { font-size: 1.2em; }
+        #mensaje.mal { color: red; }
+        #mensaje.bien { color: green; }
+    </style>
+    <script>
+
+        var numeroSecreto; // número que el jugador debe adivinar
+
+        // elegir un entero aleatorio de 1 a 1000
+        function elegirNumero()
+        {
+            numeroSecreto = Math.floor( 1 + Math.random() * 1000 );
+        } // fin de la función elegirNumero
+
+        // verificar el intento del jugador
+        function verificarIntento()
+        {
+            var campo = document.getElementById( "campoIntento" );
+            var intento = parseInt( campo.value );
+            var mensaje = document.getElementById( "mensaje" );
+
+            if ( isNaN( intento ) || intento < 1 || intento > 1000 )
+            {
+                mensaje.className = "mal";
+                mensaje.innerHTML = "Escriba un número entre 1 y 1000.";
+            } // fin de if
+            else if ( intento > numeroSecreto )
+            {
+                mensaje.className = "mal";
+                mensaje.innerHTML = "Demasiado alto. Intente de nuevo.";
+                campo.value = ""; // borrar el campo para el siguiente intento
+            } // fin de else if
+            else if ( intento < numeroSecreto )
+            {
+                mensaje.className = "mal";
+                mensaje.innerHTML = "Demasiado bajo. Intente de nuevo.";
+                campo.value = ""; // borrar el campo para el siguiente intento
+            } // fin de else if
+            else
+            {
+                mensaje.className = "bien";
+                mensaje.innerHTML = "Felicidades. ¡Adivinó el número!";
+                campo.value = ""; // borrar el campo para jugar otra vez
+                elegirNumero();   // elegir un número nuevo
+            } // fin de else
+
+            campo.focus();
+        } // fin de la función verificarIntento
+
+        // registrar el manejador del botón y elegir el primer número
+        function iniciar()
+        {
+            var boton = document.getElementById( "botonEnviar" );
+            boton.addEventListener( "click", verificarIntento, false );
+            elegirNumero();
+        } // fin de la función iniciar
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 9.25</h1>
+
+    <p class="instruccion">Escriba una secuencia de comandos que juegue a "adivinar el
+       número" de la siguiente manera: su programa debe elegir el número a adivinar,
+       para lo cual se selecciona un entero aleatorio en el rango de 1 a 1000. La
+       secuencia de comandos muestra el indicador <code>Adivine un número entre 1 y
+       1000</code> enseguida de un campo de texto. El jugador escribe su primer intento
+       en el campo de texto y hace clic en un botón para enviarlo a la secuencia de
+       comandos. Si el intento del jugador es incorrecto, su programa deberá mostrar
+       los mensajes <code>Demasiado alto. Intente de nuevo.</code> o
+       <code>Demasiado bajo. Intente de nuevo.</code> para ayudar al jugador a
+       "acercarse" a la respuesta correcta y deberá borrar el campo de texto para que
+       el usuario pueda introducir el siguiente intento. Cuando el usuario introduzca
+       la respuesta correcta, muestre el mensaje <code>Felicidades. ¡Adivinó el
+       número!</code> y borre el campo de texto para que el usuario pueda jugar otra
+       vez. [Nota: la técnica de adivinación que se emplea en este problema es similar
+       a una búsqueda binaria, que veremos en el capítulo 10, JavaScript:
+       arreglos].</p>
+
+    <form action = "#">
+        <p id = "indicador">Adivine un número entre 1 y 1000</p>
+        <p><input id = "campoIntento" type = "text" size = "8">
+           <input id = "botonEnviar" type = "button" value = "Enviar intento"></p>
+    </form>
+
+    <p id = "mensaje"></p>
+
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

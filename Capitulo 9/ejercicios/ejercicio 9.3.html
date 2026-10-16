@@ -1,0 +1,82 @@
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.9: ej09_09.html -->
+<!-- Distancia entre dos puntos con la función distancia. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 9.9 - Distancia entre dos puntos</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 800px; }
+        p.error { color: red; }
+    </style>
+    <script>
+
+        // registrar el manejador de eventos del botón
+        function iniciar()
+        {
+            var boton = document.getElementById( "botonCalcular" );
+            boton.addEventListener( "click", mostrarDistancia, false );
+        } // fin de la función iniciar
+
+        // leer las coordenadas del formulario y mostrar la distancia
+        function mostrarDistancia()
+        {
+            var x1 = parseFloat( document.getElementById( "campoX1" ).value );
+            var y1 = parseFloat( document.getElementById( "campoY1" ).value );
+            var x2 = parseFloat( document.getElementById( "campoX2" ).value );
+            var y2 = parseFloat( document.getElementById( "campoY2" ).value );
+            var resultado = document.getElementById( "resultado" );
+
+            if ( isNaN( x1 ) || isNaN( y1 ) || isNaN( x2 ) || isNaN( y2 ) )
+                resultado.innerHTML =
+                    "<p class='error'>Escriba las cuatro coordenadas como números.</p>";
+            else
+                resultado.innerHTML = "La distancia entre los puntos (" + x1 +
+                    ", " + y1 + ") y (" + x2 + ", " + y2 + ") es " +
+                    distancia( x1, y1, x2, y2 );
+        } // fin de la función mostrarDistancia
+
+        // calcular la distancia entre dos puntos (x1, y1) y (x2, y2)
+        function distancia( x1, y1, x2, y2 )
+        {
+            return Math.sqrt( Math.pow( x2 - x1, 2 ) + Math.pow( y2 - y1, 2 ) );
+        } // fin de la función distancia
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 9.9</h1>
+
+    <p class="instruccion">Escriba una función llamada distancia, que calcule la
+       distancia entre dos puntos (x1, y1) y (x2, y2). Todos los números y valores
+       de retorno deben ser valores de punto flotante. Incorpore esta función en una
+       secuencia de comandos que permita al usuario introducir las coordenadas de
+       los puntos mediante un formulario de HTML5. Para obtener los números del
+       elemento form, use las técnicas que se muestran en el ejercicio de
+       autoevaluación 9.6.</p>
+
+    <form action = "#">
+        <p>Punto 1:
+            <label>x1 <input id = "campoX1" type = "number" step = "any" value = "0"></label>
+            <label>y1 <input id = "campoY1" type = "number" step = "any" value = "0"></label></p>
+        <p>Punto 2:
+            <label>x2 <input id = "campoX2" type = "number" step = "any" value = "0"></label>
+            <label>y2 <input id = "campoY2" type = "number" step = "any" value = "0"></label></p>
+        <p><input id = "botonCalcular" type = "button" value = "Calcular distancia"></p>
+    </form>
+
+    <p id = "resultado"></p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

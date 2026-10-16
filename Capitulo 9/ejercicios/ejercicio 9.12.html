@@ -1,0 +1,179 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.19: ej09_19.html -->
+<!-- Números primos entre 1 y 10,000 y comparación de dos límites de prueba. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 9.19 - Números primos</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 850px; }
+        h2 { margin-top: 30px; }
+        .texto { max-width: 850px; }
+        table { border-collapse: collapse; margin: 15px 0; background-color: lightblue; }
+        table, th, td { border: 1px solid black; padding: 6px 12px; text-align: left; }
+        th { background-color: darkblue; color: white; }
+        textarea { font-family: monospace; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+    </style>
+    <script>
+
+        var comparaciones = 0; // cuenta las divisiones que se prueban
+
+        // a) versión 1: prueba divisores desde 2 hasta n / 2
+        function esPrimoMitad( n )
+        {
+            if ( n < 2 )
+                return false;
+
+            for ( var i = 2; i <= n / 2; ++i )
+            {
+                ++comparaciones;
+
+                if ( n % i === 0 )
+                    return false; // encontró un divisor, no es primo
+            } // fin de for
+
+            return true;
+        } // fin de la función esPrimoMitad
+
+        // c) versión 2: prueba divisores desde 2 hasta la raíz cuadrada de n
+        function esPrimoRaiz( n )
+        {
+            if ( n < 2 )
+                return false;
+
+            var limite = Math.sqrt( n );
+
+            for ( var i = 2; i <= limite; ++i )
+            {
+                ++comparaciones;
+
+                if ( n % i === 0 )
+                    return false; // encontró un divisor, no es primo
+            } // fin de for
+
+            return true;
+        } // fin de la función esPrimoRaiz
+
+        // encontrar los primos de 1 a 10,000 con la función indicada
+        function buscarPrimos( funcionPrimo )
+        {
+            var lista = "";
+            var cantidad = 0;
+
+            comparaciones = 0;
+            var inicio = performance.now();
+
+            for ( var n = 1; n <= 10000; ++n )
+            {
+                if ( funcionPrimo( n ) === true )
+                {
+                    ++cantidad;
+                    lista += n + ( cantidad % 10 === 0 ? "\n" : " " );
+                } // fin de if
+            } // fin de for
+
+            return { lista: lista,
+                     cantidad: cantidad,
+                     comparaciones: comparaciones,
+                     milisegundos: performance.now() - inicio };
+        } // fin de la función buscarPrimos
+
+        // ejecutar las dos versiones y mostrar los resultados
+        function calcular()
+        {
+            var mitad = buscarPrimos( esPrimoMitad );
+            var raiz = buscarPrimos( esPrimoRaiz );
+
+            document.getElementById( "areaPrimos" ).value = raiz.lista;
+
+            document.getElementById( "resultados" ).innerHTML =
+                "<table>" +
+                "<caption>Comparación de las dos versiones</caption>" +
+                "<thead><tr><th>Límite de prueba</th><th>Primos encontrados</th>" +
+                "<th>Divisiones probadas</th><th>Tiempo (ms)</th></tr></thead>" +
+                "<tbody>" +
+                "<tr><td>hasta n / 2</td><td>" + mitad.cantidad + "</td><td>" +
+                mitad.comparaciones + "</td><td>" + mitad.milisegundos.toFixed( 2 ) +
+                "</td></tr>" +
+                "<tr><td>hasta la raíz cuadrada de n</td><td>" + raiz.cantidad +
+                "</td><td>" + raiz.comparaciones + "</td><td>" +
+                raiz.milisegundos.toFixed( 2 ) + "</td></tr>" +
+                "</tbody></table>" +
+                "<p>La versión con raíz cuadrada probó <strong>" +
+                ( mitad.comparaciones / raiz.comparaciones ).toFixed( 1 ) +
+                " veces menos</strong> divisiones.</p>";
+        } // fin de la función calcular
+
+        // registrar el manejador de eventos del botón
+        function iniciar()
+        {
+            var boton = document.getElementById( "botonCalcular" );
+            boton.addEventListener( "click", calcular, false );
+        } // fin de la función iniciar
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 9.19</h1>
+
+    <p class="instruccion">Se dice que un entero es <strong>primo</strong> si es mayor
+       que 1 y se puede dividir sólo entre 1 y sí mismo. Por ejemplo, 2, 3, 5 y 7 son
+       primos pero 4, 6, 8 y 9 no.<br><br>
+       a) Escriba una función que determine si un número es primo.<br>
+       b) Use esta función en una secuencia de comandos que determine e imprima todos
+          los números primos entre 1 y 10,000. ¿Cuántos de estos 10,000 números tiene
+          que probar en realidad antes de asegurarse que haya encontrado todos los
+          primos? Muestre los resultados en un elemento &lt;textarea&gt;.<br>
+       c) En un principio podríamos pensar que <em>n</em>/2 es el límite superior con
+          el que debemos probar para ver si un número es primo, pero sólo necesitamos
+          llegar hasta la raíz cuadrada de <em>n</em>. ¿Por qué? Vuelva a escribir el
+          programa usando el método <code>Math.sqrt</code> para calcular la raíz
+          cuadrada y ejecútelo de las dos formas. Estime la mejora en el
+          rendimiento.</p>
+
+    <h2>a) La función esPrimo</h2>
+    <p class="texto">Un número <em>n</em> es primo si es mayor que 1 y ningún entero
+       desde 2 hasta un límite lo divide exactamente. La función prueba cada posible
+       divisor <em>i</em> con el operador residuo (<code>n % i === 0</code>). Si
+       encuentra uno, devuelve <code>false</code> de inmediato. Si termina el ciclo sin
+       hallar ninguno, devuelve <code>true</code>. Abajo hay dos versiones: la del
+       inciso a) (límite <em>n</em>/2) y la del inciso c) (límite raíz cuadrada).</p>
+
+    <h2>b) Primos entre 1 y 10,000</h2>
+    <p class="texto"><strong>¿Cuántos números hay que probar?</strong> Todos: del 2 al
+       10,000 (el 1 no es primo por definición). No hay forma de saber que un número
+       es primo sin probarlo, así que para asegurarse de haber encontrado todos los
+       primos se prueban los 10,000 números.</p>
+    <p><input id = "botonCalcular" type = "button" value = "Buscar primos y comparar"></p>
+    <textarea id = "areaPrimos" rows = "15" cols = "60" readonly></textarea>
+    <div id = "resultados"></div>
+
+    <h2>c) ¿Por qué basta llegar hasta la raíz cuadrada de n?</h2>
+    <p class="texto">Si <em>n</em> no es primo, se puede escribir como
+       <em>n</em> = <em>a</em> &times; <em>b</em>, con <em>a</em> &le; <em>b</em>.
+       Si tanto <em>a</em> como <em>b</em> fueran mayores que la raíz cuadrada de
+       <em>n</em>, su producto sería mayor que <em>n</em>, lo cual es imposible. Por
+       lo tanto, el divisor más pequeño <em>a</em> es siempre menor o igual que la
+       raíz cuadrada de <em>n</em>. Si no hay ningún divisor hasta ese límite, no
+       puede haber ninguno después, y <em>n</em> es primo.</p>
+    <p class="texto">Por ejemplo, para <em>n</em> = 97 la versión con <em>n</em>/2
+       prueba hasta 48, y la de la raíz cuadrada solo hasta 9, porque la raíz cuadrada
+       de 97 es 9.84. La mejora es mayor mientras más grande es el número. La tabla de
+       arriba muestra la mejora real en divisiones probadas y en tiempo; el tiempo
+       cambia de una computadora a otra y de una ejecución a otra, pero las divisiones
+       probadas siempre salen igual.</p>
+
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

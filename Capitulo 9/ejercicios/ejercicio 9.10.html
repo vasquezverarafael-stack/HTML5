@@ -1,0 +1,107 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+
+<!-- Ejercicio 9.17: ej09_17.html -->
+<!-- Conversión de temperaturas entre Fahrenheit y Celsius. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 9.17 - Conversión de temperaturas</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 800px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        p.error { color: red; }
+    </style>
+    <script>
+
+        // a) devuelve el equivalente en Celsius de una temperatura en Fahrenheit
+        function celsius( f )
+        {
+            return 5.0 / 9.0 * ( f - 32 );
+        } // fin de la función celsius
+
+        // b) devuelve el equivalente en Fahrenheit de una temperatura en Celsius
+        function fahrenheit( c )
+        {
+            return 9.0 / 5.0 * c + 32;
+        } // fin de la función fahrenheit
+
+        // convertir de Fahrenheit a Celsius y mostrar el resultado
+        function convertirACelsius()
+        {
+            var temperatura = parseFloat( document.getElementById( "campoTemperatura" ).value );
+            var resultado = document.getElementById( "resultado" );
+
+            if ( isNaN( temperatura ) )
+                resultado.innerHTML =
+                    "<p class='error'>Escriba una temperatura como número.</p>";
+            else
+                resultado.innerHTML = temperatura + " &deg;F equivale a " +
+                    celsius( temperatura ).toFixed( 2 ) + " &deg;C";
+        } // fin de la función convertirACelsius
+
+        // convertir de Celsius a Fahrenheit y mostrar el resultado
+        function convertirAFahrenheit()
+        {
+            var temperatura = parseFloat( document.getElementById( "campoTemperatura" ).value );
+            var resultado = document.getElementById( "resultado" );
+
+            if ( isNaN( temperatura ) )
+                resultado.innerHTML =
+                    "<p class='error'>Escriba una temperatura como número.</p>";
+            else
+                resultado.innerHTML = temperatura + " &deg;C equivale a " +
+                    fahrenheit( temperatura ).toFixed( 2 ) + " &deg;F";
+        } // fin de la función convertirAFahrenheit
+
+        // registrar los manejadores de eventos de los botones
+        function iniciar()
+        {
+            var botonACelsius = document.getElementById( "botonACelsius" );
+            botonACelsius.addEventListener( "click", convertirACelsius, false );
+            var botonAFahrenheit = document.getElementById( "botonAFahrenheit" );
+            botonAFahrenheit.addEventListener( "click", convertirAFahrenheit, false );
+        } // fin de la función iniciar
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 9.17</h1>
+
+    <p class="instruccion">Implemente las siguientes funciones:<br><br>
+       a) La función <code>celsius</code> devuelve el equivalente en Celsius de una
+          temperatura en Fahrenheit, mediante el cálculo
+          <code>C = 5.0 / 9.0 * ( F - 32 );</code><br>
+       b) La función <code>fahrenheit</code> devuelve el equivalente en Fahrenheit de
+          una temperatura en Celsius, mediante el cálculo
+          <code>F = 9.0 / 5.0 * C + 32;</code><br>
+       c) Use estas funciones para escribir una secuencia de comandos que permita al
+          usuario introducir una temperatura en Fahrenheit o Celsius y muestre el
+          equivalente en Celsius o Fahrenheit.<br><br>
+       Su documento de HTML5 debe contener dos botones: uno para iniciar la conversión
+       de Fahrenheit a Celsius y otro para iniciar la conversión de Celsius a
+       Fahrenheit.</p>
+
+    <form action = "#">
+        <p><label>Temperatura:
+            <input id = "campoTemperatura" type = "text" size = "8"></label></p>
+        <p>
+            <input id = "botonACelsius" type = "button" value = "Fahrenheit a Celsius">
+            <input id = "botonAFahrenheit" type = "button" value = "Celsius a Fahrenheit">
+        </p>
+    </form>
+
+    <p id = "resultado"></p>
+
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.8: ej09_08.html -->
+<!-- Cargos de estacionamiento con la función calcularCargos. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 9.8 - Cargos de estacionamiento</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 800px; }
+        table { width: 360px; border-collapse: collapse; background-color: lightblue;
+                margin-top: 15px; }
+        table, td, th { border: 1px solid black; padding: 4px; }
+        th { text-align: left; color: white; background-color: darkblue; }
+        tr.total { font-weight: bold; background-color: white; }
+        p.error { color: red; }
+    </style>
+    <script>
+
+        var numeroCliente = 0; // número del cliente actual
+        var totalCargos = 0;   // total corriente de los recibos de ayer
+        var totalHoras = 0;    // total corriente de horas estacionadas
+        var filas = "";        // filas de la tabla, una por cliente
+
+        // registrar el manejador de eventos del botón
+        function iniciar()
+        {
+            var boton = document.getElementById( "botonCalcular" );
+            boton.addEventListener( "click", mostrarCargo, false );
+        } // fin de la función iniciar
+
+        // leer las horas del formulario, calcular el cargo y actualizar la página
+        function mostrarCargo()
+        {
+            var campoEntrada = document.getElementById( "campoHoras" );
+            var horas = parseFloat( campoEntrada.value );
+            var resultado = document.getElementById( "resultado" );
+            var cargo;
+
+            if ( isNaN( horas ) || horas <= 0 || horas > 24 )
+                resultado.innerHTML =
+                    "<p class='error'>Escriba un número de horas mayor que 0 y hasta 24.</p>";
+            else
+            {
+                cargo = calcularCargos( horas );
+
+                ++numeroCliente;
+                totalHoras += horas;
+                totalCargos += cargo;
+
+                filas += "<tr><td>" + numeroCliente + "</td><td>" +
+                    horas + "</td><td>$" + cargo.toFixed( 2 ) + "</td></tr>";
+
+                resultado.innerHTML =
+                    "<p>Cargo para el cliente " + numeroCliente + ": <strong>$" +
+                    cargo.toFixed( 2 ) + "</strong></p>" +
+                    "<table>" +
+                    "<caption>Recibos de ayer</caption>" +
+                    "<thead><tr><th>Cliente</th><th>Horas</th><th>Cargo</th></tr></thead>" +
+                    "<tbody>" + filas +
+                    "<tr class='total'><td>Total</td><td>" + totalHoras +
+                    "</td><td>$" + totalCargos.toFixed( 2 ) + "</td></tr>" +
+                    "</tbody></table>";
+            } // fin de else
+
+            campoEntrada.value = ""; // limpiar el campo para el siguiente cliente
+        } // fin de la función mostrarCargo
+
+        // calcular el cargo de estacionamiento de un cliente
+        function calcularCargos( horas )
+        {
+            var cargo = 2.00; // cuota mínima, hasta tres horas
+
+            // $0.50 por cada hora o fracción que exceda las tres horas
+            if ( horas > 3 )
+                cargo = 2.00 + 0.50 * Math.ceil( horas - 3 );
+
+            // el cargo máximo por 24 horas es de $10.00
+            if ( cargo > 10.00 )
+                cargo = 10.00;
+
+            return cargo;
+        } // fin de la función calcularCargos
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 9.8</h1>
+
+    <p class="instruccion">Un estacionamiento cobra una cuota mínima de $2 por
+       estacionarse hasta tres horas. El estacionamiento cobra $0.50 adicionales por
+       cada hora o fracción que exceda las tres horas. El cargo máximo por un periodo
+       de 24 horas es de $10.00. Suponga que no hay autos que se estacionen por más
+       de 24 horas a la vez. Escriba una secuencia de comandos que calcule y muestre
+       los cargos de estacionamiento por cada cliente que haya estacionado su auto en
+       este lote ayer. Debe usar un elemento form para recibir del usuario las horas
+       que se estacionó cada cliente. El programa debe mostrar el cargo para el
+       cliente actual; además debe calcular y mostrar el total corriente de los
+       recibos de ayer. El programa debe usar la función calcularCargos para
+       determinar el cargo para cada cliente. Para obtener el número del elemento
+       form, use las técnicas que se muestran en el ejercicio de autoevaluación 9.6.</p>
+
+    <form action = "#">
+        <p><label>Horas estacionadas:
+            <input id = "campoHoras" type = "number" min = "0" max = "24" step = "any"></label></p>
+        <p><input id = "botonCalcular" type = "button" value = "Calcular cargo"></p>
+    </form>
+
+    <div id = "resultado"></div>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

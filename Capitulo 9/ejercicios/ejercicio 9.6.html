@@ -1,0 +1,58 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 9.12: ej09_12.html -->
+<!-- Número aleatorio de un conjunto de enteros con una sola instrucción. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 9.12 - Número al azar de un conjunto</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; max-width: 850px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 9.12</h1>
+
+    <p class="instruccion">Para cada uno de los siguientes conjuntos de enteros,
+       escriba una sola instrucción que imprima un número al azar del conjunto:<br><br>
+       a) 2, 4, 6, 8, 10.<br>
+       b) 3, 5, 7, 9, 11.<br>
+       c) 6, 10, 14, 18, 22.</p>
+
+    <h2>a) Conjunto: 2, 4, 6, 8, 10</h2>
+    <p>Número al azar: <strong>
+        <script>
+            document.writeln( 2 + 2 * Math.floor( Math.random() * 5 ) );
+        </script>
+    </strong></p>
+    <p>Instrucción: <code>document.writeln( 2 + 2 * Math.floor( Math.random() * 5 ) );</code></p>
+
+    <h2>b) Conjunto: 3, 5, 7, 9, 11</h2>
+    <p>Número al azar: <strong>
+        <script>
+            document.writeln( 3 + 2 * Math.floor( Math.random() * 5 ) );
+        </script>
+    </strong></p>
+    <p>Instrucción: <code>document.writeln( 3 + 2 * Math.floor( Math.random() * 5 ) );</code></p>
+
+    <h2>c) Conjunto: 6, 10, 14, 18, 22</h2>
+    <p>Número al azar: <strong>
+        <script>
+            document.writeln( 6 + 4 * Math.floor( Math.random() * 5 ) );
+        </script>
+    </strong></p>
+    <p>Instrucción: <code>document.writeln( 6 + 4 * Math.floor( Math.random() * 5 ) );</code></p>
+
+    <p>Actualice la página para ver otros números.</p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

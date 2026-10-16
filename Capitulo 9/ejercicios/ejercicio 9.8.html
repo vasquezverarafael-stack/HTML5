@@ -1,0 +1,78 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.15: ej09_15.html -->
+<!-- Determinar si enteros son pares con la función esPar. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 9.15 - ¿Es par?</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 800px; }
+        p { margin: 4px 0; }
+        p.error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 9.15</h1>
+
+    <p class="instruccion">Escriba una secuencia de comandos que reciba enteros (uno
+       a la vez) y los pase a la función esPar, que utiliza el operador módulo para
+       determinar si un entero es par. La función debe recibir un argumento entero y
+       devolver true si el entero es par, y false en caso contrario. Use los ciclos
+       controlados por centinela y un diálogo prompt.</p>
+
+    <h2>Resultados</h2>
+
+    <script>
+
+        var entrada;   // cadena escrita por el usuario
+        var numero;    // entero leído
+        var cantidad = 0; // cantidad de enteros procesados
+
+        // leer el primer entero (el centinela es la palabra "fin")
+        entrada = window.prompt(
+            "Escriba un entero (o la palabra fin para terminar)", "0" );
+
+        while ( entrada !== null && entrada.toLowerCase() !== "fin" )
+        {
+            numero = parseInt( entrada );
+
+            if ( isNaN( numero ) )
+                document.writeln( "<p class='error'>\"" + entrada +
+                    "\" no es un entero válido.</p>" );
+            else
+            {
+                ++cantidad;
+
+                if ( esPar( numero ) === true )
+                    document.writeln( "<p>" + numero + " es par (true)</p>" );
+                else
+                    document.writeln( "<p>" + numero + " es impar (false)</p>" );
+            } // fin de else
+
+            // leer el siguiente entero
+            entrada = window.prompt(
+                "Escriba un entero (o la palabra fin para terminar)", "0" );
+        } // fin de while
+
+        document.writeln( "<p><strong>Enteros procesados: " + cantidad + "</strong></p>" );
+
+        // devuelve true si el entero es par; false en caso contrario
+        function esPar( entero )
+        {
+            return entero % 2 === 0;
+        } // fin de la función esPar
+
+    </script>
+
+    <p>Actualice la página para ejecutar el script de nuevo.</p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.11: ej09_11.html -->
+<!-- Enteros aleatorios en distintos rangos. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 9.11 - Enteros aleatorios en rangos</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; max-width: 850px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; }
+        table { border-collapse: collapse; margin: 15px 0; }
+        table, th, td { border: 1px solid black; }
+        th, td { padding: 6px 12px; text-align: left; }
+        th { background-color: darkblue; color: white; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+    </style>
+    <script>
+
+        // generar un entero aleatorio entre minimo y maximo (ambos incluidos)
+        function enteroAleatorio( minimo, maximo )
+        {
+            return Math.floor( minimo + Math.random() * ( maximo - minimo + 1 ) );
+        } // fin de la función enteroAleatorio
+
+        // llenar la columna de ejemplo con un valor aleatorio por cada rango
+        function generarEjemplos()
+        {
+            document.getElementById( "ejemploA" ).innerHTML = enteroAleatorio( 1, 2 );
+            document.getElementById( "ejemploB" ).innerHTML = enteroAleatorio( 1, 100 );
+            document.getElementById( "ejemploC" ).innerHTML = enteroAleatorio( 0, 9 );
+            document.getElementById( "ejemploD" ).innerHTML = enteroAleatorio( 1000, 1112 );
+            document.getElementById( "ejemploE" ).innerHTML = enteroAleatorio( -1, 1 );
+            document.getElementById( "ejemploF" ).innerHTML = enteroAleatorio( -3, 11 );
+        } // fin de la función generarEjemplos
+
+        // registrar el manejador del botón y mostrar los primeros ejemplos
+        function iniciar()
+        {
+            var boton = document.getElementById( "botonGenerar" );
+            boton.addEventListener( "click", generarEjemplos, false );
+            generarEjemplos();
+        } // fin de la función iniciar
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 9.11</h1>
+
+    <p class="instruccion">Escriba instrucciones que asignen enteros aleatorios a la
+       variable <em>n</em> en los siguientes rangos:<br><br>
+       a) 1 &le; <em>n</em> &le; 2<br>
+       b) 1 &le; <em>n</em> &le; 100<br>
+       c) 0 &le; <em>n</em> &le; 9<br>
+       d) 1000 &le; <em>n</em> &le; 1112<br>
+       e) &minus;1 &le; <em>n</em> &le; 1<br>
+       f) &minus;3 &le; <em>n</em> &le; 11</p>
+
+    <h2>Respuestas</h2>
+    <table>
+        <thead>
+            <tr><th>Inciso</th><th>Rango</th><th>Instrucción</th><th>Ejemplo</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>a)</td>
+                <td>1 &le; <em>n</em> &le; 2</td>
+                <td><code>n = Math.floor( 1 + Math.random() * 2 );</code></td>
+                <td id="ejemploA"></td>
+            </tr>
+            <tr>
+                <td>b)</td>
+                <td>1 &le; <em>n</em> &le; 100</td>
+                <td><code>n = Math.floor( 1 + Math.random() * 100 );</code></td>
+                <td id="ejemploB"></td>
+            </tr>
+            <tr>
+                <td>c)</td>
+                <td>0 &le; <em>n</em> &le; 9</td>
+                <td><code>n = Math.floor( Math.random() * 10 );</code></td>
+                <td id="ejemploC"></td>
+            </tr>
+            <tr>
+                <td>d)</td>
+                <td>1000 &le; <em>n</em> &le; 1112</td>
+                <td><code>n = Math.floor( 1000 + Math.random() * 113 );</code></td>
+                <td id="ejemploD"></td>
+            </tr>
+            <tr>
+                <td>e)</td>
+                <td>&minus;1 &le; <em>n</em> &le; 1</td>
+                <td><code>n = Math.floor( -1 + Math.random() * 3 );</code></td>
+                <td id="ejemploE"></td>
+            </tr>
+            <tr>
+                <td>f)</td>
+                <td>&minus;3 &le; <em>n</em> &le; 11</td>
+                <td><code>n = Math.floor( -3 + Math.random() * 15 );</code></td>
+                <td id="ejemploF"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>¿Cómo se obtienen?</h2>
+    <p>Todas siguen la misma forma:</p>
+    <p><code>n = Math.floor( <em>primerValor</em> + Math.random() * <em>cantidadDeValores</em> );</code></p>
+    <ul>
+        <li><em>primerValor</em> es el entero más pequeño del rango (el desplazamiento).</li>
+        <li><em>cantidadDeValores</em> es cuántos enteros hay en el rango: <code>maximo - minimo + 1</code>
+            (el factor de escala). Por ejemplo, de 1000 a 1112 hay 113 valores; de &minus;3 a 11 hay 15.</li>
+        <li><code>Math.floor</code> redondea hacia abajo para obtener un entero.</li>
+    </ul>
+
+    <h2>Demostración</h2>
+    <p>La columna "Ejemplo" de la tabla muestra un valor generado con cada instrucción.
+       Pulsa el botón para generar otros.</p>
+    <p><input id="botonGenerar" type="button" value="Generar nuevos valores"></p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

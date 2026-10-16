@@ -1,0 +1,67 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.7: ej09_07.html -->
+<!-- Área de un círculo con una función y un formulario. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 9.7 - Área de un círculo</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 800px; }
+    </style>
+    <script>
+
+        // registrar el manejador de eventos del botón
+        function iniciar()
+        {
+            var boton = document.getElementById( "botonCalcular" );
+            boton.addEventListener( "click", mostrarArea, false );
+        } // fin de la función iniciar
+
+        // leer el radio del formulario y mostrar el área en un párrafo
+        function mostrarArea()
+        {
+            var campoEntrada = document.getElementById( "campoRadio" );
+            var radio = parseFloat( campoEntrada.value );
+            var resultado = document.getElementById( "resultado" );
+
+            resultado.innerHTML = "El área del círculo de radio " + radio +
+                " es " + areaCirculo( radio ).toFixed( 2 );
+        } // fin de la función mostrarArea
+
+        // calcular el área de un círculo: pi * radio al cuadrado
+        function areaCirculo( radio )
+        {
+            return Math.PI * Math.pow( radio, 2 );
+        } // fin de la función areaCirculo
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 9.7</h1>
+
+    <p class="instruccion">Escriba una secuencia de comandos que use un formulario
+       (form) para obtener el radio de un círculo del usuario y después llame a la
+       función areaCirculo para calcular el área del círculo y mostrar el resultado
+       en un párrafo en la página. Para obtener el valor del elemento form, use las
+       técnicas que se muestran en el ejercicio de autoevaluación 9.6.</p>
+
+    <form action = "#">
+        <p><label>Radio:
+            <input id = "campoRadio" type = "number" value = "1"></label></p>
+        <p><input id = "botonCalcular" type = "button" value = "Calcular"></p>
+    </form>
+
+    <p id = "resultado"></p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

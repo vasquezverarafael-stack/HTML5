@@ -1,0 +1,88 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.13: ej09_13.html -->
+<!-- Potencia entera con la función potenciaEntera. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 9.13 - Potencia entera</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 800px; }
+        p.error { color: red; }
+    </style>
+    <script>
+
+        // registrar el manejador de eventos del botón
+        function iniciar()
+        {
+            var boton = document.getElementById( "botonCalcular" );
+            boton.addEventListener( "click", mostrarPotencia, false );
+        } // fin de la función iniciar
+
+        // leer base y exponente del formulario y mostrar el resultado
+        function mostrarPotencia()
+        {
+            var base = parseInt( document.getElementById( "campoBase" ).value );
+            var exponente = parseInt( document.getElementById( "campoExponente" ).value );
+            var resultado = document.getElementById( "resultado" );
+
+            if ( isNaN( base ) || isNaN( exponente ) )
+                resultado.innerHTML =
+                    "<p class='error'>Escriba números enteros en ambos campos.</p>";
+            else if ( exponente < 0 )
+                resultado.innerHTML =
+                    "<p class='error'>El exponente debe ser un entero mayor o igual que 0.</p>";
+            else
+                resultado.innerHTML = base + "<sup>" + exponente + "</sup> = " +
+                    potenciaEntera( base, exponente );
+        } // fin de la función mostrarPotencia
+
+        // calcular base elevada a exponente con un ciclo for
+        function potenciaEntera( base, exponente )
+        {
+            var producto = 1; // empieza en 1: base elevada a 0 es 1
+
+            for ( var i = 1; i <= exponente; ++i )
+                producto *= base;
+
+            return producto;
+        } // fin de la función potenciaEntera
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 9.13</h1>
+
+    <p class="instruccion">Escriba una función llamada potenciaEntera( base, exponente )
+       que devuelva el valor de base<sup>exponente</sup>. Por ejemplo,
+       potenciaEntera( 3, 4 ) = 3 * 3 * 3 * 3. Suponga que exponente y base son
+       enteros. La función potenciaEntera debería usar una instrucción for o while
+       para controlar el cálculo. Incorpore esta función en una secuencia de comandos
+       que lea los valores enteros de un formulario de HTML5 para base y exponente, y
+       que realice el cálculo con la función potenciaEntera. El formulario de HTML5
+       deberá consistir de dos campos de texto y un botón para iniciar el cálculo. El
+       usuario debe interactuar con el programa, escribiendo números en ambos campos
+       de texto y luego haciendo clic en el botón.</p>
+
+    <form action = "#">
+        <p><label>Base:
+            <input id = "campoBase" type = "text" size = "6"></label></p>
+        <p><label>Exponente:
+            <input id = "campoExponente" type = "text" size = "6"></label></p>
+        <p><input id = "botonCalcular" type = "button" value = "Calcular"></p>
+    </form>
+
+    <p id = "resultado"></p>
+
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

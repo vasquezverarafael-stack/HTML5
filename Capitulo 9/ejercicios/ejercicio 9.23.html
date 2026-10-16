@@ -1,0 +1,102 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.29: ej09_29.html -->
+<!-- Potencia con una función recursiva. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 9.29 - Potencia recursiva</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 800px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        p.error { color: red; }
+        p.paso { margin: 2px 0; font-family: monospace; }
+    </style>
+    <script>
+
+        // devuelve base elevada a exponente, de forma recursiva
+        function potencia( base, exponente )
+        {
+            if ( exponente === 1 ) // caso base: base elevada a 1 es base
+                return base;
+            else // paso de recursividad: base * base elevada a ( exponente - 1 )
+                return base * potencia( base, exponente - 1 );
+        } // fin de la función potencia
+
+        // registrar el manejador de eventos del botón
+        function iniciar()
+        {
+            var boton = document.getElementById( "botonCalcular" );
+            boton.addEventListener( "click", mostrarPotencia, false );
+        } // fin de la función iniciar
+
+        // leer base y exponente del formulario y mostrar el resultado
+        function mostrarPotencia()
+        {
+            var base = parseFloat( document.getElementById( "campoBase" ).value );
+            var exponente = parseInt( document.getElementById( "campoExponente" ).value );
+            var resultado = document.getElementById( "resultado" );
+            var desarrollo = "";
+
+            if ( isNaN( base ) || isNaN( exponente ) )
+                resultado.innerHTML =
+                    "<p class='error'>Escriba un número en la base y un entero en el exponente.</p>";
+            else if ( exponente < 1 )
+                resultado.innerHTML =
+                    "<p class='error'>El exponente debe ser un entero mayor o igual que 1.</p>";
+            else
+            {
+                // mostrar el producto desarrollado, por ejemplo 3 * 3 * 3 * 3
+                for ( var i = 1; i <= exponente; ++i )
+                {
+                    desarrollo += base;
+
+                    if ( i < exponente )
+                        desarrollo += " * ";
+                } // fin de for
+
+                resultado.innerHTML = "<p>potencia( " + base + ", " + exponente +
+                    " ) = " + desarrollo + " = <strong>" +
+                    potencia( base, exponente ) + "</strong></p>";
+            } // fin de else
+        } // fin de la función mostrarPotencia
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 9.29</h1>
+
+    <p class="instruccion">Escriba una función recursiva llamada <code>potencia(
+       base, exponente )</code> que, cuando se invoque, devuelva
+       base<sup>exponente</sup>; por ejemplo, <code>potencia( 3, 4 ) = 3 * 3 * 3 *
+       3</code>. Suponga que <em>exponente</em> es un entero mayor o igual a 1. El
+       paso de recursividad utilizaría la relación siguiente:<br><br>
+       base<sup>exponente</sup> = base &middot; base<sup>exponente&minus;1</sup><br><br>
+       y la condición de terminación ocurre cuando <em>exponente</em> es igual a 1, ya
+       que<br><br>
+       base<sup>1</sup> = base<br><br>
+       Incorpore esta función en una secuencia de comandos que permita al usuario
+       introducir la <em>base</em> y el <em>exponente</em>.</p>
+
+    <form action = "#">
+        <p><label>Base:
+            <input id = "campoBase" type = "text" size = "6"></label></p>
+        <p><label>Exponente:
+            <input id = "campoExponente" type = "text" size = "6"></label></p>
+        <p><input id = "botonCalcular" type = "button" value = "Calcular"></p>
+    </form>
+
+    <div id = "resultado"></div>
+
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

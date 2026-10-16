@@ -1,0 +1,112 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.22: ej09_22.html -->
+<!-- Programa para practicar la multiplicación. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 9.22 - Practicar la multiplicación</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 800px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        #pregunta { font-size: 1.4em; font-weight: bold; }
+        #mensaje { font-size: 1.2em; }
+        #mensaje.bien { color: green; }
+        #mensaje.mal { color: red; }
+    </style>
+    <script>
+
+        var factor1;   // primer número de la pregunta actual
+        var factor2;   // segundo número de la pregunta actual
+
+        // genera una pregunta nueva con dos enteros positivos de un dígito
+        function generarPregunta()
+        {
+            factor1 = Math.floor( 1 + Math.random() * 9 );
+            factor2 = Math.floor( 1 + Math.random() * 9 );
+
+            document.getElementById( "pregunta" ).innerHTML =
+                "¿Cuánto es " + factor1 + " por " + factor2 + "?";
+        } // fin de la función generarPregunta
+
+        // verifica la respuesta del estudiante
+        function verificarRespuesta( evento )
+        {
+            var campo = document.getElementById( "campoRespuesta" );
+            var respuesta = parseInt( campo.value );
+            var mensaje = document.getElementById( "mensaje" );
+
+            evento.preventDefault(); // evita que Enter recargue la página
+
+            if ( isNaN( respuesta ) )
+            {
+                mensaje.className = "mal";
+                mensaje.innerHTML = "Escriba un número como respuesta.";
+            } // fin de if
+            else if ( respuesta === factor1 * factor2 )
+            {
+                mensaje.className = "bien";
+                mensaje.innerHTML = "¡Muy bien!";
+                campo.value = "";
+                generarPregunta(); // nueva pregunta solo si respondió bien
+            } // fin de else if
+            else
+            {
+                mensaje.className = "mal";
+                mensaje.innerHTML = "No. Intente de nuevo.";
+                campo.value = "";
+            } // fin de else
+
+            campo.focus();
+        } // fin de la función verificarRespuesta
+
+        // registrar el manejador del formulario y generar la primera pregunta
+        function iniciar()
+        {
+            var formulario = document.getElementById( "formulario" );
+            formulario.addEventListener( "submit", verificarRespuesta, false );
+            generarPregunta(); // primera llamada al iniciar el programa
+        } // fin de la función iniciar
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 9.22</h1>
+
+    <p class="instruccion">Las computadoras desempeñan un papel cada vez mayor en la
+       educación. Escriba un programa que ayude a un estudiante de primaria que aprenda
+       a multiplicar. Use <code>Math.random</code> para producir dos enteros positivos
+       de un dígito. Después deberá mostrar una pregunta tal como<br><br>
+       <code>¿Cuánto es 6 por 7?</code><br><br>
+       A continuación, el estudiante escribirá la respuesta en un campo de texto. Su
+       programa deberá verificar la respuesta del estudiante. Si es correcta, muestre
+       la cadena "¡Muy bien!" y genere una nueva pregunta. Si la respuesta es
+       equivocada, muestre la cadena "No. Intente de nuevo." y deje que el estudiante
+       intente la misma pregunta otra vez en forma repetida, hasta que por fin la saque
+       bien. Deberá usarse una función separada para generar cada pregunta nueva. Esta
+       función deberá llamarse una vez cuando la secuencia de comandos empiece su
+       ejecución y cada vez que el usuario responda de manera correcta a la
+       pregunta.</p>
+
+    <p id = "pregunta"></p>
+
+    <form id = "formulario" action = "#">
+        <p><label>Respuesta:
+            <input id = "campoRespuesta" type = "text" size = "6"></label>
+            <input id = "botonComprobar" type = "submit" value = "Comprobar"></p>
+    </form>
+
+    <p id = "mensaje"></p>
+
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

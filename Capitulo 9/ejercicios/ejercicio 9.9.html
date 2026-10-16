@@ -1,0 +1,138 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.16: ej09_16.html -->
+<!-- Parte entera, residuo y dígitos de un entero. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 9.16 - Dígitos de un entero</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; max-width: 850px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; }
+        h2 { margin-top: 30px; }
+        pre { background-color: #f4f4f4; border: 1px solid #ccc; padding: 10px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        p.error { color: red; }
+    </style>
+    <script>
+
+        // c) mostrar un entero de 1 a 99999 como una serie de dígitos
+        //    separados por dos espacios
+        function mostrarDigitos( numero )
+        {
+            var divisor = 10000; // mayor divisor posible para 5 dígitos
+            var digito;
+            var salida = "";
+
+            // omitir los ceros a la izquierda: bajar hasta el primer dígito
+            while ( divisor > numero )
+                divisor = divisor / 10;
+
+            // extraer un dígito a la vez, de izquierda a derecha
+            while ( divisor >= 1 )
+            {
+                digito = Math.floor( numero / divisor ); // parte entera del cociente
+                numero = numero % divisor;               // residuo entero
+
+                if ( salida !== "" )
+                    salida += "&nbsp;&nbsp;"; // dos espacios entre dígitos
+
+                salida += digito;
+                divisor = divisor / 10;
+            } // fin de while
+
+            return salida;
+        } // fin de la función mostrarDigitos
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 9.16</h1>
+
+    <p class="instruccion">Escriba segmentos de programa que realicen cada una de las
+       siguientes tareas:<br><br>
+       a) Calcule la parte entera del cociente cuando el entero <em>a</em> se divide
+          entre el entero <em>b</em>.<br>
+       b) Calcule el residuo entero cuando el entero <em>a</em> se divide entre el
+          entero <em>b</em>.<br>
+       c) Use las piezas de programa que se desarrollaron en las partes (a) y (b) para
+          escribir una función llamada <code>mostrarDigitos</code> que reciba un entero
+          entre 1 y 99999, para luego imprimirlo como una serie de dígitos, de los
+          cuales cada par se separa mediante dos espacios. Por ejemplo, el entero 4562
+          debería imprimirse como: 4&nbsp;&nbsp;5&nbsp;&nbsp;6&nbsp;&nbsp;2<br>
+       d) Incorpore la función desarrollada en la parte (c) en una secuencia de comandos
+          que reciba un entero de un diálogo <code>prompt</code> e invoque
+          <code>mostrarDigitos</code> para pasar a la función el entero introducido.</p>
+
+    <h2>a) Parte entera del cociente</h2>
+<pre>cociente = Math.floor( a / b );</pre>
+    <p>Por ejemplo, con a = 17 y b = 5, <code>Math.floor( 17 / 5 )</code> da 3
+       (porque 17 / 5 = 3.4 y se descarta la parte decimal).</p>
+
+    <h2>b) Residuo entero</h2>
+<pre>residuo = a % b;</pre>
+    <p>Por ejemplo, con a = 17 y b = 5, <code>17 % 5</code> da 2.</p>
+
+    <h2>c) Función mostrarDigitos</h2>
+<pre>function mostrarDigitos( numero )
+{
+    var divisor = 10000;
+    var digito;
+    var salida = "";
+
+    while ( divisor &gt; numero )
+        divisor = divisor / 10;
+
+    while ( divisor &gt;= 1 )
+    {
+        digito = Math.floor( numero / divisor ); // parte (a)
+        numero = numero % divisor;               // parte (b)
+
+        if ( salida !== "" )
+            salida += "&amp;nbsp;&amp;nbsp;";
+
+        salida += digito;
+        divisor = divisor / 10;
+    } // fin de while
+
+    return salida;
+} // fin de la función mostrarDigitos</pre>
+    <p>Para 4562 el divisor empieza en 1000 (porque 10000 es mayor que el número) y
+       el ciclo hace lo siguiente:</p>
+    <ul>
+        <li>4562 / 1000 da 4, y el residuo es 562.</li>
+        <li>562 / 100 da 5, y el residuo es 62.</li>
+        <li>62 / 10 da 6, y el residuo es 2.</li>
+        <li>2 / 1 da 2, y el residuo es 0.</li>
+    </ul>
+    <p>Los dígitos se van juntando en <code>salida</code> separados por dos espacios.
+       El primer <code>while</code> evita imprimir ceros a la izquierda.</p>
+
+    <h2>d) Programa con prompt</h2>
+
+    <script>
+
+        var entrada = window.prompt(
+            "Escriba un entero entre 1 y 99999", "4562" );
+        var entero = parseInt( entrada );
+
+        if ( entero >= 1 && entero <= 99999 )
+            document.writeln( "<p>El entero " + entero +
+                " como serie de dígitos: <strong>" +
+                mostrarDigitos( entero ) + "</strong></p>" );
+        else
+            document.writeln( "<p class='error'>\"" + entrada +
+                "\" no es un entero entre 1 y 99999.</p>" );
+
+    </script>
+
+    <p>Actualice la página para ejecutar el script de nuevo.</p>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

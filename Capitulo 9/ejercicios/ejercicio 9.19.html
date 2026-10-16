@@ -1,0 +1,166 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.26: ej09_26.html -->
+<!-- Juego de adivinar el número con conteo de intentos. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 9.26 - Adivinar el número con intentos</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 800px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        #indicador { font-size: 1.3em; font-weight: bold; }
+        #mensaje { font-size: 1.2em; }
+        #mensaje.mal { color: red; }
+        #mensaje.bien { color: green; }
+        #intentos { font-size: 1.1em; }
+        h2 { margin-top: 30px; }
+        .texto { max-width: 800px; }
+        table { border-collapse: collapse; margin: 15px 0; background-color: lightblue; }
+        table, th, td { border: 1px solid black; padding: 6px 12px; text-align: left; }
+        th { background-color: darkblue; color: white; }
+    </style>
+    <script>
+
+        var numeroSecreto; // número que el jugador debe adivinar
+        var intentos = 0;  // cantidad de intentos del juego actual
+
+        // elegir un entero aleatorio de 1 a 1000
+        function elegirNumero()
+        {
+            numeroSecreto = Math.floor( 1 + Math.random() * 1000 );
+        } // fin de la función elegirNumero
+
+        // devuelve el comentario según la cantidad de intentos que se necesitaron
+        function comentarioIntentos( cantidad )
+        {
+            if ( cantidad < 10 )
+                return "¡Conoce el secreto o tuvo suerte!";
+            else if ( cantidad === 10 )
+                return "¡Entonces sí conoce el secreto!";
+            else
+                return "¡Debería poder hacerlo mejor!";
+        } // fin de la función comentarioIntentos
+
+        // verificar el intento del jugador
+        function verificarIntento()
+        {
+            var campo = document.getElementById( "campoIntento" );
+            var intento = parseInt( campo.value );
+            var mensaje = document.getElementById( "mensaje" );
+            var textoIntentos = document.getElementById( "intentos" );
+
+            if ( isNaN( intento ) || intento < 1 || intento > 1000 )
+            {
+                mensaje.className = "mal";
+                mensaje.innerHTML = "Escriba un número entre 1 y 1000.";
+            } // fin de if
+            else
+            {
+                ++intentos; // contar solo los intentos válidos
+
+                if ( intento > numeroSecreto )
+                {
+                    mensaje.className = "mal";
+                    mensaje.innerHTML = "Demasiado alto. Intente de nuevo.";
+                    textoIntentos.innerHTML = "Intentos: " + intentos;
+                    campo.value = ""; // borrar el campo para el siguiente intento
+                } // fin de if
+                else if ( intento < numeroSecreto )
+                {
+                    mensaje.className = "mal";
+                    mensaje.innerHTML = "Demasiado bajo. Intente de nuevo.";
+                    textoIntentos.innerHTML = "Intentos: " + intentos;
+                    campo.value = ""; // borrar el campo para el siguiente intento
+                } // fin de else if
+                else
+                {
+                    mensaje.className = "bien";
+                    mensaje.innerHTML = "Felicidades. ¡Adivinó el número!<br>" +
+                        "Lo adivinó en " + intentos + " intentos. " +
+                        comentarioIntentos( intentos );
+                    textoIntentos.innerHTML = "Intentos: 0";
+                    campo.value = ""; // borrar el campo para jugar otra vez
+                    intentos = 0;     // reiniciar el contador
+                    elegirNumero();   // elegir un número nuevo
+                } // fin de else
+            } // fin de else
+
+            campo.focus();
+        } // fin de la función verificarIntento
+
+        // registrar el manejador del botón y elegir el primer número
+        function iniciar()
+        {
+            var boton = document.getElementById( "botonEnviar" );
+            boton.addEventListener( "click", verificarIntento, false );
+            elegirNumero();
+        } // fin de la función iniciar
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 9.26</h1>
+
+    <p class="instruccion">Modifique el programa del ejercicio 9.25 para que cuente el
+       número de intentos realizados por el jugador. Si el número es 10 o menos,
+       muestre <code>¡Conoce el secreto o tuvo suerte!</code> Si el jugador adivina el
+       número en 10 intentos, muestre <code>¡Entonces sí conoce el secreto!</code> Si el
+       jugador realiza más de 10 intentos, muestre <code>¡Debería poder hacerlo
+       mejor!</code> ¿Por qué no debe tomar más de 10 intentos? Bueno, con cada intento
+       correcto, el jugador debería ser capaz de eliminar la mitad de los números.
+       Ahora muestre por qué es posible adivinar cualquier número entre 1 y 1000 en 10
+       intentos o menos.</p>
+
+    <form action = "#">
+        <p id = "indicador">Adivine un número entre 1 y 1000</p>
+        <p><input id = "campoIntento" type = "text" size = "8">
+           <input id = "botonEnviar" type = "button" value = "Enviar intento"></p>
+    </form>
+
+    <p id = "intentos">Intentos: 0</p>
+    <p id = "mensaje"></p>
+
+    <h2>¿Por qué bastan 10 intentos?</h2>
+    <p class="texto">Si el jugador siempre prueba el número de en medio de los que aún
+       son posibles, cada intento elimina la mitad de las opciones, sin importar si el
+       resultado fue "demasiado alto" o "demasiado bajo". Empezando con 1000 números
+       posibles:</p>
+
+    <table>
+        <thead>
+            <tr><th>Intento</th><th>Números que aún son posibles (como máximo)</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Al empezar</td><td>1000</td></tr>
+            <tr><td>1</td><td>500</td></tr>
+            <tr><td>2</td><td>250</td></tr>
+            <tr><td>3</td><td>125</td></tr>
+            <tr><td>4</td><td>63</td></tr>
+            <tr><td>5</td><td>32</td></tr>
+            <tr><td>6</td><td>16</td></tr>
+            <tr><td>7</td><td>8</td></tr>
+            <tr><td>8</td><td>4</td></tr>
+            <tr><td>9</td><td>2</td></tr>
+            <tr><td>10</td><td>1</td></tr>
+        </tbody>
+    </table>
+
+    <p class="texto">Después del intento 10 solo queda un número posible, así que ese es
+       el número secreto. Matemáticamente, con <em>n</em> intentos se pueden distinguir
+       hasta 2<sup><em>n</em></sup> números. Como 2<sup>10</sup> = 1024, que es mayor que
+       1000, con 10 intentos se puede adivinar cualquier número entre 1 y 1000. Con 9
+       intentos solo alcanzaría para 2<sup>9</sup> = 512 números.</p>
+
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.27: ej09_27.html -->
+<!-- CAI con nivel de grado y tipo de problema aritmético. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 9.27 - CAI con nivel y tipo de problema</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 800px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        .oculto { display: none; }
+        #configuracion, #cuestionario { border: 2px solid darkblue; padding: 10px 15px;
+                                        max-width: 450px; margin-bottom: 15px; }
+        #pregunta { font-size: 1.4em; font-weight: bold; }
+        #mensaje { font-size: 1.2em; }
+        #mensaje.bien { color: green; }
+        #mensaje.mal { color: red; }
+        #errorConfig { color: red; }
+        #resumen { border: 2px solid darkblue; background-color: lightblue;
+                   padding: 10px 15px; max-width: 450px; }
+        #resumen p { margin: 4px 0; }
+        #resumen p.ayuda { color: red; font-weight: bold; }
+    </style>
+    <script>
+
+        var nivel = 1;        // nivel de grado: cantidad máxima de dígitos
+        var tipo = 3;         // tipo de problema: de 1 a 5
+        var respuestaCorrecta; // respuesta de la pregunta actual
+        var correctas = 0;    // respuestas correctas del estudiante actual
+        var incorrectas = 0;  // respuestas incorrectas del estudiante actual
+
+        // entero positivo aleatorio de hasta "nivel" dígitos (1 a 10^nivel - 1)
+        function aleatorio()
+        {
+            return Math.floor( 1 + Math.random() * ( Math.pow( 10, nivel ) - 1 ) );
+        } // fin de la función aleatorio
+
+        // genera una pregunta nueva según el nivel y el tipo de problema
+        function generarPregunta()
+        {
+            var limite = Math.pow( 10, nivel ) - 1; // mayor número permitido
+            var operacion = tipo; // 1 suma, 2 resta, 3 multiplicación, 4 división
+            var a, b, divisor, cociente, temporal, texto;
+
+            if ( tipo === 5 ) // mezclar al azar los cuatro tipos
+                operacion = Math.floor( 1 + Math.random() * 4 );
+
+            switch ( operacion )
+            {
+                case 1: // suma
+                    a = aleatorio();
+                    b = aleatorio();
+                    respuestaCorrecta = a + b;
+                    texto = a + " más " + b;
+                    break;
+                case 2: // resta (el resultado nunca es negativo)
+                    a = aleatorio();
+                    b = aleatorio();
+                    if ( a < b )
+                    {
+                        temporal = a;
+                        a = b;
+                        b = temporal;
+                    } // fin de if
+                    respuestaCorrecta = a - b;
+                    texto = a + " menos " + b;
+                    break;
+                case 3: // multiplicación
+                    a = aleatorio();
+                    b = aleatorio();
+                    respuestaCorrecta = a * b;
+                    texto = a + " por " + b;
+                    break;
+                case 4: // división (el cociente siempre es un entero exacto)
+                    divisor = aleatorio();
+                    cociente = Math.floor( 1 + Math.random() * Math.floor( limite / divisor ) );
+                    respuestaCorrecta = cociente;
+                    texto = ( divisor * cociente ) + " entre " + divisor;
+                    break;
+            } // fin de switch
+
+            document.getElementById( "pregunta" ).innerHTML = "¿Cuánto es " + texto + "?";
+        } // fin de la función generarPregunta
+
+        // elige al azar uno de cuatro mensajes para una respuesta correcta
+        function mensajeCorrecto()
+        {
+            var opcion = Math.floor( 1 + Math.random() * 4 );
+            var mensaje;
+
+            switch ( opcion )
+            {
+                case 1: mensaje = "Muy bien."; break;
+                case 2: mensaje = "Excelente."; break;
+                case 3: mensaje = "Buen trabajo."; break;
+                case 4: mensaje = "Siga así."; break;
+            } // fin de switch
+
+            return mensaje;
+        } // fin de la función mensajeCorrecto
+
+        // elige al azar uno de cuatro mensajes para una respuesta incorrecta
+        function mensajeIncorrecto()
+        {
+            var opcion = Math.floor( 1 + Math.random() * 4 );
+            var mensaje;
+
+            switch ( opcion )
+            {
+                case 1: mensaje = "No. Intente de nuevo"; break;
+                case 2: mensaje = "Equivocado. Trate una vez más."; break;
+                case 3: mensaje = "No se dé por vencido."; break;
+                case 4: mensaje = "No. Siga intentando."; break;
+            } // fin de switch
+
+            return mensaje;
+        } // fin de la función mensajeIncorrecto
+
+        // leer el nivel y el tipo, y comenzar el cuestionario
+        function comenzar()
+        {
+            var valorNivel = parseInt( document.getElementById( "campoNivel" ).value );
+            var valorTipo = parseInt( document.getElementById( "campoTipo" ).value );
+            var error = document.getElementById( "errorConfig" );
+
+            if ( isNaN( valorNivel ) || valorNivel < 1 || valorNivel > 6 )
+            {
+                error.innerHTML = "El nivel de grado debe ser un entero de 1 a 6.";
+                return;
+            } // fin de if
+
+            error.innerHTML = "";
+            nivel = valorNivel;
+            tipo = valorTipo;
+            correctas = 0;
+            incorrectas = 0;
+
+            document.getElementById( "configuracion" ).className = "oculto";
+            document.getElementById( "cuestionario" ).className = "";
+            document.getElementById( "mensaje" ).innerHTML = "";
+            document.getElementById( "resumen" ).className = "oculto";
+
+            generarPregunta();
+            document.getElementById( "campoRespuesta" ).focus();
+        } // fin de la función comenzar
+
+        // al terminar las 10 preguntas: calcular el porcentaje, mostrar el
+        // resultado y reiniciar para que otro estudiante elija nivel y tipo
+        function terminarCuestionario()
+        {
+            var total = correctas + incorrectas;
+            var porcentaje = correctas / total * 100;
+            var resumen = document.getElementById( "resumen" );
+
+            resumen.className = "";
+            resumen.innerHTML =
+                "<p><strong>Resultado del cuestionario</strong></p>" +
+                "<p>Respuestas correctas: " + correctas + "</p>" +
+                "<p>Respuestas incorrectas: " + incorrectas + "</p>" +
+                "<p>Porcentaje de respuestas correctas: " + porcentaje.toFixed( 1 ) + "%</p>";
+
+            if ( porcentaje < 75 )
+                resumen.innerHTML +=
+                    "<p class='ayuda'>Pida ayuda adicional a su instructor</p>";
+
+            // reiniciar: volver a mostrar la configuración
+            correctas = 0;
+            incorrectas = 0;
+            document.getElementById( "cuestionario" ).className = "oculto";
+            document.getElementById( "configuracion" ).className = "";
+        } // fin de la función terminarCuestionario
+
+        // verifica la respuesta del estudiante
+        function verificarRespuesta( evento )
+        {
+            var campo = document.getElementById( "campoRespuesta" );
+            var respuesta = parseInt( campo.value );
+            var mensaje = document.getElementById( "mensaje" );
+
+            evento.preventDefault(); // evita que Enter recargue la página
+
+            if ( isNaN( respuesta ) )
+            {
+                mensaje.className = "mal";
+                mensaje.innerHTML = "Escriba un número como respuesta.";
+            } // fin de if
+            else if ( respuesta === respuestaCorrecta )
+            {
+                ++correctas;
+                mensaje.className = "bien";
+                mensaje.innerHTML = mensajeCorrecto();
+                campo.value = "";
+
+                if ( correctas === 10 )
+                    terminarCuestionario();
+                else
+                    generarPregunta(); // nueva pregunta solo si respondió bien
+            } // fin de else if
+            else
+            {
+                ++incorrectas;
+                mensaje.className = "mal";
+                mensaje.innerHTML = mensajeIncorrecto();
+                campo.value = "";
+            } // fin de else
+
+            campo.focus();
+        } // fin de la función verificarRespuesta
+
+        // registrar los manejadores de eventos
+        function iniciar()
+        {
+            document.getElementById( "botonComenzar" ).addEventListener( "click", comenzar, false );
+            document.getElementById( "formulario" ).addEventListener( "submit", verificarRespuesta, false );
+        } // fin de la función iniciar
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 9.27</h1>
+
+    <p class="instruccion">(Proyecto) Los ejercicios 9.22 al 9.24 desarrollaron un
+       programa de instrucción asistida por computadora para enseñar a un estudiante de
+       primaria a multiplicar. Este ejercicio sugiere mejoras a ese programa.<br><br>
+       a) Modifique el programa para que permita al usuario introducir la capacidad de
+          nivel de grado. Un nivel de grado de 1 significa que usa dígitos de un solo
+          número en los problemas, un nivel de grado de 2 significa que usa números de
+          hasta dos dígitos, y así en lo sucesivo.<br>
+       b) Modifique el programa para permitir al usuario elegir el tipo de problemas
+          aritméticos que desea estudiar. Una opción de 1 significa sólo problemas de
+          suma, 2 significa sólo problemas de resta, 3 significa sólo problemas de
+          multiplicación, 4 significa sólo problemas de división y 5 significa
+          entremezclar al azar problemas de todos estos tipos.</p>
+
+    <div id = "configuracion">
+        <p><label>Nivel de grado (1 a 6):
+            <input id = "campoNivel" type = "text" size = "3" value = "1"></label></p>
+        <p><label>Tipo de problemas:
+            <select id = "campoTipo">
+                <option value = "1">1 - Sólo suma</option>
+                <option value = "2">2 - Sólo resta</option>
+                <option value = "3">3 - Sólo multiplicación</option>
+                <option value = "4">4 - Sólo división</option>
+                <option value = "5">5 - Mezcla al azar</option>
+            </select></label></p>
+        <p><input id = "botonComenzar" type = "button" value = "Comenzar cuestionario"></p>
+        <p id = "errorConfig"></p>
+    </div>
+
+    <div id = "cuestionario" class = "oculto">
+        <p id = "pregunta"></p>
+        <form id = "formulario" action = "#">
+            <p><label>Respuesta:
+                <input id = "campoRespuesta" type = "text" size = "8"></label>
+                <input id = "botonComprobar" type = "submit" value = "Comprobar"></p>
+        </form>
+    </div>
+
+    <p id = "mensaje"></p>
+
+    <div id = "resumen" class = "oculto"></div>
+
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

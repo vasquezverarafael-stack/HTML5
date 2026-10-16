@@ -1,0 +1,126 @@
+<!--Vásquez Vera Rafael 227O01115-->
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.30: ej09_30.html -->
+<!-- ¿Qué hace la función misterio? -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 9.30 - ¿Qué hace la función?</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; max-width: 850px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; }
+        h2 { margin-top: 30px; }
+        pre { background-color: #f4f4f4; border: 1px solid #ccc; padding: 10px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        table { border-collapse: collapse; margin: 15px 0; }
+        table, th, td { border: 1px solid black; }
+        th, td { padding: 6px 12px; text-align: left; }
+        th { background-color: darkblue; color: white; }
+        p.error { color: red; }
+    </style>
+    <script>
+
+        // El parámetro b debe ser entero
+        // positivo para evitar recursividad infinita
+        function misterio( a, b )
+        {
+            if ( b == 1 )
+                return a;
+            else
+                return a + misterio( a, b - 1 );
+        } // fin de la función misterio
+
+        // registrar el manejador de eventos del botón
+        function iniciar()
+        {
+            var boton = document.getElementById( "botonProbar" );
+            boton.addEventListener( "click", probarMisterio, false );
+        } // fin de la función iniciar
+
+        // leer a y b del formulario y mostrar el resultado de misterio
+        function probarMisterio()
+        {
+            var a = parseInt( document.getElementById( "campoA" ).value );
+            var b = parseInt( document.getElementById( "campoB" ).value );
+            var resultado = document.getElementById( "resultado" );
+
+            if ( isNaN( a ) || isNaN( b ) )
+                resultado.innerHTML = "<p class='error'>Escriba dos enteros.</p>";
+            else if ( b < 1 )
+                resultado.innerHTML =
+                    "<p class='error'>b debe ser un entero positivo (mayor o igual que 1).</p>";
+            else
+                resultado.innerHTML = "<p>misterio( " + a + ", " + b + " ) = <strong>" +
+                    misterio( a, b ) + "</strong><br>" + a + " * " + b + " = " +
+                    ( a * b ) + "</p>";
+        } // fin de la función probarMisterio
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 9.30</h1>
+
+    <p class="instruccion">¿Qué hace la siguiente función?</p>
+
+<pre>// El parámetro b debe ser entero
+// positivo para evitar recursividad infinita
+function misterio( a, b )
+{
+    if ( b == 1 )
+        return a;
+    else
+        return a + misterio( a, b - 1 );
+}</pre>
+
+    <h2>Respuesta</h2>
+    <p>La función <code>misterio( a, b )</code> <strong>multiplica</strong>
+       <code>a</code> por <code>b</code>, y lo hace con sumas repetidas: suma
+       <code>a</code> consigo mismo <code>b</code> veces. Es una función recursiva:</p>
+    <ul>
+        <li><strong>Caso base:</strong> si <code>b == 1</code>, devuelve <code>a</code>
+            (a &times; 1 = a).</li>
+        <li><strong>Paso de recursividad:</strong> en otro caso devuelve
+            <code>a + misterio( a, b - 1 )</code>, es decir,
+            <em>a</em> &times; <em>b</em> = <em>a</em> + <em>a</em> &times; ( <em>b</em> &minus; 1 ).</li>
+    </ul>
+
+    <h2>Ejemplo paso a paso: misterio( 5, 3 )</h2>
+    <table>
+        <thead>
+            <tr><th>Llamada</th><th>Se convierte en</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>misterio( 5, 3 )</code></td><td><code>5 + misterio( 5, 2 )</code></td></tr>
+            <tr><td><code>misterio( 5, 2 )</code></td><td><code>5 + misterio( 5, 1 )</code></td></tr>
+            <tr><td><code>misterio( 5, 1 )</code></td><td><code>5</code> (caso base)</td></tr>
+        </tbody>
+    </table>
+    <p>Al regresar de las llamadas: <code>5 + ( 5 + 5 ) = 15</code>, que es 5 &times; 3.</p>
+
+    <h2>¿Por qué b debe ser un entero positivo?</h2>
+    <p>Cada llamada reduce <code>b</code> en 1 y la recursión se detiene cuando
+       <code>b</code> llega a 1. Si <code>b</code> fuera 0, negativo o tuviera
+       decimales (por ejemplo, 2.5), <code>b</code> nunca sería exactamente 1 y la
+       función se llamaría sin parar. Por eso el comentario de la función dice que
+       <code>b</code> debe ser un entero positivo "para evitar recursividad
+       infinita".</p>
+
+    <h2>Demostración</h2>
+    <form action = "#">
+        <p><label>a: <input id = "campoA" type = "text" size = "6" value = "5"></label>
+           <label>b: <input id = "campoB" type = "text" size = "6" value = "3"></label>
+           <input id = "botonProbar" type = "button" value = "Probar misterio"></p>
+    </form>
+    <div id = "resultado"></div>
+
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>
