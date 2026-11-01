@@ -1,0 +1,41 @@
+/* estilo.css: estilos para el ejemplo de tiro de dados */
+img {
+    margin-right: 10px;
+    width: 80px;
+    height: auto;
+}
+
+table {
+    width: 250px;
+    margin-top: 15px;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 4px;
+    text-align: left;
+}
+
+th {
+    color: white;
+    background-color: #1a1a1a;
+}
+
+td {
+    background-color: lightgray;
+}
+
+/* para el ejemplo 10.9: elementos de lista en línea */
+ol {
+    margin: 0;
+    padding-left: 20px;
+}
+
+li {
+    display: inline;
+    margin-right: 10px;
+}

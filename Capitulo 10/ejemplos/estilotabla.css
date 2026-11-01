@@ -1,0 +1,23 @@
+/* estilotabla.css: estilos para las tablas de los ejemplos de arreglos */
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table {
+    width: 300px;
+}
+
+th, td {
+    padding: 4px;
+    text-align: left;
+}
+
+th {
+    color: white;
+    background-color: #1a1a1a;
+}
+
+td {
+    background-color: lightgray;
+}
