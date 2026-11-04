@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 10.10: ej10_10.html -->
+<!-- Salarios por comisiones con un arreglo de contadores. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.10 - Comisiones del personal de ventas</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 850px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        p.error { color: red; }
+        table { width: 320px; border-collapse: collapse; background-color: lightblue;
+                margin-top: 15px; }
+        table, th, td { border: 1px solid black; padding: 4px; }
+        th { text-align: left; color: white; background-color: darkblue; }
+        tr.total { font-weight: bold; background-color: white; }
+    </style>
+    <script>
+
+        // un contador por cada rango de salario (9 rangos)
+        var contadores = [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+
+        // nombres de los rangos, en el mismo orden que los contadores
+        var rangos = [ "$200 a 299", "$300 a 399", "$400 a 499", "$500 a 599",
+                       "$600 a 699", "$700 a 799", "$800 a 899", "$900 a 999",
+                       "$1000 y más" ];
+
+        // registrar el manejador de eventos del botón
+        function iniciar()
+        {
+            var boton = document.getElementById( "botonAgregar" );
+            boton.addEventListener( "click", agregarVendedor, false );
+            mostrarContadores();
+        } // fin de la función iniciar
+
+        // calcula el salario semanal (truncado a un entero) de un vendedor
+        function calcularSalario( ventasBrutas )
+        {
+            // $200 por semana más el 9 por ciento de las ventas brutas
+            return Math.floor( 200 + ventasBrutas * 9 / 100 );
+        } // fin de la función calcularSalario
+
+        // determina el índice del contador que corresponde a un salario
+        function indiceRango( salario )
+        {
+            var indice = Math.floor( salario / 100 ) - 2; // 200-299 es el índice 0
+
+            if ( indice > 8 ) // $1000 y más
+                indice = 8;
+
+            return indice;
+        } // fin de la función indiceRango
+
+        // leer las ventas brutas del formulario y actualizar los contadores
+        function agregarVendedor()
+        {
+            var campo = document.getElementById( "campoVentas" );
+            var ventas = parseFloat( campo.value );
+            var mensaje = document.getElementById( "mensaje" );
+            var salario;
+
+            if ( isNaN( ventas ) || ventas < 0 )
+            {
+                mensaje.innerHTML =
+                    "<p class='error'>Escriba unas ventas brutas mayores o iguales que 0.</p>";
+            } // fin de if
+            else
+            {
+                salario = calcularSalario( ventas );
+                ++contadores[ indiceRango( salario ) ]; // incrementar el contador
+
+                mensaje.innerHTML = "<p>Ventas brutas de $" + ventas +
+                    ": salario de <strong>$" + salario + "</strong> (rango " +
+                    rangos[ indiceRango( salario ) ] + ")</p>";
+                mostrarContadores();
+            } // fin de else
+
+            campo.value = "";
+            campo.focus();
+        } // fin de la función agregarVendedor
+
+        // mostrar cuántos vendedores hay en cada rango
+        function mostrarContadores()
+        {
+            var tabla = "<table><caption>Vendedores por rango de salario</caption>" +
+                "<thead><tr><th>Rango</th><th>Vendedores</th></tr></thead><tbody>";
+            var total = 0;
+
+            for ( var i = 0; i < contadores.length; ++i )
+            {
+                tabla += "<tr><td>" + rangos[ i ] + "</td><td>" + contadores[ i ] +
+                    "</td></tr>";
+                total += contadores[ i ];
+            } // fin de for
+
+            tabla += "<tr class='total'><td>Total</td><td>" + total + "</td></tr>";
+            tabla += "</tbody></table>";
+
+            document.getElementById( "resultado" ).innerHTML = tabla;
+        } // fin de la función mostrarContadores
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.10</h1>
+
+    <p class="instruccion">Use un arreglo unidimensional para resolver el siguiente
+       problema: una empresa paga a su personal de ventas con base en comisiones. El
+       personal de ventas recibe $200 por semana más el 9 por ciento de sus ventas
+       brutas para esa semana. Por ejemplo, un vendedor con ventas brutas de $5000 en
+       una semana recibe $200 más el 9 por ciento de $5000, o un total de $650. Escriba
+       una secuencia de comandos (usando un arreglo de contadores) que obtenga las
+       ventas brutas para cada empleado por medio de un formulario de HTML5 y determine
+       cuántos vendedores obtuvieron salarios en cada uno de los siguientes rangos
+       (suponga que el salario de cada vendedor se trunca a un monto entero):<br><br>
+       a) $200 a 299<br>
+       b) $300 a 399<br>
+       c) $400 a 499<br>
+       d) $500 a 599<br>
+       e) $600 a 699<br>
+       f) $700 a 799<br>
+       g) $800 a 899<br>
+       h) $900 a 999<br>
+       i) $1000 y más</p>
+
+    <form action = "#">
+        <p><label>Ventas brutas de la semana ($):
+            <input id = "campoVentas" type = "text" size = "10"></label>
+            <input id = "botonAgregar" type = "button" value = "Agregar vendedor"></p>
+    </form>
+
+    <div id = "mensaje"></div>
+    <div id = "resultado"></div>
+
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

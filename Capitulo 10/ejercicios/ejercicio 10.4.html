@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 10.4: ej10_04.html -->
+<!-- Ejercicio de autoevaluación: instrucciones con el arreglo tabla. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.4 - El arreglo tabla</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; max-width: 850px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; }
+        h2 { margin-top: 30px; }
+        pre { background-color: #f4f4f4; border: 1px solid #ccc; padding: 10px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        table { border-collapse: collapse; margin: 10px 0 20px 0; }
+        table, th, td { border: 1px solid black; }
+        th, td { padding: 6px 14px; text-align: center; }
+        th { background-color: darkblue; color: white; }
+    </style>
+    <script>
+
+        // mostrar un arreglo bidimensional como tabla
+        function mostrarTabla( titulo, arreglo )
+        {
+            var salida = "<table><caption>" + titulo + "</caption>" +
+                "<thead><tr><th></th><th>col 0</th><th>col 1</th><th>col 2</th></tr></thead><tbody>";
+
+            for ( var i = 0; i < arreglo.length; ++i )
+            {
+                salida += "<tr><th>fila " + i + "</th>";
+
+                for ( var j = 0; j < arreglo[ i ].length; ++j )
+                    salida += "<td>" + arreglo[ i ][ j ] + "</td>";
+
+                salida += "</tr>";
+            } // fin de for
+
+            document.writeln( salida + "</tbody></table>" );
+        } // fin de la función mostrarTabla
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.4</h1>
+
+    <p class="instruccion">Escribir instrucciones de JavaScript (con respecto al arreglo
+       <code>tabla</code>) para realizar cada una de las siguientes tareas:<br><br>
+       a) Declarar y crear el arreglo con tres filas y tres columnas.<br>
+       b) Almacenar el número total de elementos en la variable
+          <code>totalElementos</code>.<br>
+       c) Usar una instrucción <code>for...in</code> para inicializar cada elemento del
+          arreglo con la suma de sus índices de fila y de columna. Suponga que las
+          variables <code>x</code> y <code>y</code> se declaran como variables de
+          control.</p>
+
+    <h2>Respuestas</h2>
+
+    <h3>a)</h3>
+<pre>var tabla = new Array( new Array( 3 ), new Array( 3 ),
+    new Array( 3 ) );</pre>
+
+    <h3>b)</h3>
+<pre>var totalElementos = tabla.length * tabla[ 0 ].length;</pre>
+    <p>Son 3 filas por 3 columnas, así que <code>totalElementos</code> vale 9.</p>
+
+    <h3>c)</h3>
+<pre>for ( var x in tabla )
+{
+    for ( var y in tabla[ x ] )
+    {
+        tabla[ x ][ y ] = x + y;
+    }
+}</pre>
+
+    <p><strong>Dos detalles sobre esta respuesta.</strong> En el libro la segunda línea
+       del ciclo dice <code>table[ x ]</code>, que es una errata: la variable se llama
+       <code>tabla</code>. Además, con las variables del libro este código no logra lo
+       que pide el enunciado, por estas razones:</p>
+    <ul>
+        <li><code>new Array( 3 )</code> crea filas con tres posiciones <em>vacías</em>, y
+            <code>for...in</code> omite los elementos sin definir (el propio libro lo
+            advierte en el Tip para prevenir errores 10.2). El ciclo interno no se
+            ejecuta ninguna vez y la tabla queda sin valores.</li>
+        <li>En un <code>for...in</code>, las variables <code>x</code> y <code>y</code>
+            reciben los índices como <em>cadenas</em> ("0", "1", "2"). Entonces
+            <code>x + y</code> concatena en lugar de sumar y daría "01", no 1. Para sumar
+            hay que convertirlos con <code>parseInt( x ) + parseInt( y )</code>.</li>
+    </ul>
+
+    <h3>c) versión corregida (con ciclos <code>for</code> por índice)</h3>
+<pre>for ( var x = 0; x &lt; tabla.length; ++x )
+{
+    for ( var y = 0; y &lt; tabla[ x ].length; ++y )
+    {
+        tabla[ x ][ y ] = x + y;
+    }
+}</pre>
+
+    <h2>Demostración</h2>
+
+    <script>
+
+        // a) crear el arreglo con tres filas y tres columnas
+        var tabla = new Array( new Array( 3 ), new Array( 3 ), new Array( 3 ) );
+
+        // b) total de elementos
+        var totalElementos = tabla.length * tabla[ 0 ].length;
+        document.writeln( "<p>totalElementos = <strong>" + totalElementos + "</strong></p>" );
+
+        // c) versión del libro, con for...in (las posiciones vacías se omiten)
+        for ( var x in tabla )
+        {
+            for ( var y in tabla[ x ] )
+            {
+                tabla[ x ][ y ] = x + y;
+            } // fin de for interno
+        } // fin de for externo
+
+        mostrarTabla( "Resultado de la versión del libro (for...in)", tabla );
+
+        // c) versión corregida, con for por índice
+        for ( var i = 0; i < tabla.length; ++i )
+        {
+            for ( var j = 0; j < tabla[ i ].length; ++j )
+            {
+                tabla[ i ][ j ] = i + j;
+            } // fin de for interno
+        } // fin de for externo
+
+        mostrarTabla( "Resultado de la versión corregida (for por índice)", tabla );
+
+    </script>
+
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

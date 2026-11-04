@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 10.13: ej10_13.html -->
+<!-- Orden en el que se establecen en cero los elementos de ventas. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.13 - Orden de los elementos de ventas</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; max-width: 850px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; }
+        h2 { margin-top: 30px; }
+        pre { background-color: #f4f4f4; border: 1px solid #ccc; padding: 10px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        table { border-collapse: collapse; margin: 15px 0; }
+        table, th, td { border: 1px solid black; }
+        th, td { padding: 8px 16px; text-align: center; }
+        th { background-color: darkblue; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 10.13</h1>
+
+    <p class="instruccion">Etiquete los elementos del arreglo bidimensional de tres por
+       cinco llamado <code>ventas</code> para indicar el orden en el que se deben
+       establecer en cero mediante el siguiente segmento de programa:</p>
+
+<pre>for ( var fila in ventas )
+{
+    for ( var col in ventas[ fila ] )
+    {
+        ventas[ fila ][ col ] = 0;
+    }
+}</pre>
+
+    <h2>Respuesta</h2>
+    <p>El ciclo externo recorre las filas (0, 1 y 2) y, por cada fila, el ciclo interno
+       recorre todas sus columnas (0 a 4) de izquierda a derecha. Por lo tanto los
+       elementos se ponen en cero <strong>fila por fila</strong>, empezando por la fila 0.
+       Cada número de la tabla indica el orden en que se establece ese elemento en
+       cero:</p>
+
+    <table>
+        <caption>Orden en que se establece cada elemento en cero</caption>
+        <thead>
+            <tr>
+                <th></th><th>columna 0</th><th>columna 1</th><th>columna 2</th>
+                <th>columna 3</th><th>columna 4</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><th>fila 0</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+            <tr><th>fila 1</th><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+            <tr><th>fila 2</th><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td></tr>
+        </tbody>
+    </table>
+
+    <p>En otras palabras, el orden es <code>ventas[ 0 ][ 0 ]</code>,
+       <code>ventas[ 0 ][ 1 ]</code>, ..., <code>ventas[ 0 ][ 4 ]</code>, luego
+       <code>ventas[ 1 ][ 0 ]</code>, ..., <code>ventas[ 1 ][ 4 ]</code>, y por último
+       <code>ventas[ 2 ][ 0 ]</code>, ..., <code>ventas[ 2 ][ 4 ]</code>. Es decir, el
+       segundo índice (la columna) es el que cambia más rápido.</p>
+
+    <h2>Demostración</h2>
+    <p>Se ejecuta el mismo segmento sobre un arreglo de tres por cinco, y se anota el
+       orden real en que se visita cada elemento:</p>
+
+    <script>
+
+        // arreglo ventas de tres por cinco, con valores distintos de cero
+        var ventas = [ [ 9, 9, 9, 9, 9 ],
+                       [ 9, 9, 9, 9, 9 ],
+                       [ 9, 9, 9, 9, 9 ] ];
+
+        var etiquetas = [ [], [], [] ]; // aquí se anota el orden de cada elemento
+        var contador = 0;
+
+        // el segmento del ejercicio, con un contador para anotar el orden
+        for ( var fila in ventas )
+        {
+            for ( var col in ventas[ fila ] )
+            {
+                ventas[ fila ][ col ] = 0;
+                ++contador;
+                etiquetas[ fila ][ col ] = contador;
+            } // fin del for interno
+        } // fin del for externo
+
+        // mostrar una tabla de tres por cinco
+        function mostrarTabla( titulo, arreglo )
+        {
+            var salida = "<table><caption>" + titulo + "</caption><tbody>";
+
+            for ( var i = 0; i < arreglo.length; ++i )
+            {
+                salida += "<tr>";
+
+                for ( var j = 0; j < arreglo[ i ].length; ++j )
+                    salida += "<td>" + arreglo[ i ][ j ] + "</td>";
+
+                salida += "</tr>";
+            } // fin de for
+
+            document.writeln( salida + "</tbody></table>" );
+        } // fin de la función mostrarTabla
+
+        mostrarTabla( "Orden en que se visitó cada elemento", etiquetas );
+        mostrarTabla( "Contenido de ventas después del segmento", ventas );
+
+    </script>
+
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

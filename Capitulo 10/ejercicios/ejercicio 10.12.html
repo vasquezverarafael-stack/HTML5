@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 10.12: ej10_12.html -->
+<!-- Imprimir sólo los números que no son duplicados. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.12 - Números sin duplicados</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 850px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        #mensaje { font-size: 1.1em; }
+        #mensaje.mal { color: red; }
+        #mensaje.bien { color: green; }
+        #salida { font-size: 1.2em; font-weight: bold; }
+    </style>
+    <script>
+
+        var unicos = new Array( 10 ); // el arreglo más pequeño posible: peor caso, 10 distintos
+        var cantidadUnicos = 0;       // cuántos números distintos se han guardado
+        var recibidos = 0;            // cuántos números se han recibido en total
+
+        // registrar los manejadores de eventos de los botones
+        function iniciar()
+        {
+            var botonAgregar = document.getElementById( "botonAgregar" );
+            botonAgregar.addEventListener( "click", recibirNumero, false );
+            var botonReiniciar = document.getElementById( "botonReiniciar" );
+            botonReiniciar.addEventListener( "click", reiniciar, false );
+        } // fin de la función iniciar
+
+        // determina si numero ya está entre los números guardados
+        function esDuplicado( numero )
+        {
+            for ( var i = 0; i < cantidadUnicos; ++i )
+            {
+                if ( unicos[ i ] === numero )
+                    return true;
+            } // fin de for
+
+            return false;
+        } // fin de la función esDuplicado
+
+        // leer un número del formulario y procesarlo
+        function recibirNumero()
+        {
+            var campo = document.getElementById( "campoNumero" );
+            var numero = parseInt( campo.value );
+            var mensaje = document.getElementById( "mensaje" );
+
+            if ( isNaN( numero ) || numero < 10 || numero > 100 )
+            {
+                mensaje.className = "mal";
+                mensaje.innerHTML = "Escriba un entero entre 10 y 100.";
+            } // fin de if
+            else
+            {
+                ++recibidos;
+
+                if ( esDuplicado( numero ) )
+                {
+                    mensaje.className = "mal";
+                    mensaje.innerHTML = "Ese número ya se había recibido, no se imprime.";
+                } // fin de if
+                else
+                {
+                    unicos[ cantidadUnicos ] = numero; // guardar el número nuevo
+                    ++cantidadUnicos;
+                    mensaje.className = "bien";
+                    mensaje.innerHTML = "Número nuevo.";
+                } // fin de else
+
+                // imprimir sólo los números que no son duplicados
+                document.getElementById( "salida" ).innerHTML =
+                    unicos.slice( 0, cantidadUnicos ).join( " " );
+                document.getElementById( "contador" ).innerHTML =
+                    "Números recibidos: " + recibidos + " de 10";
+
+                if ( recibidos === 10 )
+                {
+                    mensaje.innerHTML += " Ya se recibieron los 10 números.";
+                    campo.disabled = true;
+                    document.getElementById( "botonAgregar" ).disabled = true;
+                } // fin de if
+            } // fin de else
+
+            campo.value = "";
+            campo.focus();
+        } // fin de la función recibirNumero
+
+        // volver a empezar
+        function reiniciar()
+        {
+            unicos = new Array( 10 );
+            cantidadUnicos = 0;
+            recibidos = 0;
+            document.getElementById( "salida" ).innerHTML = "";
+            document.getElementById( "mensaje" ).innerHTML = "";
+            document.getElementById( "contador" ).innerHTML = "Números recibidos: 0 de 10";
+            document.getElementById( "campoNumero" ).disabled = false;
+            document.getElementById( "botonAgregar" ).disabled = false;
+            document.getElementById( "campoNumero" ).focus();
+        } // fin de la función reiniciar
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.12</h1>
+
+    <p class="instruccion">Use un arreglo unidimensional para resolver el siguiente
+       problema: recibir 10 números de entrada, cada uno de los cuales debe estar entre
+       10 y 100. A medida que se ingrese cada número, imprímalo sólo si no es un
+       duplicado de un número que ya se haya recibido de entrada. Prepárese para el
+       "peor caso", en donde los 10 números sean diferentes. Use el arreglo más pequeño
+       posible para resolver este problema.</p>
+
+    <form action = "#">
+        <p><label>Escriba un número entre 10 y 100:
+            <input id = "campoNumero" type = "text" size = "6"></label>
+            <input id = "botonAgregar" type = "button" value = "Agregar">
+            <input id = "botonReiniciar" type = "button" value = "Reiniciar"></p>
+    </form>
+
+    <p id = "contador">Números recibidos: 0 de 10</p>
+    <p id = "mensaje"></p>
+    <p>Números sin duplicados:</p>
+    <p id = "salida"></p>
+
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

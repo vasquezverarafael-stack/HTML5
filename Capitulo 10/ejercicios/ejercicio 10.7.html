@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 10.7: ej10_07.html -->
+<!-- Enunciados verdaderos o falsos sobre arreglos. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.7 - Verdadero o falso</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; max-width: 850px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; }
+        h2 { margin-top: 30px; }
+        .falso { color: #c0392b; font-weight: bold; }
+        pre { background-color: #f4f4f4; border: 1px solid #ccc; padding: 10px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        table { border-collapse: collapse; margin: 15px 0; }
+        table, th, td { border: 1px solid black; }
+        th, td { padding: 6px 12px; text-align: left; }
+        th { background-color: darkblue; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 10.7</h1>
+
+    <p class="instruccion">Indique si cada uno de los siguientes enunciados es
+       <em>verdadero</em> o <em>falso</em>. Si es <em>falso</em>, explique por qué.<br><br>
+       a) Para hacer referencia a una ubicación o elemento específico en un arreglo,
+          especificamos el nombre del arreglo y el valor del elemento.<br>
+       b) La declaración de una variable reserva espacio para un arreglo.<br>
+       c) Para indicar que deben reservarse 100 ubicaciones para el arreglo entero
+          <code>p</code>, el programador debe escribir la siguiente declaración:
+          <code>p[ 100 ];</code><br>
+       d) Un programa de JavaScript que inicializa los elementos de un arreglo de 15
+          elementos en cero debe contener cuando menos una instrucción
+          <code>for</code>.<br>
+       e) Un programa de JavaScript que calcula el total de los elementos de un arreglo
+          bidimensional debe contener instrucciones <code>for</code> anidadas.</p>
+
+    <h2>Respuestas</h2>
+
+    <h3>a) <span class="falso">Falso</span></h3>
+    <p>Para hacer referencia a un elemento se especifica el nombre del arreglo y su
+       <strong>índice</strong> (su número de posición), no el valor del elemento. Por
+       ejemplo, <code>p[ 2 ]</code> hace referencia al elemento con índice 2, sea cual
+       sea el valor que contenga.</p>
+
+    <h3>b) <span class="falso">Falso</span></h3>
+    <p>Declarar una variable (<code>var p;</code>) sólo crea la variable. El arreglo es
+       un objeto que debe crearse aparte, con <code>new Array( ... )</code> o con una
+       lista inicializadora entre corchetes. La variable guarda una referencia a ese
+       objeto.</p>
+
+    <h3>c) <span class="falso">Falso</span></h3>
+    <p><code>p[ 100 ];</code> no es una declaración válida. Para reservar 100 ubicaciones
+       se escribe:</p>
+<pre>var p = new Array( 100 );</pre>
+
+    <h3>d) <span class="falso">Falso</span></h3>
+    <p>No es obligatorio usar <code>for</code>. Se puede inicializar con una lista
+       inicializadora que contenga los quince ceros, o con otro tipo de ciclo como
+       <code>while</code>:</p>
+<pre>var a = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];</pre>
+
+    <h3>e) <span class="falso">Falso</span></h3>
+    <p>No es obligatorio usar instrucciones <code>for</code> anidadas. Se pueden usar
+       ciclos <code>while</code> o <code>do...while</code> anidados, o incluso sumar los
+       elementos uno por uno con instrucciones individuales.</p>
+
+    <h2>Demostración de d) y e)</h2>
+    <p>Ninguno de estos dos programas usa una instrucción <code>for</code>:</p>
+
+    <script>
+
+        // d) arreglo de 15 elementos en cero, con una lista inicializadora
+        var a = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+
+        // e) total de un arreglo bidimensional con ciclos while anidados
+        var b = [ [ 1, 2, 3 ], [ 4, 5, 6 ] ];
+        var total = 0;
+        var fila = 0;
+
+        while ( fila < b.length )
+        {
+            var columna = 0;
+
+            while ( columna < b[ fila ].length )
+            {
+                total += b[ fila ][ columna ];
+                ++columna;
+            } // fin del while interno
+
+            ++fila;
+        } // fin del while externo
+
+        document.writeln( "<table>" );
+        document.writeln( "<thead><tr><th>Inciso</th><th>Resultado</th></tr></thead>" );
+        document.writeln( "<tbody>" );
+        document.writeln( "<tr><td>d)</td><td>a tiene " + a.length +
+            " elementos: " + a.join( ", " ) + "</td></tr>" );
+        document.writeln( "<tr><td>e)</td><td>total de [ [ 1, 2, 3 ], [ 4, 5, 6 ] ] = " +
+            total + "</td></tr>" );
+        document.writeln( "</tbody></table>" );
+
+    </script>
+
+    <h2>Resumen</h2>
+    <table>
+        <thead>
+            <tr><th>Inciso</th><th>Respuesta</th><th>Motivo</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>a)</td><td>Falso</td><td>Se usa el índice, no el valor</td></tr>
+            <tr><td>b)</td><td>Falso</td><td>El arreglo se crea con <code>new Array</code> o una lista inicializadora</td></tr>
+            <tr><td>c)</td><td>Falso</td><td>Es <code>var p = new Array( 100 );</code></td></tr>
+            <tr><td>d)</td><td>Falso</td><td>Basta una lista inicializadora o un <code>while</code></td></tr>
+            <tr><td>e)</td><td>Falso</td><td>Se puede usar <code>while</code> anidados</td></tr>
+        </tbody>
+    </table>
+
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

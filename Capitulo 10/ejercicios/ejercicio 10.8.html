@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 10.8: ej10_08.html -->
+<!-- Instrucciones de JavaScript para tareas con arreglos. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.8 - Instrucciones con arreglos</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; max-width: 850px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; }
+        h2 { margin-top: 30px; }
+        pre { background-color: #f4f4f4; border: 1px solid #ccc; padding: 10px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        table { border-collapse: collapse; margin: 15px 0; }
+        table, th, td { border: 1px solid black; }
+        th, td { padding: 6px 12px; text-align: left; }
+        th { background-color: darkblue; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 10.8</h1>
+
+    <p class="instruccion">Escriba instrucciones de JavaScript para realizar cada una de
+       las siguientes tareas:<br><br>
+       a) Mostrar el valor del séptimo elemento del arreglo <code>f</code>.<br>
+       b) Inicializar cada uno de los cinco elementos del arreglo unidimensional
+          <code>g</code> en 8.<br>
+       c) Calcular el total de los elementos del arreglo <code>c</code>, que contiene 100
+          elementos numéricos.<br>
+       d) Copiar el arreglo <code>a</code> de 11 elementos en la primera porción del
+          arreglo <code>b</code>, que contiene 34 elementos.<br>
+       e) Determinar e imprimir el valor más pequeño y el más grande contenido en el
+          arreglo <code>w</code> de 99 elementos de punto flotante.</p>
+
+    <h2>Respuestas</h2>
+
+    <h3>a)</h3>
+<pre>document.writeln( f[ 6 ] );</pre>
+    <p>El séptimo elemento tiene el índice 6, porque los índices empiezan en 0.</p>
+
+    <h3>b)</h3>
+<pre>var g = new Array( 5 );
+
+for ( var i = 0; i &lt; g.length; ++i )
+    g[ i ] = 8;</pre>
+
+    <h3>c)</h3>
+<pre>var total = 0;
+
+for ( var i = 0; i &lt; c.length; ++i )
+    total += c[ i ];</pre>
+
+    <h3>d)</h3>
+<pre>for ( var i = 0; i &lt; a.length; ++i )
+    b[ i ] = a[ i ];</pre>
+
+    <h3>e)</h3>
+<pre>var menor = w[ 0 ];
+var mayor = w[ 0 ];
+
+for ( var i = 1; i &lt; w.length; ++i )
+{
+    if ( w[ i ] &lt; menor )
+        menor = w[ i ];
+
+    if ( w[ i ] &gt; mayor )
+        mayor = w[ i ];
+}
+
+document.writeln( "Más pequeño: " + menor + ", más grande: " + mayor );</pre>
+
+    <h2>Demostración</h2>
+    <p>Resultado de ejecutar cada respuesta con datos de ejemplo:</p>
+
+    <script>
+
+        // a) arreglo f de ejemplo con 10 elementos
+        var f = [ 11, 22, 33, 44, 55, 66, 77, 88, 99, 110 ];
+        var resultadoA = f[ 6 ];
+
+        // b) inicializar g (5 elementos) en 8
+        var g = new Array( 5 );
+        for ( var i = 0; i < g.length; ++i )
+            g[ i ] = 8;
+
+        // c) arreglo c de 100 elementos (1 a 100) y su total
+        var c = new Array( 100 );
+        for ( var j = 0; j < c.length; ++j )
+            c[ j ] = j + 1;
+
+        var total = 0;
+        for ( var k = 0; k < c.length; ++k )
+            total += c[ k ];
+
+        // d) copiar a (11 elementos) en la primera porción de b (34 elementos)
+        var a = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ];
+        var b = new Array( 34 );
+        for ( var m = 0; m < b.length; ++m )
+            b[ m ] = 0;
+
+        for ( var n = 0; n < a.length; ++n )
+            b[ n ] = a[ n ];
+
+        // e) arreglo w de 99 números de punto flotante y su menor y mayor
+        var w = new Array( 99 );
+        for ( var p = 0; p < w.length; ++p )
+            w[ p ] = ( p - 40 ) * 0.75;
+
+        var menor = w[ 0 ];
+        var mayor = w[ 0 ];
+
+        for ( var q = 1; q < w.length; ++q )
+        {
+            if ( w[ q ] < menor )
+                menor = w[ q ];
+
+            if ( w[ q ] > mayor )
+                mayor = w[ q ];
+        } // fin de for
+
+        document.writeln( "<table>" );
+        document.writeln( "<thead><tr><th>Inciso</th><th>Resultado</th></tr></thead>" );
+        document.writeln( "<tbody>" );
+        document.writeln( "<tr><td>a)</td><td>f[ 6 ] = " + resultadoA + "</td></tr>" );
+        document.writeln( "<tr><td>b)</td><td>g = " + g.join( ", " ) + "</td></tr>" );
+        document.writeln( "<tr><td>c)</td><td>total de c = " + total + "</td></tr>" );
+        document.writeln( "<tr><td>d)</td><td>b (primeros 13 elementos) = " +
+            b.slice( 0, 13 ).join( ", " ) + ", ..." + "</td></tr>" );
+        document.writeln( "<tr><td>e)</td><td>más pequeño: " + menor +
+            ", más grande: " + mayor + "</td></tr>" );
+        document.writeln( "</tbody></table>" );
+
+    </script>
+
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

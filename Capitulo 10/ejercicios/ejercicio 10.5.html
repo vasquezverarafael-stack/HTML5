@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 10.5: ej10_05.html -->
+<!-- Ejercicio de autoevaluación: encontrar errores en segmentos de programa. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.5 - Encontrar los errores</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; max-width: 850px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; }
+        h2 { margin-top: 30px; }
+        pre { background-color: #f4f4f4; border: 1px solid #ccc; padding: 10px; }
+        .mal { border-left: 4px solid #c0392b; }
+        .bien { border-left: 4px solid #27ae60; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        table { border-collapse: collapse; margin: 15px 0; }
+        table, th, td { border: 1px solid black; }
+        th, td { padding: 6px 12px; text-align: left; }
+        th { background-color: darkblue; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 10.5</h1>
+
+    <p class="instruccion">Encuentre el o los errores en cada uno de los siguientes
+       segmentos de programa y corríjalos.</p>
+
+    <!-- a) -->
+    <h2>a)</h2>
+    <p><strong>Segmento original:</strong></p>
+<pre class="mal">var b = new Array( 10 );
+var longitud = b.length;
+
+for ( var i = 0; i &lt;= longitud; ++i )
+{
+    b[ i ] = 1;
+}</pre>
+    <p><strong>Error:</strong> se hace referencia al elemento de un arreglo fuera de los
+       límites del arreglo (<code>b[ 10 ]</code>). El arreglo tiene 10 elementos, con
+       índices del 0 al 9, pero con <code>&lt;=</code> el ciclo también llega a
+       <code>i = 10</code>. (Nota: en realidad éste es un error lógico y no
+       sintáctico.)</p>
+    <p><strong>Corrección:</strong> cambie el operador <code>&lt;=</code> a
+       <code>&lt;</code>.</p>
+<pre class="bien">var b = new Array( 10 );
+var longitud = b.length;
+
+for ( var i = 0; i &lt; longitud; ++i )
+{
+    b[ i ] = 1;
+}</pre>
+
+    <!-- b) -->
+    <h2>b)</h2>
+    <p><strong>Segmento original:</strong></p>
+<pre class="mal">var a = [ [ 1, 2 ], [ 3, 4 ] ];
+a[ 1, 1 ] = 5;</pre>
+    <p><strong>Error:</strong> el indexado de arreglos se realiza de manera incorrecta.
+       En un arreglo bidimensional, cada índice va en sus propios corchetes.</p>
+    <p><strong>Corrección:</strong> cambie la instrucción a <code>a[ 1 ][ 1 ] = 5;</code></p>
+<pre class="bien">var a = [ [ 1, 2 ], [ 3, 4 ] ];
+a[ 1 ][ 1 ] = 5;</pre>
+
+    <h2>Demostración</h2>
+    <p>Resultado de ejecutar cada segmento, original y corregido:</p>
+
+    <script>
+
+        // a) segmento original: el ciclo llega hasta i = 10
+        var b1 = new Array( 10 );
+        var longitud1 = b1.length;
+
+        for ( var i = 0; i <= longitud1; ++i )
+        {
+            b1[ i ] = 1;
+        } // fin de for
+
+        // a) segmento corregido
+        var b2 = new Array( 10 );
+        var longitud2 = b2.length;
+
+        for ( var k = 0; k < longitud2; ++k )
+        {
+            b2[ k ] = 1;
+        } // fin de for
+
+        // b) segmento original: la coma hace que se use sólo el último valor (1)
+        var a1 = [ [ 1, 2 ], [ 3, 4 ] ];
+        a1[ 1, 1 ] = 5;
+
+        // b) segmento corregido
+        var a2 = [ [ 1, 2 ], [ 3, 4 ] ];
+        a2[ 1 ][ 1 ] = 5;
+
+        document.writeln( "<table>" );
+        document.writeln( "<thead><tr><th>Segmento</th><th>Resultado</th></tr></thead>" );
+        document.writeln( "<tbody>" );
+        document.writeln( "<tr><td>a) original</td><td>longitud final del arreglo: " +
+            b1.length + " (¡creció de 10 a 11!)</td></tr>" );
+        document.writeln( "<tr><td>a) corregido</td><td>longitud final del arreglo: " +
+            b2.length + "</td></tr>" );
+        document.writeln( "<tr><td>b) original</td><td>a = " +
+            JSON.stringify( a1 ) + "</td></tr>" );
+        document.writeln( "<tr><td>b) corregido</td><td>a = " +
+            JSON.stringify( a2 ) + "</td></tr>" );
+        document.writeln( "</tbody></table>" );
+
+    </script>
+
+    <p>En el inciso a), JavaScript no marca ningún error: al escribir en
+       <code>b[ 10 ]</code> el arreglo simplemente crece. Por eso es un error
+       <em>lógico</em>. En el inciso b), <code>a[ 1, 1 ]</code> usa el operador coma, que
+       se queda con el último valor, así que equivale a <code>a[ 1 ] = 5</code> y
+       reemplaza toda la fila 1 por el número 5.</p>
+
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

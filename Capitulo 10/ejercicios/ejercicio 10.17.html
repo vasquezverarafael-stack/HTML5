@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 10.17: ej10_17.html -->
+<!-- Simulación: la tortuga y la liebre. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.17 - La tortuga y la liebre</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 900px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        table { border-collapse: collapse; margin: 10px 0; background-color: lightblue; }
+        table, th, td { border: 1px solid black; padding: 4px 12px; text-align: left; }
+        th { color: white; background-color: darkblue; }
+        #pista { font-family: monospace; width: 74ch; max-height: 420px; overflow-y: auto;
+                 border: 2px solid darkblue; background-color: #fafafa; padding: 8px;
+                 line-height: 1.2; }
+        #estado { font-size: 1.1em; }
+        .texto { max-width: 900px; }
+    </style>
+    <script>
+
+        var META = 70;            // la línea de meta está en la posición 70
+        var tortuga;              // posición de la tortuga (1 a 70)
+        var liebre;               // posición de la liebre (1 a 70)
+        var tics;                 // cantidad de tics del reloj
+        var intervalo = null;     // temporizador del reloj
+
+        // registrar el manejador de eventos del botón
+        function iniciar()
+        {
+            document.getElementById( "botonIniciar" ).addEventListener( "click", iniciarCarrera, false );
+        } // fin de la función iniciar
+
+        // entero aleatorio i en el rango 1 <= i <= 10
+        function aleatorio()
+        {
+            return Math.floor( 1 + Math.random() * 10 );
+        } // fin de la función aleatorio
+
+        // mover la tortuga según las reglas de la figura 10.24
+        function moverTortuga( posicion )
+        {
+            var i = aleatorio();
+
+            if ( i <= 5 )          // 50%: paso pesado rápido
+                posicion += 3;
+            else if ( i <= 7 )     // 20%: resbalón
+                posicion -= 6;
+            else                   // 30%: paso pesado lento
+                posicion += 1;
+
+            return ( posicion < 1 ) ? 1 : posicion; // no pasa de la posición 1
+        } // fin de la función moverTortuga
+
+        // mover la liebre según las reglas de la figura 10.24
+        function moverLiebre( posicion )
+        {
+            var i = aleatorio();
+
+            if ( i <= 2 )          // 20%: dormir (ningún movimiento)
+                posicion += 0;
+            else if ( i <= 4 )     // 20%: gran salto
+                posicion += 9;
+            else if ( i === 5 )    // 10%: gran resbalón
+                posicion -= 12;
+            else if ( i <= 8 )     // 30%: pequeño salto
+                posicion += 1;
+            else                   // 20%: pequeño resbalón
+                posicion -= 2;
+
+            return ( posicion < 1 ) ? 1 : posicion; // no pasa de la posición 1
+        } // fin de la función moverLiebre
+
+        // arma la línea de 70 posiciones con la T, la H o el mensaje OUCH!!!
+        function armarLinea( posTortuga, posLiebre )
+        {
+            var caracteres = new Array( META );
+            var ouch = "OUCH!!!";
+            var pt = Math.min( posTortuga, META );
+            var ph = Math.min( posLiebre, META );
+
+            for ( var i = 0; i < META; ++i )
+                caracteres[ i ] = " ";
+
+            if ( pt === ph ) // la tortuga muerde a la liebre
+            {
+                for ( var k = 0; k < ouch.length; ++k )
+                    caracteres[ pt - 1 + k ] = ouch.charAt( k );
+            } // fin de if
+            else
+            {
+                caracteres[ pt - 1 ] = "T";
+                caracteres[ ph - 1 ] = "H";
+            } // fin de else
+
+            return caracteres.join( "" );
+        } // fin de la función armarLinea
+
+        // un tic del reloj; devuelve true si la carrera terminó
+        function tic()
+        {
+            var pista = document.getElementById( "pista" );
+            var tortugaGana, liebreGana;
+
+            tortuga = moverTortuga( tortuga );
+            liebre = moverLiebre( liebre );
+            ++tics;
+
+            pista.textContent += armarLinea( tortuga, liebre ) + "\n";
+            document.getElementById( "estado" ).innerHTML =
+                "Tic: " + tics + " &nbsp; Tortuga: " + Math.min( tortuga, META ) +
+                " &nbsp; Liebre: " + Math.min( liebre, META );
+
+            tortugaGana = tortuga >= META;
+            liebreGana = liebre >= META;
+
+            if ( tortugaGana === false && liebreGana === false )
+            {
+                pista.scrollTop = pista.scrollHeight;
+                return false; // nadie ha llegado, sigue la carrera
+            } // fin de if
+
+            if ( tortugaGana === true && liebreGana === true )
+                pista.textContent += "Es un empate\n";
+            else if ( tortugaGana === true )
+                pista.textContent += "LA TORTUGA GANA!!! YAY!!!\n";
+            else
+                pista.textContent += "La liebre gana. Qué mal.\n";
+
+            pista.scrollTop = pista.scrollHeight;
+            return true;
+        } // fin de la función tic
+
+        // empezar la carrera
+        function iniciarCarrera()
+        {
+            var boton = document.getElementById( "botonIniciar" );
+            var velocidad = parseInt( document.getElementById( "velocidad" ).value );
+
+            if ( intervalo !== null )
+                clearInterval( intervalo );
+
+            tortuga = 1; // ambos empiezan en la posición 1 (la "puerta de inicio")
+            liebre = 1;
+            tics = 0;
+            document.getElementById( "pista" ).textContent = "PUM!!!\nY ARRANCAN!!!\n";
+            boton.disabled = true;
+
+            if ( velocidad === 0 ) // instantáneo: todos los tics de una vez
+            {
+                while ( tic() === false )
+                    ; // repetir hasta que alguien gane
+
+                boton.disabled = false;
+            } // fin de if
+            else
+            {
+                intervalo = setInterval( function()
+                {
+                    if ( tic() === true )
+                    {
+                        clearInterval( intervalo );
+                        intervalo = null;
+                        boton.disabled = false;
+                    } // fin de if
+                }, velocidad );
+            } // fin de else
+        } // fin de la función iniciarCarrera
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.17</h1>
+
+    <p class="instruccion"><strong>(Simulación: La tortuga y la liebre)</strong> En este
+       problema, usted recreará uno de los momentos realmente grandiosos en la historia,
+       a saber la clásica carrera de la tortuga y la liebre. Utilizará la generación de
+       números aleatorios para desarrollar una simulación de este memorable suceso.<br><br>
+       Nuestros competidores empezarán la carrera en la posición 1 de 70 posiciones.
+       Cada posición representa a una posible posición a lo largo del curso de la
+       carrera. La línea de meta se encuentra en la posición 70. El primer competidor en
+       llegar a la posición 70 o más allá recibirá una cubeta llena con zanahorias y
+       lechuga frescas. El recorrido se abre paso hasta la cima de una resbalosa montaña,
+       por lo que en ocasiones los competidores pierden terreno.<br><br>
+       Un reloj hace tictac una vez por segundo. Con cada tic del reloj, su secuencia de
+       comandos debe ajustar la posición de los animales de acuerdo con las reglas en la
+       figura 10.24.<br><br>
+       Use variables para llevar el registro de las posiciones de los animales (los
+       números son del 1 al 70). Empiece con cada animal en la posición 1 (la "puerta de
+       inicio"). Si un animal se resbala hacia la izquierda antes de la posición 1,
+       regréselo a la posición 1.<br><br>
+       Genere los porcentajes en la figura 10.24 produciendo un entero aleatorio
+       <em>i</em> en el rango 1 &le; <em>i</em> &le; 10. Para la tortuga, realice un
+       "paso pesado rápido" cuando 1 &le; <em>i</em> &le; 5, un "resbalón" cuando
+       6 &le; <em>i</em> &le; 7 o un "paso pesado lento" cuando 8 &le; <em>i</em> &le; 10.
+       Utilice una técnica similar para mover a la liebre.<br><br>
+       Empiece la carrera imprimiendo el mensaje <code>PUM!!!</code> y
+       <code>Y ARRANCAN!!!</code><br><br>
+       Luego, para cada tic del reloj (es decir, cada repetición de un ciclo) imprima una
+       línea de 70 posiciones, mostrando la letra <code>T</code> en la posición de la
+       tortuga y la letra <code>H</code> en la posición de la liebre. En ocasiones los
+       competidores se encontrarán en la misma posición. En este caso, la tortuga muerde
+       a la liebre y su secuencia de comandos debe imprimir <code>OUCH!!!</code>
+       empezando en esa posición. Todas las posiciones de impresión distintas de la
+       <code>T</code>, la <code>H</code> o el mensaje <code>OUCH!!!</code> (en caso de un
+       empate) deben estar en blanco.<br><br>
+       Después de imprimir cada línea, compruebe si uno de los animales ha llegado o se
+       ha pasado de la posición 70. De ser así, imprima quién fue el ganador y termine la
+       simulación. Si la tortuga gana, imprima <code>LA TORTUGA GANA!!! YAY!!!</code> Si
+       la liebre gana, imprima <code>La liebre gana. Qué mal.</code> Si ambos animales
+       ganan en el mismo tic del reloj, tal vez quiera favorecer a la tortuga (la más
+       débil) o tal vez quiera imprimir <code>Es un empate</code>. Si ninguno de los dos
+       animales gana, ejecute el ciclo de nuevo para simular el siguiente tic del reloj.
+       Cuando esté listo para ejecutar su secuencia de comandos, reúna a un grupo de
+       aficionados para que vean la carrera. ¡Se sorprenderá al ver lo participativa que
+       puede ser su audiencia!</p>
+
+    <table>
+        <caption>Figura 10.24: reglas para ajustar la posición de los animales</caption>
+        <thead>
+            <tr><th>Animal</th><th>Tipo de movimiento</th><th>Porcentaje del tiempo</th><th>Movimiento actual</th></tr>
+        </thead>
+        <tbody>
+            <tr><td rowspan = "3">Tortuga</td><td>Paso pesado rápido</td><td>50%</td><td>3 posiciones a la derecha</td></tr>
+            <tr><td>Resbalón</td><td>20%</td><td>6 posiciones a la izquierda</td></tr>
+            <tr><td>Paso pesado lento</td><td>30%</td><td>1 posición a la derecha</td></tr>
+            <tr><td rowspan = "5">Liebre</td><td>Dormir</td><td>20%</td><td>Ningún movimiento</td></tr>
+            <tr><td>Gran salto</td><td>20%</td><td>9 posiciones a la derecha</td></tr>
+            <tr><td>Gran resbalón</td><td>10%</td><td>12 posiciones a la izquierda</td></tr>
+            <tr><td>Pequeño salto</td><td>30%</td><td>1 posición a la derecha</td></tr>
+            <tr><td>Pequeño resbalón</td><td>20%</td><td>2 posiciones a la izquierda</td></tr>
+        </tbody>
+    </table>
+
+    <form action = "#">
+        <p><label>Velocidad del reloj:
+            <select id = "velocidad">
+                <option value = "1000">1 tic por segundo (como en el enunciado)</option>
+                <option value = "200" selected>Rápido (5 tics por segundo)</option>
+                <option value = "0">Instantáneo</option>
+            </select></label>
+            <input id = "botonIniciar" type = "button" value = "Iniciar carrera"></p>
+    </form>
+
+    <p id = "estado">Pulsa "Iniciar carrera".</p>
+    <pre id = "pista"></pre>
+
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

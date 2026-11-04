@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 10.11: ej10_11.html -->
+<!-- Operaciones con arreglos unidimensionales. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.11 - Operaciones con arreglos</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; max-width: 850px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; }
+        h2 { margin-top: 30px; }
+        pre { background-color: #f4f4f4; border: 1px solid #ccc; padding: 10px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        table { border-collapse: collapse; margin: 15px 0; }
+        table, th, td { border: 1px solid black; }
+        th, td { padding: 6px 12px; text-align: left; }
+        th { background-color: darkblue; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 10.11</h1>
+
+    <p class="instruccion">Escriba instrucciones que realicen las siguientes operaciones
+       para un arreglo unidimensional:<br><br>
+       a) Establecer los 10 elementos del arreglo <code>cuentas</code> en ceros.<br>
+       b) Sumar 1 a cada uno de los 15 elementos del arreglo <code>bono</code>.<br>
+       c) Mostrar los cinco valores del arreglo <code>mejoresPuntuaciones</code>,
+          separado por espacios.</p>
+
+    <h2>Respuestas</h2>
+
+    <h3>a)</h3>
+<pre>var cuentas = new Array( 10 );
+
+for ( var i = 0; i &lt; cuentas.length; ++i )
+    cuentas[ i ] = 0;</pre>
+
+    <h3>b)</h3>
+<pre>for ( var i = 0; i &lt; bono.length; ++i )
+    bono[ i ] += 1;</pre>
+
+    <h3>c)</h3>
+<pre>document.writeln( mejoresPuntuaciones.join( " " ) );</pre>
+    <p>El método <code>join</code> junta los elementos del arreglo en una sola cadena,
+       con el separador que se le indique (aquí, un espacio).</p>
+
+    <h2>Demostración</h2>
+    <p>Resultado de ejecutar cada respuesta con datos de ejemplo:</p>
+
+    <script>
+
+        // a) poner en cero los 10 elementos de cuentas
+        var cuentas = new Array( 10 );
+
+        for ( var i = 0; i < cuentas.length; ++i )
+            cuentas[ i ] = 0;
+
+        // b) arreglo bono de ejemplo con 15 elementos (1 a 15)
+        var bono = new Array( 15 );
+
+        for ( var j = 0; j < bono.length; ++j )
+            bono[ j ] = j + 1;
+
+        var bonoAntes = bono.join( " " );
+
+        for ( var k = 0; k < bono.length; ++k )
+            bono[ k ] += 1;
+
+        // c) arreglo mejoresPuntuaciones de ejemplo con 5 valores
+        var mejoresPuntuaciones = [ 98, 95, 91, 88, 85 ];
+
+        document.writeln( "<table>" );
+        document.writeln( "<thead><tr><th>Inciso</th><th>Resultado</th></tr></thead>" );
+        document.writeln( "<tbody>" );
+        document.writeln( "<tr><td>a)</td><td>cuentas = " + cuentas.join( " " ) + "</td></tr>" );
+        document.writeln( "<tr><td>b) antes</td><td>bono = " + bonoAntes + "</td></tr>" );
+        document.writeln( "<tr><td>b) después</td><td>bono = " + bono.join( " " ) + "</td></tr>" );
+        document.writeln( "<tr><td>c)</td><td>" );
+        document.writeln( mejoresPuntuaciones.join( " " ) );
+        document.writeln( "</td></tr>" );
+        document.writeln( "</tbody></table>" );
+
+    </script>
+
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

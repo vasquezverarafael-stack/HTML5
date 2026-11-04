@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 10.2: ej10_02.html -->
+<!-- Ejercicio de autoevaluación: enunciados verdaderos o falsos sobre arreglos. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.2 - Verdadero o falso</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; max-width: 850px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; }
+        h2 { margin-top: 30px; }
+        .verdadero { color: green; font-weight: bold; }
+        .falso { color: #c0392b; font-weight: bold; }
+        table { border-collapse: collapse; margin: 15px 0; }
+        table, th, td { border: 1px solid black; }
+        th, td { padding: 6px 12px; text-align: left; }
+        th { background-color: darkblue; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 10.2</h1>
+
+    <p class="instruccion">Indique si cada uno de los siguientes enunciados es
+       <em>verdadero</em> o <em>falso</em>. Si es <em>falso</em>, explique por qué.<br><br>
+       a) Un arreglo puede almacenar muchos tipos diferentes de valores.<br>
+       b) Por lo general el índice de un arreglo debe ser un valor de punto flotante.<br>
+       c) Un elemento individual de un arreglo que se pasa a una función y se modifica
+          en ésta debe contener el valor modificado cuando la función invocada complete
+          su ejecución.</p>
+
+    <h2>Respuestas</h2>
+
+    <h3>a) <span class="verdadero">Verdadero</span></h3>
+    <p>Un arreglo puede almacenar muchos tipos diferentes de valores.</p>
+
+    <h3>b) <span class="falso">Falso</span></h3>
+    <p>El índice de un arreglo debe ser un entero o una expresión entera.</p>
+
+    <h3>c) <span class="falso">Falso</span></h3>
+    <p>Los elementos individuales de un tipo de datos primitivo se pasan por valor. Si
+       se pasa una referencia a un arreglo, entonces las modificaciones a los elementos
+       del arreglo se reflejan en el elemento original del arreglo. Además, el elemento
+       individual de un tipo de objeto que se pasa a una función se pasa por
+       referencia, y los cambios en el objeto se reflejarán en el elemento del arreglo
+       original.</p>
+
+    <h2>Resumen</h2>
+    <table>
+        <thead>
+            <tr><th>Inciso</th><th>Respuesta</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>a)</td><td>Verdadero</td></tr>
+            <tr><td>b)</td><td>Falso</td></tr>
+            <tr><td>c)</td><td>Falso</td></tr>
+        </tbody>
+    </table>
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

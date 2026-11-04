@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 10.16: ej10_16.html -->
+<!-- La criba de Eratóstenes. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.16 - La criba de Eratóstenes</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 900px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        table { border-collapse: collapse; margin: 15px 0; background-color: lightblue; }
+        table, td { border: 1px solid black; padding: 4px 10px; text-align: right; }
+        caption { font-weight: bold; margin-bottom: 6px; }
+        .texto { max-width: 900px; }
+    </style>
+    <script>
+
+        // devuelve el arreglo de la criba: primos[ i ] vale 1 si i es primo
+        function criba( tamanio )
+        {
+            var primos = new Array( tamanio );
+
+            // a) todos los elementos empiezan en 1 (true)
+            for ( var i = 0; i < primos.length; ++i )
+                primos[ i ] = 1;
+
+            // b) 0 y 1 no son primos
+            primos[ 0 ] = 0;
+            primos[ 1 ] = 0;
+
+            // para cada elemento que siga valiendo 1, poner en cero sus múltiplos
+            for ( var indice = 2; indice < primos.length; ++indice )
+            {
+                if ( primos[ indice ] === 1 )
+                {
+                    for ( var j = indice + 1; j < primos.length; ++j )
+                    {
+                        if ( j % indice === 0 )
+                            primos[ j ] = 0;
+                    } // fin del for interno
+                } // fin de if
+            } // fin del for externo
+
+            return primos;
+        } // fin de la función criba
+
+        // calcular los primos del 1 al 999 y mostrarlos en una tabla
+        function iniciar()
+        {
+            var primos = criba( 1000 ); // arreglo de 1000 elementos
+            var cantidad = 0;
+            var tabla = "<table><caption>Números primos entre 1 y 999</caption><tr>";
+
+            // el elemento 0 se ignora: se recorre desde el índice 1
+            for ( var i = 1; i < primos.length; ++i )
+            {
+                if ( primos[ i ] === 1 )
+                {
+                    if ( cantidad > 0 && cantidad % 10 === 0 )
+                        tabla += "</tr><tr>"; // 10 primos por fila
+
+                    tabla += "<td>" + i + "</td>";
+                    ++cantidad;
+                } // fin de if
+            } // fin de for
+
+            tabla += "</tr></table>";
+
+            document.getElementById( "resultado" ).innerHTML =
+                "<p>Se encontraron <strong>" + cantidad + "</strong> números primos.</p>" + tabla;
+        } // fin de la función iniciar
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.16</h1>
+
+    <p class="instruccion"><strong>(La criba de Eratóstenes)</strong> Un número primo es
+       cualquier entero mayor que 1, divisible sólo por sí mismo y por el número 1. La
+       Criba de Eratóstenes es un método para encontrar números primos. Opera de la
+       siguiente manera:<br><br>
+       a) Cree un arreglo con todos los elementos inicializados en 1 (true). Los
+          elementos del arreglo con índices primos permanecerán como 1. Cualquier otro
+          elemento del arreglo eventualmente cambiará a 0.<br>
+       b) Establezca los primeros dos elementos en cero, ya que 0 y 1 no son primos.
+          Empezando con el índice 2 del arreglo, cada vez que encuentre un elemento del
+          arreglo cuyo valor sea 1, itere a través del resto del arreglo y asigne cero a
+          todo elemento cuyo índice sea múltiplo del índice del elemento que tiene el
+          valor 1. Para el índice 2 del arreglo, todos los elementos más allá del
+          elemento 2 en el arreglo que sean múltiplos de 2 se establecerán en cero (los
+          índices 4, 6, 8, 10, etcétera); para el índice 3 del arreglo, todos los
+          elementos más allá del elemento 3 en el arreglo que sean múltiplos de 3 se
+          establecerán en cero (los índices 6, 9, 12, 15, etcétera); y así en lo
+          sucesivo.<br><br>
+       Cuando este proceso termine, los elementos del arreglo que aún sean 1 indicarán
+       que el índice es un número primo. Entonces podrá imprimir estos índices. Escriba
+       una secuencia de comandos que utilice un arreglo de 1000 elementos para
+       determinar e imprimir los números primos entre 1 y 999. Ignore el elemento 0 del
+       arreglo.</p>
+
+    <div id = "resultado"></div>
+
+    <p class="texto"><strong>Cómo funciona.</strong> El arreglo <code>primos</code> tiene
+       1000 elementos, y <code>primos[ i ]</code> guarda 1 si <em>i</em> es primo o 0 si no
+       lo es. Al empezar todos valen 1, salvo los índices 0 y 1, que se ponen en 0. Después
+       se recorre el arreglo desde el índice 2: cada vez que se encuentra un elemento que
+       sigue valiendo 1, ese índice es primo, y se pone en 0 todo elemento posterior cuyo
+       índice sea múltiplo suyo. Al final, los índices que siguen valiendo 1 son los
+       números primos.</p>
+
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

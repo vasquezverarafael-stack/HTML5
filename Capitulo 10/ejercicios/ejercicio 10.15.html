@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 10.15: ej10_15.html -->
+<!-- Gráficos de tortuga. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.15 - Gráficos de tortuga</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 900px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        table { border-collapse: collapse; margin: 10px 0; background-color: lightblue; }
+        table, th, td { border: 1px solid black; padding: 4px 12px; text-align: left; }
+        th { color: white; background-color: darkblue; }
+        textarea { font-family: monospace; }
+        pre { font-family: monospace; line-height: 1.1; border: 2px solid darkblue;
+              padding: 8px; display: inline-block; background-color: #fafafa; }
+        .aviso { color: #c0392b; font-weight: bold; }
+        .estado { margin: 4px 0; }
+        .texto { max-width: 900px; }
+    </style>
+    <script>
+
+        var TAM = 20;              // el piso es de 20 por 20
+        var piso;                  // arreglo bidimensional de 20 por 20, en ceros
+        var fila;                  // fila actual de la tortuga
+        var columna;               // columna actual de la tortuga
+        var direccion;             // 0 derecha, 1 abajo, 2 izquierda, 3 arriba
+        var plumaAbajo;            // true si la pluma está abajo
+
+        var DFILA = [ 0, 1, 0, -1 ];  // cambio de fila al avanzar en cada dirección
+        var DCOL = [ 1, 0, -1, 0 ];   // cambio de columna al avanzar en cada dirección
+        var NOMBRES_DIRECCION = [ "la derecha", "abajo", "la izquierda", "arriba" ];
+
+        // programas de ejemplo
+        var ejemplos = [
+            "2\n5,12\n3\n5,12\n3\n5,12\n3\n5,12\n1\n6\n9",
+            "2\n5,16\n3\n5,8\n3\n5,16\n3\n5,8\n1\n6\n9",
+            "2\n5,4\n3\n5,4\n4\n5,4\n3\n5,4\n4\n5,4\n3\n5,4\n1\n6\n9"
+        ];
+
+        // registrar los manejadores de eventos
+        function iniciar()
+        {
+            document.getElementById( "botonEjecutar" ).addEventListener( "click", ejecutar, false );
+            document.getElementById( "selectorEjemplo" ).addEventListener( "change", cargarEjemplo, false );
+            cargarEjemplo();
+        } // fin de la función iniciar
+
+        // poner el programa de ejemplo elegido en el área de texto
+        function cargarEjemplo()
+        {
+            var indice = parseInt( document.getElementById( "selectorEjemplo" ).value );
+            document.getElementById( "comandos" ).value = ejemplos[ indice ];
+        } // fin de la función cargarEjemplo
+
+        // crear el piso de 20 por 20 con todos los elementos en cero
+        function crearPiso()
+        {
+            piso = new Array( TAM );
+
+            for ( var i = 0; i < TAM; ++i )
+            {
+                piso[ i ] = new Array( TAM );
+
+                for ( var j = 0; j < TAM; ++j )
+                    piso[ i ][ j ] = 0;
+            } // fin de for
+        } // fin de la función crearPiso
+
+        // devuelve el piso como texto: asterisco si hay 1, espacio si hay 0
+        function imprimirPiso()
+        {
+            var texto = "";
+
+            for ( var i = 0; i < TAM; ++i )
+            {
+                for ( var j = 0; j < TAM; ++j )
+                    texto += ( piso[ i ][ j ] === 1 ) ? "* " : "  ";
+
+                texto += "\n";
+            } // fin de for
+
+            return texto;
+        } // fin de la función imprimirPiso
+
+        // avanza la tortuga; devuelve false si llegó al borde del piso
+        function avanzar( pasos )
+        {
+            var nuevaFila, nuevaColumna;
+
+            for ( var paso = 1; paso <= pasos; ++paso )
+            {
+                nuevaFila = fila + DFILA[ direccion ];
+                nuevaColumna = columna + DCOL[ direccion ];
+
+                if ( nuevaFila < 0 || nuevaFila >= TAM || nuevaColumna < 0 || nuevaColumna >= TAM )
+                    return false; // el piso se acabó
+
+                fila = nuevaFila;
+                columna = nuevaColumna;
+
+                if ( plumaAbajo === true )
+                    piso[ fila ][ columna ] = 1; // la tortuga traza la figura
+            } // fin de for
+
+            return true;
+        } // fin de la función avanzar
+
+        // convierte el texto de comandos en un arreglo de comandos
+        function leerComandos( texto )
+        {
+            var lineas = texto.split( "\n" );
+            var comandos = [];
+            var partes, linea;
+
+            for ( var i = 0; i < lineas.length; ++i )
+            {
+                linea = lineas[ i ].trim();
+
+                if ( linea !== "" )
+                {
+                    partes = linea.split( "," );
+                    comandos.push( { linea: i + 1,
+                                     texto: linea,
+                                     comando: parseInt( partes[ 0 ] ),
+                                     argumento: ( partes.length > 1 ) ? parseInt( partes[ 1 ] ) : 10 } );
+                } // fin de if
+            } // fin de for
+
+            return comandos;
+        } // fin de la función leerComandos
+
+        // ejecutar el programa de tortuga
+        function ejecutar()
+        {
+            var comandos = leerComandos( document.getElementById( "comandos" ).value );
+            var salida = "";
+            var terminar = false;
+            var c;
+
+            crearPiso();
+            fila = 0;           // la tortuga empieza en la posición (0, 0)
+            columna = 0;
+            direccion = 0;      // mirando a la derecha
+            plumaAbajo = false; // con la pluma arriba
+
+            for ( var i = 0; i < comandos.length && terminar === false; ++i )
+            {
+                c = comandos[ i ];
+
+                switch ( c.comando )
+                {
+                    case 1: // pluma arriba
+                        plumaAbajo = false;
+                        break;
+                    case 2: // pluma abajo
+                        plumaAbajo = true;
+                        piso[ fila ][ columna ] = 1;
+                        break;
+                    case 3: // girar a la derecha
+                        direccion = ( direccion + 1 ) % 4;
+                        break;
+                    case 4: // girar a la izquierda
+                        direccion = ( direccion + 3 ) % 4;
+                        break;
+                    case 5: // avanzar
+                        if ( isNaN( c.argumento ) || c.argumento < 1 )
+                        {
+                            salida += "<p class='aviso'>Línea " + c.linea +
+                                ": el número de espacios no es válido.</p>";
+                            terminar = true;
+                        } // fin de if
+                        else if ( avanzar( c.argumento ) === false )
+                        {
+                            salida += "<p class='aviso'>Línea " + c.linea +
+                                ": la tortuga llegó al borde del piso y se detuvo.</p>";
+                            terminar = true;
+                        } // fin de else if
+                        break;
+                    case 6: // imprimir el arreglo de 20 por 20
+                        salida += "<pre>" + imprimirPiso() + "</pre><br>";
+                        break;
+                    case 9: // fin de datos (centinela)
+                        terminar = true;
+                        break;
+                    default:
+                        salida += "<p class='aviso'>Línea " + c.linea +
+                            ": comando no válido (" + c.texto.replace( /</g, "&lt;" ) + ").</p>";
+                        terminar = true;
+                } // fin de switch
+            } // fin de for
+
+            salida += "<p class='estado'>Posición final de la tortuga: fila " + fila +
+                ", columna " + columna + ". Pluma " + ( plumaAbajo ? "abajo" : "arriba" ) +
+                ". Mirando hacia " + NOMBRES_DIRECCION[ direccion ] + ".</p>";
+
+            document.getElementById( "resultado" ).innerHTML = salida;
+        } // fin de la función ejecutar
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.15</h1>
+
+    <p class="instruccion"><strong>(Gráficos de tortuga)</strong> El lenguaje Logo, que
+       es popular entre usuarios de computadora de corta edad, hizo famoso el concepto de
+       los <em>gráficos de tortuga</em>. Imagine una tortuga mecánica que camina alrededor
+       del cuarto bajo el control de un programa de JavaScript. La tortuga sostiene una
+       pluma en una de dos posiciones, arriba o abajo. Cuando la pluma está abajo, la
+       tortuga traza figuras a medida que se desplaza; cuando la pluma está arriba la
+       tortuga se mueve libremente sin escribir nada. En este problema usted simulará la
+       operación de la tortuga y creará un bloc de dibujo computarizado.<br><br>
+       Use un arreglo de 20 por 20 llamado <code>piso</code> que esté inicializado en
+       ceros. Lea los comandos de un arreglo que los contenga. Rastree la posición actual
+       de la tortuga en todo momento y si la pluma está arriba o abajo en un momento
+       dado. Suponga que la tortuga siempre empieza en la posición (0, 0) del piso, con
+       su pluma arriba. El conjunto de comandos de tortuga que deberá procesar su
+       secuencia de comandos se encuentra en la figura 10.23.<br><br>
+       Suponga que la tortuga está en alguna parte cerca del centro del piso. El
+       siguiente "programa" dibuja e imprime un cuadrado de 12 por 12 y después deja la
+       pluma en la posición arriba: <code>2</code>, <code>5,12</code>, <code>3</code>,
+       <code>5,12</code>, <code>3</code>, <code>5,12</code>, <code>3</code>,
+       <code>5,12</code>, <code>1</code>, <code>6</code>, <code>9</code>.<br><br>
+       A medida que la tortuga se desplace con la pluma abajo, establezca los elementos
+       apropiados del arreglo <code>piso</code> en 1. Al proporcionar el comando 6
+       (imprimir), muestre un asterisco o cualquier otro carácter de su elección cada vez
+       que haya un 1 en el arreglo. Siempre que haya un cero, muestre un espacio en
+       blanco. Escriba una secuencia de comandos para implementar las herramientas de
+       gráficos de tortuga aquí descritas. Escriba varios programas de gráficos de
+       tortuga para dibujar figuras interesantes. Agregue otros comandos para aumentar el
+       poder de su lenguaje de gráficos de tortuga.</p>
+
+    <table>
+        <caption>Figura 10.23: comandos de gráficos de tortuga</caption>
+        <thead>
+            <tr><th>Comando</th><th>Significado</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>Pluma arriba</td></tr>
+            <tr><td>2</td><td>Pluma abajo</td></tr>
+            <tr><td>3</td><td>Girar a la derecha</td></tr>
+            <tr><td>4</td><td>Girar a la izquierda</td></tr>
+            <tr><td>5,10</td><td>Avanzar 10 espacios (o un número distinto de 10)</td></tr>
+            <tr><td>6</td><td>Imprimir el arreglo de 20 por 20</td></tr>
+            <tr><td>9</td><td>Fin de datos (centinela)</td></tr>
+        </tbody>
+    </table>
+
+    <h2>Programa de tortuga</h2>
+    <p class="texto">Escribe un comando por línea. Para avanzar usa <code>5,N</code>
+       (por ejemplo <code>5,12</code>); si escribes solo <code>5</code>, avanza 10
+       espacios. La tortuga empieza en (0, 0), mirando a la derecha, con la pluma
+       arriba.</p>
+
+    <form action = "#">
+        <p><label>Ejemplo:
+            <select id = "selectorEjemplo">
+                <option value = "0">Cuadrado de 12 por 12 (el del libro)</option>
+                <option value = "1">Rectángulo de 16 por 8</option>
+                <option value = "2">Escalera</option>
+            </select></label></p>
+        <p><textarea id = "comandos" rows = "14" cols = "20"></textarea></p>
+        <p><input id = "botonEjecutar" type = "button" value = "Ejecutar programa"></p>
+    </form>
+
+    <div id = "resultado"></div>
+
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

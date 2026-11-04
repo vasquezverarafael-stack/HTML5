@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 10.9: ej10_09.html -->
+<!-- Arreglo de dos por tres: declaración, recorrido y formato tabular. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.9 - Arreglo de dos por tres</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; max-width: 850px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; }
+        h2 { margin-top: 30px; }
+        pre { background-color: #f4f4f4; border: 1px solid #ccc; padding: 10px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        table { border-collapse: collapse; margin: 15px 0; }
+        table, th, td { border: 1px solid black; }
+        th, td { padding: 6px 12px; text-align: left; }
+        th { background-color: darkblue; color: white; }
+        table.tabular td { text-align: center; }
+        table.tabular th { text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 10.9</h1>
+
+    <p class="instruccion">Considere un arreglo de dos por tres que almacena enteros.<br><br>
+       a) Escriba una instrucción para declarar y crear el arreglo <code>t</code>.<br>
+       b) ¿Cuántas filas tiene <code>t</code>?<br>
+       c) ¿Cuántas columnas tiene <code>t</code>?<br>
+       d) ¿Cuántos elementos tiene <code>t</code>?<br>
+       e) Escriba los nombres de todos los elementos en la fila 1 de <code>t</code>.<br>
+       f) Escriba los nombres de todos los elementos en la tercera columna de
+          <code>t</code>.<br>
+       g) Escriba una sola instrucción para establecer el elemento de <code>t</code> en
+          la fila 1 y la columna 2 en cero.<br>
+       h) Escriba una serie de instrucciones para inicializar cada elemento de
+          <code>t</code> en cero.<br>
+       i) Escriba una instrucción <code>for</code> anidada para inicializar cada elemento
+          de <code>t</code> en cero.<br>
+       j) Escriba una serie de instrucciones para determinar e imprimir el valor más
+          pequeño en el arreglo <code>t</code>.<br>
+       k) Escriba una instrucción sin repetición para mostrar los elementos de la
+          primera fila de <code>t</code>.<br>
+       l) Escriba una serie de instrucciones para imprimir el arreglo <code>t</code> en un
+          formato tabular ordenado. Liste los índices de columnas como encabezados a lo
+          largo de la parte superior y liste los índices de fila en la parte izquierda de
+          cada fila.</p>
+
+    <h2>Respuestas</h2>
+    <p>Los índices de un arreglo empiezan en 0. Por eso "la fila 1" es la segunda fila
+       (<code>t[ 1 ]</code>) y "la tercera columna" es la columna con índice 2.</p>
+
+    <h3>a)</h3>
+<pre>var t = new Array( new Array( 3 ), new Array( 3 ) );</pre>
+
+    <h3>b) Filas</h3>
+    <p>Dos filas (<code>t.length</code> vale 2).</p>
+
+    <h3>c) Columnas</h3>
+    <p>Tres columnas (<code>t[ 0 ].length</code> vale 3).</p>
+
+    <h3>d) Elementos</h3>
+    <p>Seis elementos (2 &times; 3).</p>
+
+    <h3>e) Elementos de la fila 1</h3>
+<pre>t[ 1 ][ 0 ], t[ 1 ][ 1 ], t[ 1 ][ 2 ]</pre>
+
+    <h3>f) Elementos de la tercera columna</h3>
+<pre>t[ 0 ][ 2 ], t[ 1 ][ 2 ]</pre>
+
+    <h3>g)</h3>
+<pre>t[ 1 ][ 2 ] = 0;</pre>
+
+    <h3>h)</h3>
+<pre>t[ 0 ][ 0 ] = 0;
+t[ 0 ][ 1 ] = 0;
+t[ 0 ][ 2 ] = 0;
+t[ 1 ][ 0 ] = 0;
+t[ 1 ][ 1 ] = 0;
+t[ 1 ][ 2 ] = 0;</pre>
+
+    <h3>i)</h3>
+<pre>for ( var fila = 0; fila &lt; t.length; ++fila )
+{
+    for ( var col = 0; col &lt; t[ fila ].length; ++col )
+    {
+        t[ fila ][ col ] = 0;
+    }
+}</pre>
+
+    <h3>j)</h3>
+<pre>var menor = t[ 0 ][ 0 ];
+
+for ( var fila = 0; fila &lt; t.length; ++fila )
+{
+    for ( var col = 0; col &lt; t[ fila ].length; ++col )
+    {
+        if ( t[ fila ][ col ] &lt; menor )
+            menor = t[ fila ][ col ];
+    }
+}
+
+document.writeln( "El valor más pequeño es " + menor );</pre>
+
+    <h3>k)</h3>
+<pre>document.writeln( t[ 0 ].join( ", " ) );</pre>
+    <p>El método <code>join</code> junta todos los elementos de la fila en una sola
+       cadena, así que no hace falta ningún ciclo.</p>
+
+    <h3>l)</h3>
+<pre>document.writeln( "&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;" );
+
+for ( var col = 0; col &lt; t[ 0 ].length; ++col )
+    document.writeln( "&lt;th&gt;" + col + "&lt;/th&gt;" );
+
+document.writeln( "&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;" );
+
+for ( var fila = 0; fila &lt; t.length; ++fila )
+{
+    document.writeln( "&lt;tr&gt;&lt;th&gt;" + fila + "&lt;/th&gt;" );
+
+    for ( var col = 0; col &lt; t[ fila ].length; ++col )
+        document.writeln( "&lt;td&gt;" + t[ fila ][ col ] + "&lt;/td&gt;" );
+
+    document.writeln( "&lt;/tr&gt;" );
+}
+
+document.writeln( "&lt;/tbody&gt;&lt;/table&gt;" );</pre>
+
+    <h2>Demostración</h2>
+    <p>Se ejecutan las respuestas con estos valores de ejemplo para <code>t</code>:
+       fila 0 = 5, 2, 9 y fila 1 = 7, 1, 6.</p>
+
+    <script>
+
+        // a) declarar y crear el arreglo t
+        var t = new Array( new Array( 3 ), new Array( 3 ) );
+
+        // i) inicializar todo en cero con un for anidado
+        for ( var fila = 0; fila < t.length; ++fila )
+        {
+            for ( var col = 0; col < t[ fila ].length; ++col )
+            {
+                t[ fila ][ col ] = 0;
+            } // fin del for interno
+        } // fin del for externo
+
+        var despuesDeI = t[ 0 ].join( ", " ) + " / " + t[ 1 ].join( ", " );
+
+        // valores de ejemplo para el resto de la demostración
+        t[ 0 ][ 0 ] = 5; t[ 0 ][ 1 ] = 2; t[ 0 ][ 2 ] = 9;
+        t[ 1 ][ 0 ] = 7; t[ 1 ][ 1 ] = 1; t[ 1 ][ 2 ] = 6;
+
+        var filaUno = t[ 1 ][ 0 ] + ", " + t[ 1 ][ 1 ] + ", " + t[ 1 ][ 2 ];
+        var terceraColumna = t[ 0 ][ 2 ] + ", " + t[ 1 ][ 2 ];
+
+        // g) poner en cero el elemento de la fila 1, columna 2
+        t[ 1 ][ 2 ] = 0;
+
+        // j) valor más pequeño
+        var menor = t[ 0 ][ 0 ];
+        for ( var f = 0; f < t.length; ++f )
+        {
+            for ( var c = 0; c < t[ f ].length; ++c )
+            {
+                if ( t[ f ][ c ] < menor )
+                    menor = t[ f ][ c ];
+            } // fin del for interno
+        } // fin del for externo
+
+        document.writeln( "<table>" );
+        document.writeln( "<thead><tr><th>Inciso</th><th>Resultado</th></tr></thead>" );
+        document.writeln( "<tbody>" );
+        document.writeln( "<tr><td>b)</td><td>filas: " + t.length + "</td></tr>" );
+        document.writeln( "<tr><td>c)</td><td>columnas: " + t[ 0 ].length + "</td></tr>" );
+        document.writeln( "<tr><td>d)</td><td>elementos: " + ( t.length * t[ 0 ].length ) + "</td></tr>" );
+        document.writeln( "<tr><td>e)</td><td>fila 1: " + filaUno + "</td></tr>" );
+        document.writeln( "<tr><td>f)</td><td>tercera columna: " + terceraColumna + "</td></tr>" );
+        document.writeln( "<tr><td>g)</td><td>después de t[ 1 ][ 2 ] = 0, la fila 1 es " + t[ 1 ].join( ", " ) + "</td></tr>" );
+        document.writeln( "<tr><td>i)</td><td>con el for anidado, t queda " + despuesDeI + "</td></tr>" );
+        document.writeln( "<tr><td>j)</td><td>el valor más pequeño es " + menor + "</td></tr>" );
+        document.writeln( "<tr><td>k)</td><td>primera fila: " + t[ 0 ].join( ", " ) + "</td></tr>" );
+        document.writeln( "</tbody></table>" );
+
+        // l) mostrar t en formato tabular
+        document.writeln( "<table class='tabular'><caption>l) Arreglo t en formato tabular</caption><thead><tr><th></th>" );
+
+        for ( var k = 0; k < t[ 0 ].length; ++k )
+            document.writeln( "<th>" + k + "</th>" );
+
+        document.writeln( "</tr></thead><tbody>" );
+
+        for ( var m = 0; m < t.length; ++m )
+        {
+            document.writeln( "<tr><th>" + m + "</th>" );
+
+            for ( var n = 0; n < t[ m ].length; ++n )
+                document.writeln( "<td>" + t[ m ][ n ] + "</td>" );
+
+            document.writeln( "</tr>" );
+        } // fin de for
+
+        document.writeln( "</tbody></table>" );
+
+    </script>
+
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

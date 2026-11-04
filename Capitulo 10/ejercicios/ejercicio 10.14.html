@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 10.14: ej10_14.html -->
+<!-- Simulación de 36,000 tiros de dos dados. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.14 - Tiro de dos dados</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 850px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        table { border-collapse: collapse; margin: 15px 0; background-color: lightblue; }
+        table, th, td { border: 1px solid black; padding: 4px 12px; }
+        th { text-align: center; color: white; background-color: darkblue; }
+        td { text-align: center; }
+        tr.total { font-weight: bold; background-color: white; }
+        .si { color: green; font-weight: bold; }
+        .no { color: red; font-weight: bold; }
+        .texto { max-width: 850px; }
+    </style>
+    <script>
+
+        var TIROS = 36000; // cantidad de tiros de los dos dados
+
+        // registrar el manejador de eventos del botón
+        function iniciar()
+        {
+            var boton = document.getElementById( "botonTirar" );
+            boton.addEventListener( "click", simular, false );
+        } // fin de la función iniciar
+
+        // tirar un dado: entero aleatorio de 1 a 6
+        function tirarDado()
+        {
+            return Math.floor( 1 + Math.random() * 6 );
+        } // fin de la función tirarDado
+
+        // tirar los dados 36,000 veces y mostrar los resultados
+        function simular()
+        {
+            var conteos = new Array( 7 ); // conteos[ dado1 ][ dado2 ]: arreglo bidimensional
+            var frecuencia = new Array( 13 ); // frecuencia[ suma ], para sumas de 2 a 12
+            var dado1, dado2;
+
+            // inicializar en cero los arreglos
+            for ( var i = 0; i < conteos.length; ++i )
+            {
+                conteos[ i ] = new Array( 7 );
+
+                for ( var j = 0; j < conteos[ i ].length; ++j )
+                    conteos[ i ][ j ] = 0;
+            } // fin de for
+
+            for ( var k = 0; k < frecuencia.length; ++k )
+                frecuencia[ k ] = 0;
+
+            // tirar los dados 36,000 veces y contar cada combinación
+            for ( var tiro = 1; tiro <= TIROS; ++tiro )
+            {
+                dado1 = tirarDado();
+                dado2 = tirarDado();
+                ++conteos[ dado1 ][ dado2 ];
+            } // fin de for
+
+            // sumar las combinaciones que dan la misma suma
+            for ( dado1 = 1; dado1 <= 6; ++dado1 )
+            {
+                for ( dado2 = 1; dado2 <= 6; ++dado2 )
+                    frecuencia[ dado1 + dado2 ] += conteos[ dado1 ][ dado2 ];
+            } // fin de for
+
+            mostrarResultados( conteos, frecuencia );
+        } // fin de la función simular
+
+        // mostrar las tablas de resultados
+        function mostrarResultados( conteos, frecuencia )
+        {
+            var formas, probabilidad, esperado, desviacion, diferencia, razonable;
+            var total = 0;
+
+            // tabla 1: sumas
+            var tabla1 = "<table><caption>Frecuencia de cada suma (" + TIROS +
+                " tiros)</caption><thead><tr><th>Suma</th><th>Formas de obtenerla</th>" +
+                "<th>Veces que salió</th><th>Veces esperadas</th><th>Porcentaje</th>" +
+                "<th>¿Razonable?</th></tr></thead><tbody>";
+
+            for ( var suma = 2; suma <= 12; ++suma )
+            {
+                formas = 6 - Math.abs( 7 - suma );
+                probabilidad = formas / 36;
+                esperado = TIROS * probabilidad;
+                desviacion = Math.sqrt( TIROS * probabilidad * ( 1 - probabilidad ) );
+                diferencia = Math.abs( frecuencia[ suma ] - esperado );
+                razonable = diferencia <= 3 * desviacion; // dentro de 3 desviaciones estándar
+                total += frecuencia[ suma ];
+
+                tabla1 += "<tr><td>" + suma + "</td><td>" + formas + " de 36</td><td>" +
+                    frecuencia[ suma ] + "</td><td>" + esperado.toFixed( 0 ) +
+                    "</td><td>" + ( frecuencia[ suma ] / TIROS * 100 ).toFixed( 2 ) +
+                    "%</td><td class='" + ( razonable ? "si" : "no" ) + "'>" +
+                    ( razonable ? "Sí" : "No" ) + "</td></tr>";
+            } // fin de for
+
+            tabla1 += "<tr class='total'><td>Total</td><td></td><td>" + total +
+                "</td><td>" + TIROS + "</td><td></td><td></td></tr></tbody></table>";
+
+            // tabla 2: el arreglo bidimensional de combinaciones
+            var tabla2 = "<table><caption>Veces que salió cada combinación " +
+                "(fila = dado 1, columna = dado 2)</caption><thead><tr><th></th>";
+
+            for ( var c = 1; c <= 6; ++c )
+                tabla2 += "<th>" + c + "</th>";
+
+            tabla2 += "</tr></thead><tbody>";
+
+            for ( var f = 1; f <= 6; ++f )
+            {
+                tabla2 += "<tr><th>" + f + "</th>";
+
+                for ( var d = 1; d <= 6; ++d )
+                    tabla2 += "<td>" + conteos[ f ][ d ] + "</td>";
+
+                tabla2 += "</tr>";
+            } // fin de for
+
+            tabla2 += "</tbody></table>";
+
+            document.getElementById( "resultado" ).innerHTML = tabla1 + tabla2;
+        } // fin de la función mostrarResultados
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.14</h1>
+
+    <p class="instruccion">Escriba una secuencia de comandos para simular el tiro de dos
+       dados. La secuencia debe usar <code>Math.random</code> para tirar el primer dado
+       y usar esa función de nuevo para tirar el segundo dado. Después deberá calcularse
+       la suma de los dos valores [<em>nota:</em> como cada dado puede mostrar un valor
+       entero de 1 a 6, la suma de los valores variará de 2 a 12, en donde 7 será la
+       suma más frecuente y tanto 2 como 12 serán las sumas menos frecuentes. La figura
+       10.22 muestra las 36 combinaciones posibles de los dos dados. Su programa deberá
+       tirar los dados 36,000 veces. Use un arreglo bidimensional para calcular el
+       número de veces que aparezca cada posible suma. Muestre los resultados en una
+       tabla de HTML5. Determine además si los totales son razonables (por ejemplo, hay
+       seis formas de tirar un 7 por lo que cerca de 1/6 parte de todos los tiros
+       deberán ser 7)].</p>
+
+    <form action = "#">
+        <p><input id = "botonTirar" type = "button" value = "Tirar los dados 36,000 veces"></p>
+    </form>
+
+    <div id = "resultado"></div>
+
+    <p class="texto"><strong>¿Cómo se decide si los totales son razonables?</strong>
+       Cada suma tiene un número de veces esperado: (formas de obtenerla / 36) &times;
+       36,000. Por ejemplo, el 7 se puede obtener de 6 formas, así que debe salir cerca
+       de 6,000 veces. Como el azar nunca da exactamente el valor esperado, se considera
+       razonable si la diferencia no pasa de 3 desviaciones estándar. Con 36,000 tiros,
+       eso es unas 212 veces para el 7 y unas 93 para el 2 y el 12.</p>
+
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>
