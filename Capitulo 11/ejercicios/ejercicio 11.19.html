@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!-- Vásquez Vera Rafael 227O01115 -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 11.19 - Mi propio indexOf</title>
+</head>
+<body>
+
+    <h1>Mi propia versión de indexOf()</h1>
+
+    <form id="formulario">
+        <label for="texto">Ingrese una cadena de texto:</label>
+        <br>
+        <input type="text" id="texto" required>
+
+        <br><br>
+
+        <label for="buscar">Ingrese el texto que desea buscar:</label>
+        <br>
+        <input type="text" id="buscar" required>
+
+        <br><br>
+
+        <button type="submit">Buscar</button>
+    </form>
+
+    <h3>Resultado:</h3>
+    <p id="resultado"></p>
+
+    <script>
+
+        // Crear nuestra propia función indexOf
+        function miIndexOf(texto, busqueda) {
+
+            // Recorrer la cadena original
+            for (let i = 0; i <= texto.length - busqueda.length; i++) {
+
+                let encontrado = true;
+
+                // Comparar los caracteres
+                for (let j = 0; j < busqueda.length; j++) {
+
+                    if (texto[i + j] !== busqueda[j]) {
+                        encontrado = false;
+                        break;
+                    }
+                }
+
+                // Si se encontró la coincidencia, devolver posición
+                if (encontrado) {
+                    return i;
+                }
+            }
+
+            // Si no se encontró, devolver -1
+            return -1;
+        }
+
+        // Utilizar la función
+        document.getElementById("formulario").addEventListener("submit",
+            function(event) {
+
+                event.preventDefault();
+
+                let texto = document.getElementById("texto").value;
+                let busqueda = document.getElementById("buscar").value;
+
+                let posicion = miIndexOf(texto, busqueda);
+
+                if (posicion !== -1) {
+                    document.getElementById("resultado").textContent =
+                        "El texto se encontró en la posición: " + posicion;
+                } else {
+                    document.getElementById("resultado").textContent =
+                        "El texto no fue encontrado.";
+                }
+            }
+        );
+
+    </script>
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

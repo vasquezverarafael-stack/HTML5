@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!-- Vásquez Vera Rafael 227O01115 -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 11.10 - Tokens Inversos</title>
+</head>
+<body>
+
+    <!-- Vásquez Vera Rafael 227O01115 -->
+
+    <h1>Mostrar tokens en orden inverso</h1>
+
+    <label for="texto">Ingrese una línea de texto:</label>
+    <input type="text" id="texto" placeholder="Escriba una frase">
+
+    <button onclick="mostrarTokens()">Invertir tokens</button>
+
+    <h3>Resultado:</h3>
+    <p id="resultado"></p>
+
+    <script>
+        function mostrarTokens() {
+
+            // Obtener el texto ingresado
+            let linea = document.getElementById("texto").value;
+
+            // Dividir la línea en tokens utilizando split()
+            let tokens = linea.trim().split(/\s+/);
+
+            // Verificar que se haya ingresado texto
+            if (linea.trim() === "") {
+                document.getElementById("resultado").textContent =
+                    "Por favor, ingrese una línea de texto.";
+                return;
+            }
+
+            // Invertir el orden de los tokens
+            tokens.reverse();
+
+            // Mostrar los tokens en orden inverso
+            document.getElementById("resultado").textContent =
+                tokens.join(" ");
+        }
+    </script>
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

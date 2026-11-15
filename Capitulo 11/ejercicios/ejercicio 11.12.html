@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- Vásquez Vera Rafael 227O01115 -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 11.11 - Mayúsculas y Minúsculas</title>
+</head>
+<body>
+
+    <!-- Vásquez Vera Rafael 227O01115 -->
+
+    <h1>Convertir texto a mayúsculas y minúsculas</h1>
+
+    <form id="formulario">
+        <label for="texto">Ingrese un texto:</label>
+        <input type="text" id="texto" required>
+
+        <button type="submit">Convertir texto</button>
+    </form>
+
+    <h3>Texto en mayúsculas:</h3>
+    <p id="mayusculas"></p>
+
+    <h3>Texto en minúsculas:</h3>
+    <p id="minusculas"></p>
+
+    <script>
+        // Obtener el formulario
+        document.getElementById("formulario").addEventListener("submit",
+            function(event) {
+
+                // Evitar que se recargue la página
+                event.preventDefault();
+
+                // Obtener el texto ingresado
+                let texto = document.getElementById("texto").value;
+
+                // Convertir a mayúsculas
+                let textoMayusculas = texto.toUpperCase();
+
+                // Convertir a minúsculas
+                let textoMinusculas = texto.toLowerCase();
+
+                // Mostrar ambos resultados
+                document.getElementById("mayusculas").textContent =
+                    textoMayusculas;
+
+                document.getElementById("minusculas").textContent =
+                    textoMinusculas;
+            }
+        );
+    </script>
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

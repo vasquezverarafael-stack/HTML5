@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 11.2: ej11_02.html -->
+<!-- Cuatro botones que muestran fechas distintas en un diálogo de alerta. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.2 - Fechas y horas</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 850px; }
+        input[type = "button"] { margin: 4px; padding: 6px 12px; }
+    </style>
+    <script>
+
+        // mostrar una fecha en un diálogo de alerta
+        function mostrar( texto, fecha )
+        {
+            window.alert( texto + ":\n" + fecha.toLocaleString() );
+        } // fin de la función mostrar
+
+        // fecha y hora actuales
+        function botonAhora()
+        {
+            mostrar( "Ahora", new Date() );
+        } // fin de la función botonAhora
+
+        // fecha y hora de hace 24 horas
+        function botonAyer()
+        {
+            var fecha = new Date();
+            fecha.setTime( fecha.getTime() - 24 * 60 * 60 * 1000 ); // 24 horas en milisegundos
+            mostrar( "Hace 24 horas (ayer)", fecha );
+        } // fin de la función botonAyer
+
+        // fecha y hora de hace diez años
+        function botonDiezAnios()
+        {
+            var fecha = new Date();
+            fecha.setFullYear( fecha.getFullYear() - 10 );
+            mostrar( "Hace diez años", fecha );
+        } // fin de la función botonDiezAnios
+
+        // fecha y hora una semana a partir de hoy
+        function botonSemana()
+        {
+            var fecha = new Date();
+            fecha.setDate( fecha.getDate() + 7 );
+            mostrar( "Una semana a partir de hoy", fecha );
+        } // fin de la función botonSemana
+
+        // registrar los manejadores de eventos
+        function iniciar()
+        {
+            document.getElementById( "botonAhora" ).addEventListener( "click", botonAhora, false );
+            document.getElementById( "botonAyer" ).addEventListener( "click", botonAyer, false );
+            document.getElementById( "botonDiez" ).addEventListener( "click", botonDiezAnios, false );
+            document.getElementById( "botonSemana" ).addEventListener( "click", botonSemana, false );
+        } // fin de la función iniciar
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.2</h1>
+
+    <p class="instruccion">Cree una página Web que contenga cuatro botones. Al hacer clic
+       en cada botón, deberá aparecer un diálogo de alerta con una hora o fecha diferentes
+       en relación con la hora actual. Cree un botón <strong>Ahora</strong> que alerte
+       sobre la hora y fecha actuales, y un botón <strong>Ayer</strong> que alerte sobre
+       la fecha y hora hace 24 horas. Los otros dos botones deberán alertar sobre la fecha
+       y hora hace diez años y una semana a partir de hoy.</p>
+
+    <form action = "#">
+        <p>
+            <input id = "botonAhora" type = "button" value = "Ahora">
+            <input id = "botonAyer" type = "button" value = "Ayer">
+            <input id = "botonDiez" type = "button" value = "Hace diez años">
+            <input id = "botonSemana" type = "button" value = "Dentro de una semana">
+        </p>
+    </form>
+
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

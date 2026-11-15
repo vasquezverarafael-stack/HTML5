@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- Vásquez Vera Rafael 227O01115 -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 11.12 - Buscar Caracteres</title>
+</head>
+<body>
+
+    <!-- Vásquez Vera Rafael 227O01115 -->
+
+    <h1>Contador de ocurrencias de un carácter</h1>
+
+    <form id="formulario">
+        <label for="texto">Ingrese varias líneas de texto:</label>
+        <br>
+        <textarea id="texto" rows="6" cols="40" required></textarea>
+
+        <br><br>
+
+        <label for="caracter">Ingrese el carácter que desea buscar:</label>
+        <input type="text" id="caracter" maxlength="1" required>
+
+        <br><br>
+
+        <button type="submit">Buscar carácter</button>
+    </form>
+
+    <h3>Resultado:</h3>
+    <p id="resultado"></p>
+
+    <script>
+        document.getElementById("formulario").addEventListener("submit",
+            function(event) {
+
+                // Evitar que se recargue la página
+                event.preventDefault();
+
+                // Obtener el texto y el carácter
+                let texto = document.getElementById("texto").value;
+                let caracter = document.getElementById("caracter").value;
+
+                // Inicializar el contador
+                let contador = 0;
+                let posicion = 0;
+
+                // Buscar todas las apariciones del carácter
+                while ((posicion = texto.indexOf(caracter, posicion)) !== -1) {
+                    contador++;
+                    posicion++;
+                }
+
+                // Mostrar el resultado
+                document.getElementById("resultado").textContent =
+                    "El carácter '" + caracter +
+                    "' aparece " + contador + " veces en el texto.";
+            }
+        );
+    </script>
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

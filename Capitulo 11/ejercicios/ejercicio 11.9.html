@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 11.9: ej11_09.html -->
+<!-- Traductor de frases en español a "latín cerdo". -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.9 - Latín cerdo</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 900px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        p.error { color: red; }
+        textarea { font-size: 1em; }
+    </style>
+    <script>
+
+        // imprime una palabra en latín cerdo en el textarea
+        function imprimirPalabraEnLatin( palabra )
+        {
+            var salida = document.getElementById( "areaLatin" );
+
+            // primera letra al final de la palabra, y se agregan las letras "ae"
+            salida.value += palabra.substring( 1 ) + palabra.charAt( 0 ) + "ae ";
+        } // fin de la función imprimirPalabraEnLatin
+
+        // traducir la frase del formulario
+        function traducir()
+        {
+            var campo = document.getElementById( "campoFrase" );
+            var frase = campo.value.trim();
+            var salida = document.getElementById( "areaLatin" );
+
+            if ( frase === "" )
+            {
+                document.getElementById( "mensaje" ).innerHTML =
+                    "<p class='error'>Escriba una frase.</p>";
+            } // fin de if
+            else
+            {
+                document.getElementById( "mensaje" ).innerHTML = "";
+                var tokens = frase.split( " " ); // dividir la frase en palabras
+
+                for ( var i = 0; i < tokens.length; ++i )
+                {
+                    if ( tokens[ i ] !== "" )
+                        imprimirPalabraEnLatin( tokens[ i ] );
+                } // fin de for
+
+                salida.value += "\n"; // cada frase en su propia línea
+                campo.value = "";
+            } // fin de else
+
+            campo.focus();
+        } // fin de la función traducir
+
+        // registrar el manejador de eventos del botón
+        function iniciar()
+        {
+            document.getElementById( "botonTraducir" ).addEventListener( "click", traducir, false );
+        } // fin de la función iniciar
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.9</h1>
+
+    <p class="instruccion"><strong>(Latín cerdo)</strong> Escriba una secuencia de comandos
+       que codifique frases en español a frases en latín cerdo. El latín cerdo es una forma
+       de lenguaje codificado, que se utiliza con frecuencia por diversión. Existen muchas
+       variaciones en los métodos utilizados para formar frases en latín cerdo. Por
+       cuestiones de simpleza, utilice el siguiente algoritmo:<br><br>
+       Para formar una frase en latín cerdo a partir de una frase en español, divida la
+       frase en palabras con el método <code>split</code> de <code>String</code>. Para
+       traducir cada palabra en español a una palabra en latín cerdo, coloque la primera
+       letra de la palabra en español al final de la palabra, y agregue las letras "ae".
+       De esta forma, la palabra "salta" se convierte a "altasae", la palabra "el" se
+       convierte en "leae" y la palabra "computadora" se convierte en "omputadoracae". Los
+       espacios en blanco entre las palabras permanecen como espacios en blanco. Suponga
+       lo siguiente: la frase en español consiste en palabras separadas por espacios en
+       blanco, no hay signos de puntuación y todas las palabras tienen dos o más letras.
+       La función <code>imprimirPalabraEnLatin</code> deberá mostrar cada palabra. Cada
+       token (es decir, palabra en el enunciado) se pasará al método
+       <code>imprimirPalabraEnLatin</code> para imprimir la palabra en latín cerdo. Permita
+       al usuario introducir el enunciado a través de un formulario de HTML5. Muestre de
+       manera continua en la pantalla todos los enunciados convertidos en un elemento
+       <code>textarea</code> de HTML5.</p>
+
+    <form action = "#">
+        <p><label>Frase en español:
+            <input id = "campoFrase" type = "text" size = "45"></label>
+            <input id = "botonTraducir" type = "button" value = "Traducir"></p>
+    </form>
+
+    <div id = "mensaje"></div>
+    <textarea id = "areaLatin" rows = "14" cols = "60" readonly></textarea>
+
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

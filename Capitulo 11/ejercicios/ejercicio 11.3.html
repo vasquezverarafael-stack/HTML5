@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 11.3: ej11_03.html -->
+<!-- Evaluación de los métodos de la biblioteca Math. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.3 - Funciones de la biblioteca Math</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 850px; }
+        textarea { font-family: monospace; }
+        .texto { max-width: 850px; }
+    </style>
+    <script>
+
+        var salida = ""; // texto que se mostrará en el textarea
+
+        // agrega un encabezado de función
+        function titulo( texto )
+        {
+            salida += "\n" + texto + "\n" + "------------------------------------------\n";
+        } // fin de la función titulo
+
+        // agrega una fila "llamada = valor de retorno"
+        function fila( llamada, valor )
+        {
+            salida += "  " + llamada + " = " + valor + "\n";
+        } // fin de la función fila
+
+        // llenar el textarea con las tablas de valores de retorno
+        function iniciar()
+        {
+            titulo( "abs( x ): valor absoluto" );
+            fila( "abs( -7.2 )", Math.abs( -7.2 ) );
+            fila( "abs( 0 )", Math.abs( 0 ) );
+            fila( "abs( 5.5 )", Math.abs( 5.5 ) );
+            fila( "abs( -15 )", Math.abs( -15 ) );
+
+            titulo( "ceil( x ): redondea hacia arriba" );
+            fila( "ceil( 9.2 )", Math.ceil( 9.2 ) );
+            fila( "ceil( -9.8 )", Math.ceil( -9.8 ) );
+            fila( "ceil( 5 )", Math.ceil( 5 ) );
+
+            titulo( "cos( x ): coseno (x en radianes)" );
+            fila( "cos( 0 )", Math.cos( 0 ) );
+            fila( "cos( PI / 3 )", Math.cos( Math.PI / 3 ) );
+            fila( "cos( PI )", Math.cos( Math.PI ) );
+            fila( "cos( 2 * PI )", Math.cos( 2 * Math.PI ) );
+
+            titulo( "exp( x ): e elevada a la potencia x" );
+            fila( "exp( 0 )", Math.exp( 0 ) );
+            fila( "exp( 1 )", Math.exp( 1 ) );
+            fila( "exp( 2 )", Math.exp( 2 ) );
+            fila( "exp( -1 )", Math.exp( -1 ) );
+
+            titulo( "floor( x ): redondea hacia abajo" );
+            fila( "floor( 9.2 )", Math.floor( 9.2 ) );
+            fila( "floor( -9.8 )", Math.floor( -9.8 ) );
+            fila( "floor( 5.9 )", Math.floor( 5.9 ) );
+
+            titulo( "log( x ): logaritmo natural" );
+            fila( "log( 1 )", Math.log( 1 ) );
+            fila( "log( E )", Math.log( Math.E ) );
+            fila( "log( 10 )", Math.log( 10 ) );
+            fila( "log( 100 )", Math.log( 100 ) );
+
+            titulo( "max( x, y ): el mayor de dos valores" );
+            fila( "max( 2.3, 12.7 )", Math.max( 2.3, 12.7 ) );
+            fila( "max( -2.3, -12.7 )", Math.max( -2.3, -12.7 ) );
+            fila( "max( 5, 5 )", Math.max( 5, 5 ) );
+
+            titulo( "min( x, y ): el menor de dos valores" );
+            fila( "min( 2.3, 12.7 )", Math.min( 2.3, 12.7 ) );
+            fila( "min( -2.3, -12.7 )", Math.min( -2.3, -12.7 ) );
+            fila( "min( 5, 5 )", Math.min( 5, 5 ) );
+
+            titulo( "pow( x, y ): x elevada a la potencia y" );
+            fila( "pow( 2, 7 )", Math.pow( 2, 7 ) );
+            fila( "pow( 9, .5 )", Math.pow( 9, .5 ) );
+            fila( "pow( 10, 3 )", Math.pow( 10, 3 ) );
+            fila( "pow( 2, -1 )", Math.pow( 2, -1 ) );
+
+            titulo( "round( x ): redondea al entero más cercano" );
+            fila( "round( 9.75 )", Math.round( 9.75 ) );
+            fila( "round( 9.25 )", Math.round( 9.25 ) );
+            fila( "round( 9.5 )", Math.round( 9.5 ) );
+            fila( "round( -9.75 )", Math.round( -9.75 ) );
+
+            titulo( "sin( x ): seno (x en radianes)" );
+            fila( "sin( 0 )", Math.sin( 0 ) );
+            fila( "sin( PI / 2 )", Math.sin( Math.PI / 2 ) );
+            fila( "sin( PI )", Math.sin( Math.PI ) );
+            fila( "sin( 3 * PI / 2 )", Math.sin( 3 * Math.PI / 2 ) );
+
+            titulo( "sqrt( x ): raíz cuadrada" );
+            fila( "sqrt( 900 )", Math.sqrt( 900 ) );
+            fila( "sqrt( 9 )", Math.sqrt( 9 ) );
+            fila( "sqrt( 2 )", Math.sqrt( 2 ) );
+            fila( "sqrt( 0 )", Math.sqrt( 0 ) );
+
+            titulo( "tan( x ): tangente (x en radianes)" );
+            fila( "tan( 0 )", Math.tan( 0 ) );
+            fila( "tan( PI / 4 )", Math.tan( Math.PI / 4 ) );
+            fila( "tan( PI / 3 )", Math.tan( Math.PI / 3 ) );
+
+            document.getElementById( "areaResultados" ).value = salida;
+        } // fin de la función iniciar
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.3</h1>
+
+    <p class="instruccion">Escriba una secuencia de comandos que evalúe todas las
+       funciones que pueda de la biblioteca <code>Math</code> de la figura 11.1. Para
+       ejercitar cada una de estas funciones, haga que su programa muestre tablas de
+       valores de retorno para varios valores de argumentos en un elemento
+       <code>textarea</code> de HTML5.</p>
+
+    <textarea id = "areaResultados" rows = "42" cols = "62" readonly></textarea>
+
+    <p class="texto">Algunos resultados parecen raros, como <code>6.123233995736766e-17</code>
+       en <code>cos( PI / 2 )</code> o <code>0.9999999999999999</code> en
+       <code>tan( PI / 4 )</code>. Es normal: los números de punto flotante tienen
+       precisión limitada, y <code>PI</code> no se puede representar exactamente.</p>
+
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

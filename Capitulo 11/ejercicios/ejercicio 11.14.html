@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!-- Vásquez Vera Rafael 227O01115 -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 11.13 - Contador de Letras</title>
+</head>
+<body>
+
+    <!-- Vásquez Vera Rafael 227O01115 -->
+
+    <h1>Contador de ocurrencias de letras</h1>
+
+    <form id="formulario">
+        <label for="texto">Ingrese varias líneas de texto:</label>
+        <br>
+        <textarea id="texto" rows="6" cols="50" required></textarea>
+
+        <br><br>
+
+        <button type="submit">Contar letras</button>
+    </form>
+
+    <h3>Resultados:</h3>
+    <textarea id="resultado" rows="28" cols="35" readonly></textarea>
+
+    <script>
+        document.getElementById("formulario").addEventListener("submit",
+            function(event) {
+
+                // Evitar que se recargue la página
+                event.preventDefault();
+
+                // Obtener el texto y convertirlo a minúsculas
+                let texto = document.getElementById("texto").value.toLowerCase();
+
+                // Arreglo con las letras del alfabeto
+                let letras = "abcdefghijklmnopqrstuvwxyz";
+
+                // Arreglo para almacenar los totales
+                let totales = [];
+
+                // Recorrer cada letra del alfabeto
+                for (let i = 0; i < letras.length; i++) {
+
+                    let contador = 0;
+                    let posicion = 0;
+
+                    // Buscar todas las apariciones de la letra actual
+                    while ((posicion = texto.indexOf(letras[i], posicion)) !== -1) {
+                        contador++;
+                        posicion++;
+                    }
+
+                    // Guardar el total en el arreglo
+                    totales[i] = contador;
+                }
+
+                // Crear la tabla de resultados
+                let tabla = "LETRA       OCURRENCIAS\n";
+                tabla += "-----------------------\n";
+
+                for (let i = 0; i < letras.length; i++) {
+                    tabla += "   " + letras[i] + "              " +
+                             totales[i] + "\n";
+                }
+
+                // Mostrar la tabla en el textarea
+                document.getElementById("resultado").value = tabla;
+            }
+        );
+    </script>
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

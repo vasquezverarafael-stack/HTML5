@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!-- Vásquez Vera Rafael 227O01115 -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 11.18 - Códigos de Caracteres</title>
+</head>
+<body>
+
+    <h1>Generador de códigos de caracteres</h1>
+
+    <button onclick="generarCodigos()">Generar caracteres</button>
+
+    <h3>Resultados:</h3>
+    <textarea id="resultado" rows="25" cols="40" readonly></textarea>
+
+    <script>
+        function generarCodigos() {
+
+            // Variable para almacenar los resultados
+            let tabla = "CODIGO     CARACTER\n";
+            tabla += "--------------------\n";
+
+            // Generar códigos desde 000 hasta 255
+            for (let codigo = 0; codigo <= 255; codigo++) {
+
+                // Convertir el número a tres dígitos
+                let numero = String(codigo).padStart(3, "0");
+
+                // Obtener el carácter correspondiente
+                let caracter = String.fromCharCode(codigo);
+
+                // Identificar caracteres no imprimibles
+                if (codigo < 32 || codigo === 127) {
+                    caracter = "[No imprimible]";
+                }
+
+                // Agregar los resultados a la tabla
+                tabla += numero + "          " + caracter + "\n";
+            }
+
+            // Mostrar los resultados en el textarea
+            document.getElementById("resultado").value = tabla;
+        }
+    </script>
+   <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

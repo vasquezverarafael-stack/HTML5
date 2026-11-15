@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- Vásquez Vera Rafael 227O01115 -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 11.15 - Filtrar Cadenas</title>
+</head>
+<body>
+
+    <!-- Vásquez Vera Rafael 227O01115 -->
+
+    <h1>Filtrar cadenas que terminen con "ed"</h1>
+
+    <form id="formulario">
+        <label for="cadenas">Ingrese varias cadenas (una por línea):</label>
+        <br>
+        <textarea id="cadenas" rows="8" cols="40" required></textarea>
+
+        <br><br>
+
+        <button type="submit">Filtrar cadenas</button>
+    </form>
+
+    <h3>Cadenas que terminan con "ed":</h3>
+    <textarea id="resultado" rows="8" cols="40" readonly></textarea>
+
+    <script>
+        document.getElementById("formulario").addEventListener("submit",
+            function(event) {
+
+                // Evitar que se recargue la página
+                event.preventDefault();
+
+                // Obtener las cadenas ingresadas
+                let texto = document.getElementById("cadenas").value;
+
+                // Dividir el texto en cadenas individuales
+                let cadenas = texto.split("\n");
+
+                // Arreglo para almacenar las cadenas encontradas
+                let filtradas = [];
+
+                // Recorrer todas las cadenas
+                for (let i = 0; i < cadenas.length; i++) {
+
+                    // Eliminar espacios al inicio y al final
+                    let cadena = cadenas[i].trim();
+
+                    // Verificar si termina con "ed"
+                    if (cadena.toLowerCase().endsWith("ed")) {
+                        filtradas.push(cadena);
+                    }
+                }
+
+                // Mostrar los resultados
+                if (filtradas.length > 0) {
+                    document.getElementById("resultado").value =
+                        filtradas.join("\n");
+                } else {
+                    document.getElementById("resultado").value =
+                        "No se encontraron cadenas que terminen con ed.";
+                }
+            }
+        );
+    </script>
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

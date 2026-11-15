@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 11.6: ej11_06.html -->
+<!-- Comparación de dos cadenas con operadores relacionales y de igualdad. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.6 - Comparar cadenas</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 850px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        #resultado { font-size: 1.2em; font-weight: bold; }
+        .texto { max-width: 850px; }
+    </style>
+    <script>
+
+        // comparar las dos cadenas del formulario
+        function comparar()
+        {
+            var cadena1 = document.getElementById( "cadena1" ).value;
+            var cadena2 = document.getElementById( "cadena2" ).value;
+            var resultado = document.getElementById( "resultado" );
+
+            if ( cadena1 < cadena2 )
+                resultado.innerHTML = "\"" + cadena1 + "\" es <u>menor</u> que \"" + cadena2 + "\"";
+            else if ( cadena1 === cadena2 )
+                resultado.innerHTML = "\"" + cadena1 + "\" es <u>igual</u> a \"" + cadena2 + "\"";
+            else
+                resultado.innerHTML = "\"" + cadena1 + "\" es <u>mayor</u> que \"" + cadena2 + "\"";
+        } // fin de la función comparar
+
+        // registrar el manejador de eventos del botón
+        function iniciar()
+        {
+            document.getElementById( "botonComparar" ).addEventListener( "click", comparar, false );
+        } // fin de la función iniciar
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.6</h1>
+
+    <p class="instruccion">Escriba una secuencia de comandos que use operadores
+       relacionales y de igualdad para comparar dos objetos <code>String</code>
+       introducidos por el usuario a través de un formulario de HTML5. Muestre si la
+       primera cadena es menor, igual o mayor que la segunda.</p>
+
+    <form action = "#">
+        <p><label>Primera cadena: <input id = "cadena1" type = "text"></label></p>
+        <p><label>Segunda cadena: <input id = "cadena2" type = "text"></label></p>
+        <p><input id = "botonComparar" type = "button" value = "Comparar"></p>
+    </form>
+
+    <p id = "resultado"></p>
+
+    <p class="texto">Las cadenas se comparan carácter por carácter según su código Unicode.
+       Por eso las mayúsculas van antes que las minúsculas: "Zebra" es menor que "abeja".</p>
+
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

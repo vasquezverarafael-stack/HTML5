@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!-- Vásquez Vera Rafael 227O01115 -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 11.22 - Formatos de Fechas</title>
+</head>
+<body>
+
+    <h1>Impresión de fechas en varios formatos</h1>
+
+    <form id="formulario">
+        <label for="fecha">Seleccione una fecha:</label>
+        <input type="date" id="fecha" required>
+
+        <br><br>
+
+        <button type="submit">Mostrar formatos</button>
+    </form>
+
+    <h3>Resultados:</h3>
+    <textarea id="resultado" rows="12" cols="65" readonly></textarea>
+
+    <script>
+        document.getElementById("formulario").addEventListener("submit",
+            function(event) {
+
+                // Evitar que se recargue la página
+                event.preventDefault();
+
+                // Obtener la fecha del formulario
+                let fechaIngresada =
+                    document.getElementById("fecha").value;
+
+                // Crear el objeto Date evitando problemas de zona horaria
+                let partes = fechaIngresada.split("-");
+
+                let fecha = new Date(
+                    Number(partes[0]),
+                    Number(partes[1]) - 1,
+                    Number(partes[2])
+                );
+
+                // Crear los diferentes formatos de fecha
+                let resultado = "Fecha en diferentes formatos:\n\n";
+
+                resultado += "toString():\n";
+                resultado += fecha.toString() + "\n\n";
+
+                resultado += "toDateString():\n";
+                resultado += fecha.toDateString() + "\n\n";
+
+                resultado += "toLocaleDateString():\n";
+                resultado += fecha.toLocaleDateString("es-MX") + "\n\n";
+
+                resultado += "toISOString():\n";
+                resultado += fecha.toISOString() + "\n\n";
+
+                resultado += "toUTCString():\n";
+                resultado += fecha.toUTCString();
+
+                // Mostrar los resultados
+                document.getElementById("resultado").value =
+                    resultado;
+            }
+        );
+    </script>
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

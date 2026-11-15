@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!-- Vásquez Vera Rafael 227O01115 -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 11.21 - Combinaciones de Letras</title>
+</head>
+<body>
+    <h1>Generador de cadenas de tres letras</h1>
+
+    <form id="formulario">
+        <label for="palabra">Ingrese una palabra de cinco letras:</label>
+        <br>
+        <input type="text" id="palabra" maxlength="5" required>
+
+        <br><br>
+
+        <button type="submit">Generar combinaciones</button>
+    </form>
+
+    <h3>Resultados:</h3>
+    <textarea id="resultado" rows="15" cols="45" readonly></textarea>
+
+    <script>
+        document.getElementById("formulario").addEventListener("submit",
+            function(event) {
+
+                // Evitar que se recargue la página
+                event.preventDefault();
+
+                // Obtener la palabra ingresada
+                let palabra = document.getElementById("palabra").value.trim();
+
+                // Validar que tenga exactamente cinco letras
+                if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]{5}$/.test(palabra)) {
+                    document.getElementById("resultado").value =
+                        "Ingrese una palabra que tenga exactamente cinco letras.";
+                    return;
+                }
+
+                // Variable para almacenar las combinaciones
+                let combinaciones = "";
+
+                // Generar todas las cadenas posibles de tres letras
+                for (let i = 0; i < palabra.length; i++) {
+
+                    for (let j = 0; j < palabra.length; j++) {
+
+                        for (let k = 0; k < palabra.length; k++) {
+
+                            // Evitar utilizar dos veces la misma posición
+                            if (i !== j && i !== k && j !== k) {
+
+                                combinaciones +=
+                                    palabra[i] + palabra[j] + palabra[k] + "\n";
+                            }
+                        }
+                    }
+                }
+
+                // Mostrar las combinaciones
+                document.getElementById("resultado").value =
+                    combinaciones;
+            }
+        );
+    </script>
+   <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

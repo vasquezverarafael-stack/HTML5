@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 11.10: ej11_10.html -->
+<!-- Extraer el código de área y el número de un teléfono con split. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.10 - Número telefónico</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 850px; }
+        code { background-color: #f4f4f4; padding: 1px 4px; }
+        p.error { color: red; }
+    </style>
+    <script>
+
+        // extraer el código de área y el número a partir de (555)555-5555
+        function extraer()
+        {
+            var telefono = document.getElementById( "campoTelefono" ).value.trim();
+            var partes = telefono.split( ")" ); // [ "(555", "555-5555" ]
+            var numero, areaCodigo, primerosTres, ultimosCuatro;
+
+            document.getElementById( "campoArea" ).value = "";
+            document.getElementById( "campoNumero" ).value = "";
+
+            if ( partes.length !== 2 || partes[ 0 ].charAt( 0 ) !== "(" )
+            {
+                document.getElementById( "mensaje" ).innerHTML =
+                    "<p class='error'>Use el formato (555)555-5555.</p>";
+                return;
+            } // fin de if
+
+            areaCodigo = partes[ 0 ].substring( 1 ); // quitar el paréntesis de apertura
+            numero = partes[ 1 ].split( "-" );       // [ "555", "5555" ]
+
+            if ( numero.length !== 2 )
+            {
+                document.getElementById( "mensaje" ).innerHTML =
+                    "<p class='error'>Use el formato (555)555-5555.</p>";
+                return;
+            } // fin de if
+
+            primerosTres = numero[ 0 ];
+            ultimosCuatro = numero[ 1 ];
+
+            document.getElementById( "mensaje" ).innerHTML = "";
+            document.getElementById( "campoArea" ).value = areaCodigo;
+            document.getElementById( "campoNumero" ).value = primerosTres + "-" + ultimosCuatro;
+        } // fin de la función extraer
+
+        // registrar el manejador de eventos del botón
+        function iniciar()
+        {
+            document.getElementById( "botonExtraer" ).addEventListener( "click", extraer, false );
+        } // fin de la función iniciar
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.10</h1>
+
+    <p class="instruccion">Escriba una aplicación que reciba como entrada un número
+       telefónico como una cadena de la forma (555)555-5555. La aplicación deberá utilizar
+       el método <code>String split</code> para extraer el código de área como un token, los
+       primeros tres dígitos del número telefónico como otro token y los últimos cuatro
+       dígitos del número telefónico como otro token. Muestre en pantalla el código de área
+       en un campo de texto y el número telefónico de siete dígitos en otro campo de
+       texto.</p>
+
+    <form action = "#">
+        <p><label>Número telefónico:
+            <input id = "campoTelefono" type = "text" placeholder = "(555)555-5555"></label>
+            <input id = "botonExtraer" type = "button" value = "Extraer"></p>
+        <p><label>Código de área: <input id = "campoArea" type = "text" size = "6" readonly></label></p>
+        <p><label>Número de siete dígitos: <input id = "campoNumero" type = "text" size = "10" readonly></label></p>
+    </form>
+
+    <div id = "mensaje"></div>
+
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>

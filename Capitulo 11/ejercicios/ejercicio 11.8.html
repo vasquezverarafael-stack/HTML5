@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Ejercicio 11.8: ej11_08.html -->
+<!-- Generador aleatorio de quintillas. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.8 - Quintillas</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .instruccion { background-color: #eef3fb; border-left: 4px solid darkblue;
+                       padding: 10px 15px; max-width: 850px; }
+        .quintilla { border-left: 4px solid darkblue; margin: 14px 0; padding-left: 12px;
+                     line-height: 1.6; font-style: italic; }
+        .texto { max-width: 850px; }
+    </style>
+    <script>
+
+        // cada familia de rima tiene inicios de línea que concuerdan con sus palabras finales
+        var familias = [
+            { inicios: [ "Un gato quiso", "Mi tío fue a", "La luna dijo: voy a",
+                         "El perro se puso a", "Una rana empezó a" ],
+              rimas: [ "cantar", "bailar", "volar", "soñar", "viajar", "saltar" ] },
+            { inicios: [ "Un viejo se fue sin", "Mi abuela guardó la", "El cartero perdió su",
+                         "La niña soñó con una", "Un pirata encontró una" ],
+              rimas: [ "canción", "ilusión", "razón", "estación", "lección" ] },
+            { inicios: [ "El gato se puso a", "Mi tío estaba", "La luna andaba",
+                         "Un perro llegó", "Una rana vivía" ],
+              rimas: [ "cantando", "bailando", "soñando", "llorando", "saltando", "jugando" ] },
+            { inicios: [ "Una tarde de", "El pirata pensó en", "Mi abuela soñaba con la",
+                         "Un viejo tenía mucha", "La niña cantaba con" ],
+              rimas: [ "alegría", "poesía", "melodía", "fantasía", "armonía" ] }
+        ];
+
+        // elige al azar un elemento de un arreglo
+        function elegir( arreglo )
+        {
+            return arreglo[ Math.floor( Math.random() * arreglo.length ) ];
+        } // fin de la función elegir
+
+        // devuelve una copia del arreglo con sus elementos en orden aleatorio
+        function mezclar( arreglo )
+        {
+            var copia = arreglo.slice();
+
+            for ( var i = copia.length - 1; i > 0; --i )
+            {
+                var j = Math.floor( Math.random() * ( i + 1 ) );
+                var temporal = copia[ i ];
+                copia[ i ] = copia[ j ];
+                copia[ j ] = temporal;
+            } // fin de for
+
+            return copia;
+        } // fin de la función mezclar
+
+        // crea una línea con el inicio y una palabra de rima de su familia
+        function crearLinea( familia, palabraFinal )
+        {
+            return elegir( familia.inicios ) + " " + palabraFinal;
+        } // fin de la función crearLinea
+
+        // crea una quintilla: las líneas 1, 2 y 5 riman (A); las líneas 3 y 4 riman (B)
+        function crearQuintilla()
+        {
+            var indiceA = Math.floor( Math.random() * familias.length );
+            var indiceB = ( indiceA + 1 + Math.floor( Math.random() * ( familias.length - 1 ) ) ) % familias.length;
+            var rimasA = mezclar( familias[ indiceA ].rimas ); // palabras distintas para A
+            var rimasB = mezclar( familias[ indiceB ].rimas ); // palabras distintas para B
+            var lineas = [];
+
+            lineas[ 0 ] = crearLinea( familias[ indiceA ], rimasA[ 0 ] ) + ",";
+            lineas[ 1 ] = crearLinea( familias[ indiceA ], rimasA[ 1 ] ) + ",";
+            lineas[ 2 ] = crearLinea( familias[ indiceB ], rimasB[ 0 ] ) + ",";
+            lineas[ 3 ] = crearLinea( familias[ indiceB ], rimasB[ 1 ] ) + ",";
+            lineas[ 4 ] = crearLinea( familias[ indiceA ], rimasA[ 2 ] ) + ".";
+
+            return "<p class='quintilla'>" + lineas.join( "<br>" ) + "</p>";
+        } // fin de la función crearQuintilla
+
+        // crear cinco quintillas y mostrarlas
+        function crearQuintillas()
+        {
+            var salida = "";
+
+            for ( var i = 1; i <= 5; ++i )
+                salida += crearQuintilla();
+
+            document.getElementById( "quintillas" ).innerHTML = salida;
+        } // fin de la función crearQuintillas
+
+        // registrar el manejador del botón y crear las primeras quintillas
+        function iniciar()
+        {
+            document.getElementById( "botonQuintillas" ).addEventListener( "click", crearQuintillas, false );
+            crearQuintillas();
+        } // fin de la función iniciar
+
+        window.addEventListener( "load", iniciar, false );
+
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.8</h1>
+
+    <p class="instruccion"><strong>(Quintillas)</strong> Una quintilla es un verso
+       humorístico de cinco líneas en el cual la primera y segunda línea riman con la
+       quinta, y la tercera línea rima con la cuarta. Utilizando técnicas similares a las
+       desarrolladas en el ejercicio 11.7, escriba una secuencia de comandos que produzca
+       quintillas al azar. Mejorar el programa para producir buenas quintillas es un gran
+       desafío, ¡pero el resultado valdrá la pena!</p>
+
+    <form action = "#">
+        <p><input id = "botonQuintillas" type = "button" value = "Crear nuevas quintillas"></p>
+    </form>
+
+    <div id = "quintillas"></div>
+
+    <p class="texto">Cómo funciona: hay cuatro familias de rima (-ar, -ón, -ando y -ía). Cada
+       quintilla usa una familia para las líneas 1, 2 y 5, y otra distinta para las líneas 3
+       y 4. Cada línea es un inicio al azar más una palabra final de su familia, y no se
+       repite la misma palabra final en la misma quintilla. La rima siempre es correcta, y
+       lo que dice cada verso es una combinación aleatoria, así que a veces queda
+       gracioso.</p>
+
+    <p>
+        <a href="Index.html">
+            <button type="button">Volver a la lista de ejercicios</button>
+        </a>
+    </p>
+</body>
+</html>
