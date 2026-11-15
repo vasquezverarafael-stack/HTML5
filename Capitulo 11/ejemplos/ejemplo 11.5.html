@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--Vásquez Vera Rafael 227O01115-->
+
+<!-- Fig. 11.17: BusquedasFavoritasTwitter.html -->
+<!-- Aplicación Web de búsquedas favoritas de Twitter. -->
+<html>
+<head>
+    <meta charset = "utf-8">
+    <title>Búsquedas de Twitter</title>
+    <link rel = "stylesheet" type = "text/css" href = "estilo-twitter.css">
+    <script src = "BusquedasFavoritasTwitter.js"></script>
+</head>
+<body>
+    <h1>Búsquedas favoritas de Twitter</h1>
+    <p id = "mensajeBienvenida"></p>
+    <form action = "#">
+        <p><input id = "consulta" type = "text"
+            placeholder = "Introduzca la consulta de búsqueda de Twitter">
+            <a href = "https://dev.twitter.com/docs/using-search">
+                Operadores de búsqueda de Twitter</a></p>
+        <p><input id = "etiqueta" type = "text" placeholder = "Etiquete su consulta">
+            <input type = "button" value = "Guardar"
+                id = "botonGuardar">
+            <input type = "button" value = "Borrar todas las búsquedas guardadas"
+                id = "botonBorrar"></p>
+    </form>
+    <h1>Búsquedas etiquetadas previamente</h1>
+    <div id = "busquedas"></div>
+    <p>
+        <a href="index.html">
+            <button type="button">Volver al índice de ejemplos</button>
+        </a>
+    </p>
+</body>
+</html>
